@@ -17,6 +17,8 @@ export default function AdminDashboard() {
   const [leads, setLeads] = useState([]);
   const [projects, setProjects] = useState([]);
   const [testimonials, setTestimonials] = useState([]);
+  const [dashboardLoading, setDashboardLoading] = useState(false);
+  const [dashboardError, setDashboardError] = useState(null);
 
   // Forms states
   const [newProject, setNewProject] = useState({
@@ -68,15 +70,22 @@ export default function AdminDashboard() {
 
   const fetchDashboardData = async (token) => {
     const headers = { 'Authorization': `Bearer ${token}` };
+    setDashboardLoading(true);
+    setDashboardError(null);
     try {
       // Fetch stats
       const statsRes = await fetch(`${API_BASE_URL}/api/admin/stats`, { headers });
-      if (statsRes.status === 401) return handleLogout();
+      if (statsRes.status === 401) {
+        setDashboardLoading(false);
+        return handleLogout();
+      }
+      if (!statsRes.ok) throw new Error('Failed to retrieve statistics');
       const statsData = await statsRes.json();
       setStats(statsData);
 
       // Fetch leads
       const leadsRes = await fetch(`${API_BASE_URL}/api/admin/leads`, { headers });
+      if (!leadsRes.ok) throw new Error('Failed to retrieve leads');
       const leadsData = await leadsRes.json();
       setLeads(leadsData);
 
@@ -88,8 +97,12 @@ export default function AdminDashboard() {
       const testRes = await fetch(`${API_BASE_URL}/api/testimonials`);
       const testData = await testRes.json();
       setTestimonials(testData);
+      
+      setDashboardLoading(false);
     } catch (err) {
       console.error('Error fetching dashboard records:', err);
+      setDashboardError('Connection timeout: Server is spinning up (this can take up to 40 seconds on Render cold-starts) or database is unreachable.');
+      setDashboardLoading(false);
     }
   };
 
@@ -314,6 +327,64 @@ export default function AdminDashboard() {
 
   // Sort trend to render graph
   const maxTrendCount = Math.max(...stats.visitTrend.map(t => t.count), 1);
+
+  if (dashboardLoading) {
+    return (
+      <div style={{
+        minHeight: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        background: '#05020c',
+        gap: '20px',
+        padding: '20px'
+      }}>
+        <div style={{
+          width: '50px',
+          height: '50px',
+          border: '3px solid rgba(161, 79, 255, 0.1)',
+          borderTopColor: 'var(--accent-purple)',
+          borderRadius: '50%',
+          animation: 'spin 1s linear infinite'
+        }} className="animate-spin" />
+        <h3 style={{ fontSize: '1.4rem', color: '#fff', textAlign: 'center', fontFamily: 'var(--font-head)' }}>
+          Establishing Connection to Render Servers...
+        </h3>
+        <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem', textAlign: 'center', maxWidth: '450px', lineHeight: '1.6' }}>
+          Render spins down free web hosts after 15 minutes of inactivity. Booting database layers can take up to 40 seconds.
+        </p>
+      </div>
+    );
+  }
+
+  if (dashboardError) {
+    return (
+      <div style={{
+        minHeight: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        background: '#05020c',
+        gap: '30px',
+        padding: '20px 8%',
+        textAlign: 'center'
+      }}>
+        <div style={{ color: '#ff4d4d', fontSize: '1.15rem', maxWidth: '600px', lineHeight: '1.7', background: 'rgba(255, 77, 77, 0.05)', padding: '25px', borderRadius: '12px', border: '1px solid rgba(255, 77, 77, 0.2)' }}>
+          {dashboardError}
+        </div>
+        <div style={{ display: 'flex', gap: '15px' }}>
+          <button onClick={() => fetchDashboardData(getToken())} className="btn-primary shimmer-btn" style={{ padding: '12px 30px' }}>
+            Retry Connection
+          </button>
+          <button onClick={handleLogout} className="btn-secondary" style={{ padding: '12px 30px' }}>
+            Logout Portal
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>

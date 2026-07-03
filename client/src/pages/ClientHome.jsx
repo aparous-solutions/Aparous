@@ -842,8 +842,13 @@ export default function ClientHome() {
                 )}
 
                 <button type="submit" disabled={isSubmitting} className="btn-primary shimmer-btn" style={{ width: '100%', justifyContent: 'center', marginTop: '10px' }}>
-                  {isSubmitting ? 'Submitting Scope...' : 'Submit Project Scope'} <Send size={16} />
+                  {isSubmitting ? 'Establishing Secure Connection...' : 'Submit Project Scope'} <Send size={16} />
                 </button>
+                {isSubmitting && (
+                  <p style={{ color: 'var(--text-muted)', fontSize: '0.8rem', textAlign: 'center', marginTop: '10px', lineStretch: '1.4' }}>
+                    Note: If the server is sleeping, spin-up can take up to 40 seconds. Thank you for your patience.
+                  </p>
+                )}
               </form>
             )}
           </div>

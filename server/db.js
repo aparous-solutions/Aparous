@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import { sendLeadNotification } from './email.js';
 
 dotenv.config();
 
@@ -316,12 +317,13 @@ export async function getLeads() {
 }
 
 export async function createLead(data) {
+  let newLead;
   if (isMongo) {
-    const newLead = new MongoLead(data);
-    return await newLead.save();
+    const mongoLead = new MongoLead(data);
+    newLead = await mongoLead.save();
   } else {
     const db = readJsonDb();
-    const newLead = { 
+    newLead = { 
       _id: generateId(), 
       name: data.name,
       email: data.email,
@@ -333,8 +335,12 @@ export async function createLead(data) {
     };
     db.leads.push(newLead);
     writeJsonDb(db);
-    return newLead;
   }
+  
+  // Asynchronously trigger lead notification email
+  sendLeadNotification(newLead).catch(err => console.error('Error dispatching lead email:', err));
+  
+  return newLead;
 }
 
 export async function updateLeadStatus(id, status) {
