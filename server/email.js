@@ -76,6 +76,7 @@ export async function sendLeadNotification(lead) {
     console.log('Lead notification email sent successfully:', info.messageId);
   } catch (error) {
     console.error('Error sending lead notification email:', error);
+    throw error;
   }
 }
 
