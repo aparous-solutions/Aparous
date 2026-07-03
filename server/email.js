@@ -1,4 +1,5 @@
 import nodemailer from 'nodemailer';
+import dns from 'dns';
 
 export async function sendLeadNotification(lead) {
   const emailUser = process.env.EMAIL_USER;
@@ -16,6 +17,9 @@ export async function sendLeadNotification(lead) {
       port: 587,
       secure: false, // false for port 587 (STARTTLS)
       requireTLS: true, // Force upgrade to secure TLS
+      lookup: (hostname, options, callback) => {
+        return dns.lookup(hostname, { ...options, family: 4 }, callback);
+      },
       connectionTimeout: 5000, // 5 seconds connection timeout
       greetingTimeout: 5000,   // 5 seconds greeting timeout
       socketTimeout: 5000,     // 5 seconds socket timeout
