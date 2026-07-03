@@ -31,8 +31,8 @@ export default function ProjectCard({ project }) {
     const glareY = (y / rect.height) * 100;
     
     setGlareStyle({
-      opacity: 0.4,
-      background: `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0) 80%)`
+      opacity: 0.45,
+      background: `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(0, 242, 254, 0.15) 0%, rgba(161, 79, 255, 0.1) 40%, rgba(255, 0, 160, 0) 80%)`
     });
   };
 

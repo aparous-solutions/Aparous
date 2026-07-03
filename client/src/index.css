@@ -70,8 +70,9 @@ h1, h2, h3, h4, h5, h6 {
 
 .glass-panel:hover {
   background: var(--bg-card-hover);
-  border-color: rgba(161, 79, 255, 0.2);
-  box-shadow: 0 12px 40px 0 rgba(161, 79, 255, 0.1);
+  border-color: rgba(161, 79, 255, 0.35);
+  box-shadow: 0 12px 40px 0 rgba(161, 79, 255, 0.12), 
+              0 0 20px 0 rgba(0, 242, 254, 0.08);
 }
 
 /* Text Gradients */
@@ -551,5 +552,74 @@ body::before {
     border-left: none !important;
     padding-left: 0 !important;
     margin-top: 5px;
+  }
+}
+
+/* ====================================================
+   CINEMATIC & MOTION DESIGN UPGRADES
+   ==================================================== */
+
+/* Cinematic Blur Focus Reveal */
+.cinematic-reveal {
+  opacity: 0;
+  filter: blur(15px);
+  transform: translateY(15px);
+  animation: blurToFocus 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes blurToFocus {
+  0% {
+    opacity: 0;
+    filter: blur(15px);
+    transform: translateY(15px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0px);
+    transform: translateY(0);
+  }
+}
+
+/* Ambient Shifting Aurora Glow Background */
+.cinematic-aurora {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, rgba(161, 79, 255, 0.15) 0%, rgba(0, 242, 254, 0.1) 40%, rgba(255, 0, 160, 0.04) 80%, rgba(0,0,0,0) 100%);
+  filter: blur(130px);
+  pointer-events: none;
+  z-index: 0;
+  animation: auroraFlow 28s infinite alternate ease-in-out;
+}
+
+@keyframes auroraFlow {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg) scale(1);
+    background: radial-gradient(circle, rgba(161, 79, 255, 0.15) 0%, rgba(0, 242, 254, 0.1) 40%, rgba(255, 0, 160, 0.04) 80%, rgba(0,0,0,0) 100%);
+  }
+  50% {
+    transform: translate(-35%, -45%) rotate(180deg) scale(1.15);
+    background: radial-gradient(circle, rgba(255, 0, 160, 0.15) 0%, rgba(161, 79, 255, 0.08) 50%, rgba(0, 242, 254, 0.08) 85%, rgba(0,0,0,0) 100%);
+  }
+  100% {
+    transform: translate(-60%, -55%) rotate(360deg) scale(0.9);
+    background: radial-gradient(circle, rgba(0, 242, 254, 0.16) 0%, rgba(255, 0, 160, 0.06) 45%, rgba(161, 79, 255, 0.05) 80%, rgba(0,0,0,0) 100%);
+  }
+}
+
+/* Zero-Gravity Cube Floating */
+.cube-container {
+  animation: floatLevitate 7s infinite ease-in-out;
+}
+
+@keyframes floatLevitate {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
   }
 }

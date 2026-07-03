@@ -51,7 +51,7 @@ const adminAuth = (req, res, next) => {
 
 // ----------------------------------------------------
 // PUBLIC API ENDPOINTS
-// ----------------------------------------------------
+// -------------------------------------------------------
 
 // Get portfolio projects
 app.get('/api/projects', async (req, res) => {

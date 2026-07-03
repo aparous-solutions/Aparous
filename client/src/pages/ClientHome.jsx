@@ -277,10 +277,13 @@ export default function ClientHome() {
         {/* Receding 3D Wireframe Parallax Grid Floor */}
         <div className="grid-overlay" style={gridTransform} />
         
+        {/* Ambient Shifting Aurora Glow */}
+        <div className="cinematic-aurora" />
+        
         <div className="hero-grid">
           {/* Left Column: Headline Copy */}
           <div>
-            <div style={{
+            <div className="cinematic-reveal" style={{
               display: 'inline-flex',
               alignItems: 'center',
               gap: '8px',
@@ -297,27 +300,29 @@ export default function ClientHome() {
               <span>Revealing Your Business to the Digital Era</span>
             </div>
 
-            <h1 style={{
+            <h1 className="cinematic-reveal" style={{
               fontSize: 'clamp(2.6rem, 5vw, 4.8rem)',
               lineHeight: '1.15',
               fontWeight: '800',
               marginBottom: '25px',
-              letterSpacing: '-1.5px'
+              letterSpacing: '-1.5px',
+              animationDelay: '0.15s'
             }}>
               We Craft <span className="text-gradient-purple">Cinematic Code</span> & High-Value Visuals.
             </h1>
 
-            <p style={{
+            <p className="cinematic-reveal" style={{
               fontSize: 'clamp(1.05rem, 1.8vw, 1.25rem)',
               color: 'var(--text-normal)',
               marginBottom: '40px',
               lineHeight: '1.7',
-              fontWeight: '300'
+              fontWeight: '300',
+              animationDelay: '0.35s'
             }}>
               Premium custom web applications and elite video editing services tailored for high-converting businesses, startups, and creators looking to dominate the digital landscape.
             </p>
 
-            <div style={{ display: 'flex', gap: '20px' }}>
+            <div className="cinematic-reveal" style={{ display: 'flex', gap: '20px', animationDelay: '0.55s' }}>
               <a href="#contact" className="btn-primary shimmer-btn">
                 Begin Ascent <ArrowRight size={18} />
               </a>
