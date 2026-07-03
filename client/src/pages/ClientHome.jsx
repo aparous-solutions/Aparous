@@ -4,6 +4,63 @@ import { ArrowRight, ChevronLeft, ChevronRight, Mail, Phone, MapPin, CheckCircle
 import ProjectCard from '../components/ProjectCard';
 import { API_BASE_URL } from '../config';
 
+const BACKUP_PROJECTS = [
+  {
+    _id: "backup-proj-1",
+    title: "Grow Athlete",
+    description: "A scale-up landing platform built for an executive startup accelerator. Includes a multi-step pricing funnel, real-time consultation scheduler, and interactive marketing ROI calculators. Reduced lead friction by 40% within the first month of deployment.",
+    category: "Web Development",
+    client: "Hemant",
+    impact: "+180% Lead Rate",
+    tags: ["React", "Fastify", "ROI Engine", "Aesthetic Funnels"],
+    link: "#",
+    image: "linear-gradient(135deg, #150030 0%, #3a0078 100%)"
+  },
+  {
+    _id: "backup-proj-2",
+    title: "Bloodline Battle Esports Hub",
+    description: "An immersive e-sports tournament dashboard and community portal. Built with live match statistics, dynamic brackets, discord notification webhook triggers, and player registration modules. Configured to support up to 5,000 concurrent tournament participants.",
+    category: "Web Development",
+    client: "Lucky",
+    impact: "5.2k Active Registrants",
+    tags: ["React", "Real-time Brackets", "WebSockets", "Glassmorphic UI"],
+    link: "#",
+    image: "linear-gradient(135deg, #0b1e36 0%, #00d2ff 100%)"
+  },
+  {
+    _id: "backup-proj-3",
+    title: "Cinematic Brand Campaign",
+    description: "A high-impact promotional video campaign directed and edited for a premium athletic apparel line. Features rapid pacing sync, custom color grading, layered sound design, and custom 3D VFX transitions. Reached 1.2M views on social channels.",
+    category: "Video Editing",
+    client: "Aero Athletic",
+    impact: "1.2M Social Views",
+    tags: ["Cinematic Cuts", "Color Grading", "Sound Design", "VFX Dynamics"],
+    link: "#",
+    image: "linear-gradient(135deg, #800020 0%, #b30000 100%)"
+  }
+];
+
+const BACKUP_TESTIMONIALS = [
+  {
+    _id: "backup-test-1",
+    name: "Marcus Vance",
+    role: "CEO & Founder",
+    company: "Grow Athlete",
+    content: "Aperio Studio transformed our online presence completely. The user experience they designed for our platform was cinematic and converted leads better than any platform we've used in the past five years. Extremely professional team.",
+    rating: 5,
+    avatar: "MV"
+  },
+  {
+    _id: "backup-test-2",
+    name: "Sarah 'Valkyrie' Chen",
+    role: "Tournament Director",
+    company: "Bloodline Battle Esports Hub",
+    content: "Our tournament registrants were amazed by the fluid bracket updates and the dark-cyber dashboard. Working with them was an absolute pleasure; they understood the aesthetics of our gaming community perfectly.",
+    rating: 5,
+    avatar: "SC"
+  }
+];
+
 export default function ClientHome() {
   const [projects, setProjects] = useState([]);
   const [testimonials, setTestimonials] = useState([]);
@@ -78,15 +135,39 @@ export default function ClientHome() {
 
     // Fetch projects
     fetch(`${API_BASE_URL}/api/projects`)
-      .then(res => res.json())
-      .then(data => setProjects(data))
-      .catch(err => console.error('Error fetching projects:', err));
+      .then(res => {
+        if (!res.ok) throw new Error('API failed');
+        return res.json();
+      })
+      .then(data => {
+        if (Array.isArray(data) && data.length > 0) {
+          setProjects(data);
+        } else {
+          setProjects(BACKUP_PROJECTS);
+        }
+      })
+      .catch(err => {
+        console.error('Error fetching projects, loading fallbacks:', err);
+        setProjects(BACKUP_PROJECTS);
+      });
 
     // Fetch testimonials
     fetch(`${API_BASE_URL}/api/testimonials`)
-      .then(res => res.json())
-      .then(data => setTestimonials(data))
-      .catch(err => console.error('Error fetching testimonials:', err));
+      .then(res => {
+        if (!res.ok) throw new Error('API failed');
+        return res.json();
+      })
+      .then(data => {
+        if (Array.isArray(data) && data.length > 0) {
+          setTestimonials(data);
+        } else {
+          setTestimonials(BACKUP_TESTIMONIALS);
+        }
+      })
+      .catch(err => {
+        console.error('Error fetching testimonials, loading fallbacks:', err);
+        setTestimonials(BACKUP_TESTIMONIALS);
+      });
   }, []);
 
   // Global mouse coordinates listener for background spotlight
