@@ -776,7 +776,7 @@ export default function ClientHome() {
                 </div>
                 <div>
                   <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Email Communications</span>
-                  <p style={{ fontSize: '0.92rem', color: '#fff' }}>ascent@aperio.studio</p>
+                  <p style={{ fontSize: '0.92rem', color: '#fff' }}>aperiostudio92@gmail.com</p>
                 </div>
               </div>
 
@@ -786,7 +786,7 @@ export default function ClientHome() {
                 </div>
                 <div>
                   <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Direct Hotline</span>
-                  <p style={{ fontSize: '0.92rem', color: '#fff' }}>+1 (800) 900-APEX</p>
+                  <p style={{ fontSize: '0.92rem', color: '#fff' }}>+91 9849836092</p>
                 </div>
               </div>
             </div>
@@ -829,9 +829,9 @@ export default function ClientHome() {
                 <div>
                   <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '600', marginBottom: '8px', color: '#fff' }}>Allocated Budget</label>
                   <select name="budget" value={formData.budget} onChange={handleInputChange} className="glass-input" style={{ background: 'rgba(10, 5, 20, 0.95)' }}>
-                    <option value="$2k - $5k">$2,000 - $5,000</option>
-                    <option value="$5k - $10k">$5,000 - $10,000</option>
-                    <option value="$10k+">$10,000+ (Enterprise)</option>
+                    <option value="$2k - $5k">4,000 - 6,000</option>
+                    <option value="$5k - $10k">6,000 - 10,000</option>
+                    <option value="$10k+">10,000+ (Enterprise)</option>
                   </select>
                 </div>
 
