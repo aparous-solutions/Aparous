@@ -17,13 +17,29 @@ export async function sendLeadNotification(lead) {
   }
 
   try {
+    // Manually resolve smtp.gmail.com to IPv4 address to bypass Render's broken IPv6 network stack
+    const smtpIp = await new Promise((resolve) => {
+      dns.resolve4('smtp.gmail.com', (err, addresses) => {
+        if (err) {
+          console.warn('DNS resolve4 failed for smtp.gmail.com, falling back to host string...', err.message);
+          resolve('smtp.gmail.com');
+        } else if (!addresses || addresses.length === 0) {
+          resolve('smtp.gmail.com');
+        } else {
+          resolve(addresses[0]);
+        }
+      });
+    });
+
+    console.log('Using resolved SMTP IPv4 Address:', smtpIp);
+
     const transporter = nodemailer.createTransport({
-      host: 'smtp.gmail.com',
+      host: smtpIp, // Connect directly to IPv4 IP address
       port: 587,
       secure: false, // false for port 587 (STARTTLS)
       requireTLS: true, // Force upgrade to secure TLS
-      lookup: (hostname, options, callback) => {
-        return dns.lookup(hostname, { ...options, family: 4 }, callback);
+      tls: {
+        servername: 'smtp.gmail.com' // Crucial for SSL/TLS certificate validation!
       },
       connectionTimeout: 5000, // 5 seconds connection timeout
       greetingTimeout: 5000,   // 5 seconds greeting timeout
