@@ -13,8 +13,9 @@ export async function sendLeadNotification(lead) {
   try {
     const transporter = nodemailer.createTransport({
       host: 'smtp.gmail.com',
-      port: 465,
-      secure: true, // true for port 465
+      port: 587,
+      secure: false, // false for port 587 (STARTTLS)
+      requireTLS: true, // Force upgrade to secure TLS
       connectionTimeout: 5000, // 5 seconds connection timeout
       greetingTimeout: 5000,   // 5 seconds greeting timeout
       socketTimeout: 5000,     // 5 seconds socket timeout
