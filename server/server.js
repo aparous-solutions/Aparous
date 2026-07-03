@@ -123,15 +123,15 @@ app.post('/api/chat', async (req, res) => {
 
   // AI Dialogue flow control
   if (currentStep === 'greet') {
-    botReply = "Hi! I am Aperio's Digital Architect. I help businesses design, structure, and scale their premium web presences. What is the name of your business or project?";
+    botReply = "Hi! I am Aperio's Digital Architect. I help businesses design, build, and scale their premium web applications and cinematic video productions. What is the name of your business or project?";
     currentStep = 'ask_business';
   } else if (currentStep === 'ask_business') {
     data.businessName = messages[messages.length - 1].content;
-    botReply = `Got it! "${data.businessName}" sounds exciting. Tell me a bit about what this project is. Are we building a brand-new website, launching a product, or revamping an old one? What features do you need?`;
+    botReply = `Got it! "${data.businessName}" sounds exciting. Tell me a bit about what this project is. Are we building a web application, editing professional/cinematic videos, or both? What features do you need?`;
     currentStep = 'ask_details';
   } else if (currentStep === 'ask_details') {
     data.projectDetails = messages[messages.length - 1].content;
-    botReply = "Understood. A cinematic web presence would work wonders for this. What kind of budget do you have allocated for this launch? (e.g., $2k-$5k, $5k-$10k, or $10k+)";
+    botReply = "Understood. A cinematic presentation would work wonders for this. What kind of budget do you have allocated for this launch? (e.g., $2k-$5k, $5k-$10k, or $10k+)";
     currentStep = 'ask_budget';
   } else if (currentStep === 'ask_budget') {
     data.budget = messages[messages.length - 1].content;
@@ -170,9 +170,9 @@ app.post('/api/chat', async (req, res) => {
   } else {
     // If complete or any other queries
     if (lastUserMessage.includes('price') || lastUserMessage.includes('cost')) {
-      botReply = "Our solutions are custom-built to match your brand requirements. Typically, simple premium websites start at $2,000, and complex web applications/e-commerce hubs start around $5,000. Let's discuss a package tailored for you!";
+      botReply = "Our solutions are custom-built. Premium web application packages start at $2,000, and custom cinematic video editing campaigns start at $1,500. Let's discuss a package tailored for your brand!";
     } else if (lastUserMessage.includes('work') || lastUserMessage.includes('portfolio') || lastUserMessage.includes('projects')) {
-      botReply = "We recently built a premium startup launch site for 'Grow Elite' and a live tournament e-sports platform. Check out the Portfolio section on our landing page to see them in action!";
+      botReply = "We recently built a premium launch site for 'Grow Athlete' and a live esports platform for 'Bloodline Battle Esports Hub'. Check out the Portfolio section on our landing page to see them in action!";
     } else {
       botReply = "I'm always here to help. You can also submit the main contact form at the bottom of the page, or email our founder directly. What else can I assist you with?";
     }

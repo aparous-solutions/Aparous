@@ -609,9 +609,10 @@ export default function AdminDashboard() {
                       <label style={{ display: 'block', fontSize: '0.8rem', marginBottom: '6px' }}>Category *</label>
                       <select value={newProject.category} onChange={e => setNewProject(p=>({...p, category: e.target.value}))} className="glass-input" style={{ background: '#0a0414' }}>
                         <option value="Web Development">Web Development</option>
+                        <option value="Video Editing">Video Editing</option>
                         <option value="UI/UX Design">UI/UX Design</option>
-                        <option value="Custom SaaS">Custom SaaS</option>
                         <option value="Gaming & Esports">Gaming & Esports</option>
+                        <option value="Custom SaaS">Custom SaaS</option>
                       </select>
                     </div>
                     <div>

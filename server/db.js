@@ -125,7 +125,7 @@ async function seedDefaults() {
     {
       title: "Grow Athlete",
       description: "A scale-up landing platform built for an executive startup accelerator. Includes a multi-step pricing funnel, real-time consultation scheduler, and interactive marketing ROI calculators. Reduced lead friction by 40% within the first month of deployment.",
-      category: "Web App / Startup Launch",
+      category: "Web Development",
       client: "Hemant",
       impact: "+180% Lead Rate",
       tags: ["React", "Fastify", "ROI Engine", "Aesthetic Funnels"],
@@ -135,12 +135,22 @@ async function seedDefaults() {
     {
       title: "Bloodline Battle Esports Hub",
       description: "An immersive e-sports tournament dashboard and community portal. Built with live match statistics, dynamic brackets, discord notification webhook triggers, and player registration modules. Configured to support up to 5,000 concurrent tournament participants.",
-      category: "Gaming & Web3",
+      category: "Web Development",
       client: "Lucky",
       impact: "5.2k Active Registrants",
       tags: ["React", "Real-time Brackets", "WebSockets", "Glassmorphic UI"],
       link: "#",
       image: "linear-gradient(135deg, #0b1e36 0%, #00d2ff 100%)"
+    },
+    {
+      title: "Cinematic Brand Campaign",
+      description: "A high-impact promotional video campaign directed and edited for a premium athletic apparel line. Features rapid pacing sync, custom color grading, layered sound design, and custom 3D VFX transitions. Reached 1.2M views on social channels.",
+      category: "Video Editing",
+      client: "Aero Athletic",
+      impact: "1.2M Social Views",
+      tags: ["Cinematic Cuts", "Color Grading", "Sound Design", "VFX Dynamics"],
+      link: "#",
+      image: "linear-gradient(135deg, #800020 0%, #b30000 100%)"
     }
   ];
 

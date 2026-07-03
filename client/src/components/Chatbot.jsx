@@ -7,7 +7,7 @@ export default function Chatbot() {
   const [messages, setMessages] = useState([
     {
       sender: 'bot',
-      content: "Hello! I am Aperio's Digital Architect. I help businesses design, structure, and scale their premium web presences. What is the name of your business or project?"
+      content: "Hello! I am Aperio's Digital Architect. I help businesses design, build, and scale their premium web applications and cinematic video productions. What is the name of your business or project?"
     }
   ]);
   const [inputText, setInputText] = useState('');

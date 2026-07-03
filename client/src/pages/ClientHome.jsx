@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ChevronLeft, ChevronRight, Mail, Phone, MapPin, CheckCircle, Send, Cpu, Layout, Sparkles, Database, Shield, TrendingUp } from 'lucide-react';
+import { ArrowRight, ChevronLeft, ChevronRight, Mail, Phone, MapPin, CheckCircle, Send, Cpu, Layout, Sparkles, Database, Shield, TrendingUp, Video } from 'lucide-react';
 import ProjectCard from '../components/ProjectCard';
 import { API_BASE_URL } from '../config';
 
@@ -304,7 +304,7 @@ export default function ClientHome() {
               marginBottom: '25px',
               letterSpacing: '-1.5px'
             }}>
-              We Engineer <span className="text-gradient-purple">Cinematic</span> Digital Presence.
+              We Craft <span className="text-gradient-purple">Cinematic Code</span> & High-Value Visuals.
             </h1>
 
             <p style={{
@@ -314,7 +314,7 @@ export default function ClientHome() {
               lineHeight: '1.7',
               fontWeight: '300'
             }}>
-              Stunning 3D animations, custom web architectures, and smart lead-generation solutions designed to make businesses trust and scale.
+              Premium custom web applications and elite video editing services tailored for high-converting businesses, startups, and creators looking to dominate the digital landscape.
             </p>
 
             <div style={{ display: 'flex', gap: '20px' }}>
@@ -354,8 +354,8 @@ export default function ClientHome() {
                   <span style={{ fontSize: '0.85rem', letterSpacing: '1px', textTransform: 'uppercase' }}>AI Build</span>
                 </div>
                 <div className="cube-face face-left">
-                  <Database style={{ color: 'var(--accent-magenta)', marginBottom: '12px' }} size={26} />
-                  <span style={{ fontSize: '0.85rem', letterSpacing: '1px', textTransform: 'uppercase' }}>Mern</span>
+                  <Video style={{ color: 'var(--accent-magenta)', marginBottom: '12px' }} size={26} />
+                  <span style={{ fontSize: '0.85rem', letterSpacing: '1px', textTransform: 'uppercase' }}>Video Edit</span>
                 </div>
                 <div className="cube-face face-top">
                   <Shield style={{ color: 'var(--accent-cyan)', marginBottom: '12px' }} size={26} />
@@ -432,31 +432,31 @@ export default function ClientHome() {
             <div style={{ background: 'rgba(0, 242, 254, 0.1)', color: 'var(--accent-cyan)', width: '50px', height: '50px', borderRadius: '12px', display: 'flex', alignItems: 'center', justify: 'center', marginBottom: '25px', paddingLeft: '13px' }}>
               <Layout size={24} />
             </div>
-            <h3 style={{ fontSize: '1.35rem', marginBottom: '15px' }}>Web Architectures</h3>
+            <h3 style={{ fontSize: '1.35rem', marginBottom: '15px' }}>Premium Web Apps</h3>
             <p style={{ color: 'var(--text-normal)', fontSize: '0.92rem', lineHeight: '1.6' }}>
-              Cinematic, fast, responsive interfaces using React, animations, and high-performance WebGL backdrops.
+              Cinematic, ultra-fast, responsive web interfaces using React, animations, and high-performance layouts.
             </p>
           </div>
 
           {/* Card 2 */}
           <div className="glass-panel" style={{ padding: '40px 30px' }}>
             <div style={{ background: 'rgba(161, 79, 255, 0.1)', color: 'var(--accent-purple)', width: '50px', height: '50px', borderRadius: '12px', display: 'flex', alignItems: 'center', justify: 'center', marginBottom: '25px', paddingLeft: '13px' }}>
-              <Cpu size={24} />
+              <Video size={24} />
             </div>
-            <h3 style={{ fontSize: '1.35rem', marginBottom: '15px' }}>AI Integrations</h3>
+            <h3 style={{ fontSize: '1.35rem', marginBottom: '15px' }}>Cinematic Video Editing</h3>
             <p style={{ color: 'var(--text-normal)', fontSize: '0.92rem', lineHeight: '1.6' }}>
-              Conversational chatbots, automatic qualification pipelines, and intelligent search hubs matching business goals.
+              Premium commercial ads, cinematic styling, color grading, sound design, and transitions designed to capture attention and convert.
             </p>
           </div>
 
           {/* Card 3 */}
           <div className="glass-panel" style={{ padding: '40px 30px' }}>
             <div style={{ background: 'rgba(255, 0, 160, 0.1)', color: 'var(--accent-magenta)', width: '50px', height: '50px', borderRadius: '12px', display: 'flex', alignItems: 'center', justify: 'center', marginBottom: '25px', paddingLeft: '13px' }}>
-              <Database size={24} />
+              <Cpu size={24} />
             </div>
-            <h3 style={{ fontSize: '1.35rem', marginBottom: '15px' }}>Full-Stack Ecosystems</h3>
+            <h3 style={{ fontSize: '1.35rem', marginBottom: '15px' }}>AI & Full-Stack Systems</h3>
             <p style={{ color: 'var(--text-normal)', fontSize: '0.92rem', lineHeight: '1.6' }}>
-              MERN stack servers, lead trackers, admin control panels, and custom database APIs designed for analytics.
+              Custom lead qualification chatbots, database-driven administrative portals, and analytical tracking suites.
             </p>
           </div>
         </div>
