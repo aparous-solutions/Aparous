@@ -6,6 +6,7 @@ import {
   getProjects, 
   createProject, 
   deleteProject, 
+  updateProject,
   getTestimonials, 
   createTestimonial, 
   deleteTestimonial, 
@@ -246,6 +247,17 @@ app.delete('/api/admin/projects/:id', adminAuth, async (req, res) => {
     res.json({ success: true });
   } catch (err) {
     res.status(500).json({ error: 'Failed to delete project' });
+  }
+});
+
+// Edit portfolio project
+app.put('/api/admin/projects/:id', adminAuth, async (req, res) => {
+  try {
+    const updatedProj = await updateProject(req.params.id, req.body);
+    if (!updatedProj) return res.status(404).json({ error: 'Project not found' });
+    res.json(updatedProj);
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to update project' });
   }
 });
 

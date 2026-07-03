@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Shield, Eye, FileText, TrendingUp, Laptop, Smartphone, Tablet, ChevronDown, Check, LogOut, Trash2, Plus, Calendar, DollarSign } from 'lucide-react';
+import { Shield, Eye, FileText, TrendingUp, Laptop, Smartphone, Tablet, ChevronDown, Check, LogOut, Trash2, Plus, Calendar, DollarSign, Edit } from 'lucide-react';
 import { API_BASE_URL } from '../config';
 
 export default function AdminDashboard() {
@@ -112,16 +112,28 @@ export default function AdminDashboard() {
     }
   };
 
+  const [editingProjectId, setEditingProjectId] = useState(null);
+
   const handleCreateProject = async (e) => {
     e.preventDefault();
     try {
+      const tagsArray = typeof newProject.tags === 'string'
+        ? newProject.tags.split(',').map(t => t.trim()).filter(Boolean)
+        : newProject.tags;
+
       const formattedProj = {
         ...newProject,
-        tags: newProject.tags.split(',').map(t => t.trim()).filter(Boolean)
+        tags: tagsArray
       };
 
-      const res = await fetch(`${API_BASE_URL}/api/admin/projects`, {
-        method: 'POST',
+      const isEditing = !!editingProjectId;
+      const url = isEditing
+        ? `${API_BASE_URL}/api/admin/projects/${editingProjectId}`
+        : `${API_BASE_URL}/api/admin/projects`;
+      const method = isEditing ? 'PUT' : 'POST';
+
+      const res = await fetch(url, {
+        method,
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${getToken()}`
@@ -133,11 +145,33 @@ export default function AdminDashboard() {
         setNewProject({
           title: '', description: '', category: 'Web Development', client: '', impact: '', tags: '', link: '#', image: 'linear-gradient(135deg, #150030 0%, #3a0078 100%)'
         });
+        setEditingProjectId(null);
         fetchDashboardData(getToken());
       }
     } catch (err) {
-      console.error('Error creating project:', err);
+      console.error('Error saving project:', err);
     }
+  };
+
+  const handleStartEditProject = (proj) => {
+    setEditingProjectId(proj._id);
+    setNewProject({
+      title: proj.title,
+      description: proj.description,
+      category: proj.category,
+      client: proj.client,
+      impact: proj.impact,
+      tags: Array.isArray(proj.tags) ? proj.tags.join(', ') : proj.tags,
+      link: proj.link || '#',
+      image: proj.image || 'linear-gradient(135deg, #150030 0%, #3a0078 100%)'
+    });
+  };
+
+  const handleCancelEditProject = () => {
+    setEditingProjectId(null);
+    setNewProject({
+      title: '', description: '', category: 'Web Development', client: '', impact: '', tags: '', link: '#', image: 'linear-gradient(135deg, #150030 0%, #3a0078 100%)'
+    });
   };
 
   const handleDeleteProject = async (id) => {
@@ -515,8 +549,20 @@ export default function AdminDashboard() {
               
               {/* Add Project Form */}
               <div className="glass-panel" style={{ padding: '30px' }}>
-                <h3 style={{ fontSize: '1.2rem', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <Plus size={18} /> Add Portfolio Project
+                <h3 style={{ fontSize: '1.2rem', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '8px', justifyContent: 'space-between' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    {editingProjectId ? <Edit size={18} style={{ color: 'var(--accent-cyan)' }} /> : <Plus size={18} />}
+                    <span>{editingProjectId ? 'Edit Portfolio Project' : 'Add Portfolio Project'}</span>
+                  </div>
+                  {editingProjectId && (
+                    <button 
+                      type="button"
+                      onClick={handleCancelEditProject}
+                      style={{ background: 'rgba(255, 77, 77, 0.1)', color: '#ff4d4d', border: '1px solid rgba(255, 77, 77, 0.2)', borderRadius: '4px', padding: '4px 10px', fontSize: '0.75rem', cursor: 'pointer' }}
+                    >
+                      Cancel Edit
+                    </button>
+                  )}
                 </h3>
                 <form onSubmit={handleCreateProject} style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
@@ -557,7 +603,7 @@ export default function AdminDashboard() {
                   </div>
 
                   <button type="submit" className="btn-primary" style={{ marginTop: '10px', justifyContent: 'center' }}>
-                    Save Project Card
+                    {editingProjectId ? 'Update Project Card' : 'Save Project Card'}
                   </button>
                 </form>
               </div>
@@ -575,14 +621,26 @@ export default function AdminDashboard() {
                         <h4 style={{ fontSize: '0.95rem' }}>{proj.title}</h4>
                         <span style={{ fontSize: '0.75rem', color: 'var(--accent-cyan)' }}>{proj.category}</span>
                       </div>
-                      <button
-                        onClick={() => handleDeleteProject(proj._id)}
-                        style={{ background: 'transparent', border: 'none', color: '#ff4d4d', cursor: 'pointer', transition: 'transform 0.2s' }}
-                        onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.1)'}
-                        onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
-                      >
-                        <Trash2 size={16} />
-                      </button>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+                        <button
+                          onClick={() => handleStartEditProject(proj)}
+                          style={{ background: 'transparent', border: 'none', color: 'var(--accent-cyan)', cursor: 'pointer', transition: 'transform 0.2s' }}
+                          onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.1)'}
+                          onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
+                          title="Edit Project"
+                        >
+                          <Edit size={16} />
+                        </button>
+                        <button
+                          onClick={() => handleDeleteProject(proj._id)}
+                          style={{ background: 'transparent', border: 'none', color: '#ff4d4d', cursor: 'pointer', transition: 'transform 0.2s' }}
+                          onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.1)'}
+                          onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
+                          title="Delete Project"
+                        >
+                          <Trash2 size={16} />
+                        </button>
+                      </div>
                     </div>
                   ))}
                 </div>

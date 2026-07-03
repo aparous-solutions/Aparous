@@ -230,6 +230,21 @@ export async function deleteProject(id) {
   }
 }
 
+export async function updateProject(id, data) {
+  if (isMongo) {
+    return await MongoProject.findByIdAndUpdate(id, data, { new: true });
+  } else {
+    const db = readJsonDb();
+    const index = db.projects.findIndex(p => p._id === id);
+    if (index !== -1) {
+      db.projects[index] = { ...db.projects[index], ...data };
+      writeJsonDb(db);
+      return db.projects[index];
+    }
+    return null;
+  }
+}
+
 // Testimonials
 export async function getTestimonials() {
   if (isMongo) {
