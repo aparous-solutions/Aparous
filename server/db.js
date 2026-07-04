@@ -241,8 +241,8 @@ const MongoNotification = mongoose.models.Notification || mongoose.model('Notifi
 const SettingsSchema = new mongoose.Schema({
   key: { type: String, default: 'config' },
   agency: {
-    companyName: { type: String, default: 'Aperio Studio' },
-    email: { type: String, default: 'aperiostudio92@gmail.com' },
+    companyName: { type: String, default: 'Aparous Solutions' },
+    email: { type: String, default: 'aparoussolutions@gmail.com' },
     phone: { type: String, default: '+1 (555) 000-0000' },
     whatsApp: { type: String, default: '+91 9849836092' },
     address: { type: String, default: 'San Francisco, CA' },
@@ -255,9 +255,9 @@ const SettingsSchema = new mongoose.Schema({
   website: {
     heroText: { type: String, default: 'Reveal Hidden Potential' },
     stats: { type: Map, of: String },
-    contactEmail: { type: String, default: 'aperiostudio92@gmail.com' },
+    contactEmail: { type: String, default: 'aparoussolutions@gmail.com' },
     seo: {
-      title: { type: String, default: 'Aperio Studio - Premium Digital Agency' },
+      title: { type: String, default: 'Aparous Solutions - Premium Digital Agency' },
       description: { type: String, default: 'We craft cyber-aesthetic platforms that convert.' }
     }
   },
@@ -343,7 +343,7 @@ async function seedDefaults() {
       name: "Marcus Vance",
       role: "CEO & Founder",
       company: "Grow Athlete",
-      content: "Aperio Digital transformed our online presence completely. The user experience they designed for our platform was cinematic and converted leads better than any platform we've used in the past five years. Extremely professional team.",
+      content: "Aparous Solutions transformed our online presence completely. The user experience they designed for our platform was cinematic and converted leads better than any platform we've used in the past five years. Extremely professional team.",
       rating: 5,
       avatar: "MV"
     },
@@ -364,7 +364,7 @@ async function seedDefaults() {
       email: "hemant@growathlete.com",
       projectName: "Grow Athlete Scale-up Funnel",
       rating: 5,
-      feedback: "Aperio Studio built a world-class landing system for our startup accelerator. Our lead generation conversion rate increased by 180% within the first month. Their attention to animations and performance is lease to say, brilliant.",
+      feedback: "Aparous Solutions built a world-class landing system for our startup accelerator. Our lead generation conversion rate increased by 180% within the first month. Their attention to animations and performance is lease to say, brilliant.",
       status: "approved"
     },
     {
@@ -927,8 +927,8 @@ export async function getSettings() {
       db.settings = {
         key: 'config',
         agency: {
-          companyName: 'Aperio Studio',
-          email: 'aperiostudio92@gmail.com',
+          companyName: 'Aparous Solutions',
+          email: 'aparoussolutions@gmail.com',
           phone: '+1 (555) 000-0000',
           whatsApp: '+91 9849836092',
           address: 'San Francisco, CA',
@@ -941,9 +941,9 @@ export async function getSettings() {
         website: {
           heroText: 'Reveal Hidden Potential',
           stats: {},
-          contactEmail: 'aperiostudio92@gmail.com',
+          contactEmail: 'aparoussolutions@gmail.com',
           seo: {
-            title: 'Aperio Studio - Premium Digital Agency',
+            title: 'Aparous Solutions - Premium Digital Agency',
             description: 'We craft cyber-aesthetic platforms that convert.'
           }
         },

@@ -65,8 +65,8 @@ export default function AdminDashboard() {
   
   // Configurations state
   const [agencySettings, setAgencySettings] = useState({
-    companyName: 'Aperio Studio',
-    email: 'aperiostudio92@gmail.com',
+    companyName: 'Aparous Solutions',
+    email: 'aparoussolutions@gmail.com',
     phone: '+1 (555) 000-0000',
     whatsApp: '+91 9849836092',
     address: 'San Francisco, CA',
@@ -1006,7 +1006,7 @@ export default function AdminDashboard() {
         zIndex: 50
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px', paddingLeft: '8px' }}>
-          <span style={{ fontFamily: 'var(--font-head)', fontWeight: '900', fontSize: '1.4rem', letterSpacing: '1px' }}>APERIO.</span>
+          <span style={{ fontFamily: 'var(--font-head)', fontWeight: '900', fontSize: '1.4rem', letterSpacing: '1px' }}>APAROUS.</span>
           <span style={{ fontSize: '0.55rem', background: 'rgba(0, 242, 254, 0.1)', color: 'var(--accent-cyan)', padding: '2px 6px', borderRadius: '4px', border: '1px solid rgba(0, 242, 254, 0.2)', textTransform: 'uppercase' }}>AMS V2</span>
         </div>
 

@@ -46,7 +46,7 @@ const BACKUP_TESTIMONIALS = [
     name: "Marcus Vance",
     role: "CEO & Founder",
     company: "Grow Athlete",
-    content: "Aperio Studio transformed our online presence completely. The user experience they designed for our platform was cinematic and converted leads better than any platform we've used in the past five years. Extremely professional team.",
+    content: "Aparous Solutions transformed our online presence completely. The user experience they designed for our platform was cinematic and converted leads better than any platform we've used in the past five years. Extremely professional team.",
     rating: 5,
     avatar: "MV"
   },
@@ -68,7 +68,7 @@ const BACKUP_REVIEWS = [
     company: "Grow Athlete",
     projectName: "Grow Athlete Scale-up Funnel",
     rating: 5,
-    feedback: "Aperio Studio built a world-class landing system for our startup accelerator. Our lead generation conversion rate increased by 180% within the first month. Their attention to animations and performance is lease to say, brilliant.",
+    feedback: "Aparous Solutions built a world-class landing system for our startup accelerator. Our lead generation conversion rate increased by 180% within the first month. Their attention to animations and performance is lease to say, brilliant.",
     createdAt: "2026-07-03T18:00:00.000Z"
   },
   {
@@ -612,9 +612,9 @@ export default function ClientHome() {
               fontWeight: '800',
               letterSpacing: '1px'
             }}>
-              APERIO
+              APAROUS
             </span>
-            <span style={{ fontSize: '0.6rem', background: 'var(--accent-purple)', color: '#fff', padding: '2px 6px', borderRadius: '4px', textTransform: 'uppercase', letterSpacing: '1px' }}>Studio</span>
+            <span style={{ fontSize: '0.6rem', background: 'var(--accent-purple)', color: '#fff', padding: '2px 6px', borderRadius: '4px', textTransform: 'uppercase', letterSpacing: '1px' }}>Solutions</span>
           </div>
 
           <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
@@ -741,7 +741,7 @@ export default function ClientHome() {
                 {/* 6 Cube Faces */}
                 <div className="cube-face face-front">
                   <Sparkles style={{ color: 'var(--accent-cyan)', marginBottom: '12px' }} size={26} />
-                  <span style={{ fontSize: '0.85rem', letterSpacing: '1px', textTransform: 'uppercase' }}>Aperio</span>
+                  <span style={{ fontSize: '0.85rem', letterSpacing: '1px', textTransform: 'uppercase' }}>Aparous</span>
                 </div>
                 <div className="cube-face face-back">
                   <TrendingUp style={{ color: '#00ff64', marginBottom: '12px' }} size={26} />
@@ -951,7 +951,7 @@ export default function ClientHome() {
         </div>
       </section>
 
-      {/* Scroll-Reveal Dual Engine Graphic Section (Aperio Engine) */}
+      {/* Scroll-Reveal Dual Engine Graphic Section (Aparous Engine) */}
       <hr className="section-divider" />
       <section className="scroll-reveal" style={{ padding: '120px 8%', background: 'rgba(10, 4, 20, 0.25)', overflow: 'hidden' }}>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', gap: '50px', alignItems: 'center', maxWidth: '1200px', margin: '0 auto' }} className="engine-grid-responsive">
@@ -1399,7 +1399,7 @@ export default function ClientHome() {
                 <textarea
                   required
                   rows={4}
-                  placeholder="Share details of your experience working with Aperio Studio..."
+                  placeholder="Share details of your experience working with Aparous Solutions..."
                   value={newReview.feedback}
                   onChange={(e) => setNewReview({ ...newReview, feedback: e.target.value })}
                   style={{ width: '100%', padding: '12px 16px', background: 'rgba(255, 255, 255, 0.02)', border: '1px solid var(--glass-border)', borderRadius: '8px', color: '#fff', fontSize: '0.9rem', outline: 'none', resize: 'vertical' }}
@@ -1545,7 +1545,7 @@ export default function ClientHome() {
                 </div>
                 <div>
                   <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Email Communications</span>
-                  <p style={{ fontSize: '0.92rem', color: '#fff' }}>aperiostudio92@gmail.com</p>
+                  <p style={{ fontSize: '0.92rem', color: '#fff' }}>aparoussolutions@gmail.com</p>
                 </div>
               </div>
 
@@ -1645,7 +1645,7 @@ export default function ClientHome() {
                     style={{ marginTop: '3px', cursor: 'pointer' }}
                   />
                   <label htmlFor="privacy-checkbox" style={{ fontSize: '0.78rem', color: 'var(--text-muted)', lineHeight: '1.4', cursor: 'pointer' }}>
-                    I agree to the privacy policy, and authorize Aperio Studio to contact me via email/phone regarding my web build scope audit.
+                    I agree to the privacy policy, and authorize Aparous Solutions to contact me via email/phone regarding my web build scope audit.
                   </label>
                 </div>
 
@@ -1786,7 +1786,7 @@ export default function ClientHome() {
           {/* Col 1: Brand details */}
           <div style={{ gridColumn: 'span 2' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '15px' }}>
-              <span className="text-gradient" style={{ fontFamily: 'var(--font-head)', fontSize: '1.5rem', fontWeight: '800' }}>APERIO</span>
+              <span className="text-gradient" style={{ fontFamily: 'var(--font-head)', fontSize: '1.5rem', fontWeight: '800' }}>APAROUS</span>
               <span style={{ fontSize: '0.55rem', background: 'var(--accent-purple)', color: '#fff', padding: '2px 6px', borderRadius: '3px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Studio</span>
             </div>
             <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem', lineHeight: '1.6', marginBottom: '25px', maxWidth: '280px' }}>
@@ -1818,7 +1818,7 @@ export default function ClientHome() {
             </form>
             {newsletterStatus && (
               <span style={{ display: 'block', color: 'var(--accent-cyan)', fontSize: '0.75rem', marginTop: '8px' }}>
-                ✓ Subscribed! Welcome to Aperio Insights.
+                ✓ Subscribed! Welcome to Aparous Insights.
               </span>
             )}
           </div>
@@ -1869,7 +1869,7 @@ export default function ClientHome() {
               Legal
             </h4>
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '12px', fontSize: '0.85rem' }}>
-              <li><button onClick={() => alert('Privacy Policy: Aperio Studio does not share client contact information or data scope details.')} style={{ background: 'transparent', border: 'none', padding: 0, color: 'var(--text-normal)', cursor: 'pointer', fontSize: '0.85rem', textAlign: 'left', transition: 'color 0.2s' }} onMouseEnter={e => e.target.style.color = '#fff'} onMouseLeave={e => e.target.style.color = 'var(--text-normal)'}>Privacy Policy</button></li>
+              <li><button onClick={() => alert('Privacy Policy: Aparous Solutions does not share client contact information or data scope details.')} style={{ background: 'transparent', border: 'none', padding: 0, color: 'var(--text-normal)', cursor: 'pointer', fontSize: '0.85rem', textAlign: 'left', transition: 'color 0.2s' }} onMouseEnter={e => e.target.style.color = '#fff'} onMouseLeave={e => e.target.style.color = 'var(--text-normal)'}>Privacy Policy</button></li>
               <li><button onClick={() => alert('Terms of Service: Audit scapes are delivered in 24 hours. Code deployment includes 30 days support retainers.')} style={{ background: 'transparent', border: 'none', padding: 0, color: 'var(--text-normal)', cursor: 'pointer', fontSize: '0.85rem', textAlign: 'left', transition: 'color 0.2s' }} onMouseEnter={e => e.target.style.color = '#fff'} onMouseLeave={e => e.target.style.color = 'var(--text-normal)'}>Terms & Conditions</button></li>
               <li><button onClick={() => alert('Refund Policy: Custom engineering sprints include detailed milestones. Completed milestone builds are non-refundable.')} style={{ background: 'transparent', border: 'none', padding: 0, color: 'var(--text-normal)', cursor: 'pointer', fontSize: '0.85rem', textAlign: 'left', transition: 'color 0.2s' }} onMouseEnter={e => e.target.style.color = '#fff'} onMouseLeave={e => e.target.style.color = 'var(--text-normal)'}>Refund Policy</button></li>
               <li><button onClick={() => alert('Cookie Policy: We use local cookies for web analytics visits mapping and admin authorization states.')} style={{ background: 'transparent', border: 'none', padding: 0, color: 'var(--text-normal)', cursor: 'pointer', fontSize: '0.85rem', textAlign: 'left', transition: 'color 0.2s' }} onMouseEnter={e => e.target.style.color = '#fff'} onMouseLeave={e => e.target.style.color = 'var(--text-normal)'}>Cookie Policy</button></li>
@@ -1888,7 +1888,7 @@ export default function ClientHome() {
           fontSize: '0.8rem',
           color: 'var(--text-muted)'
         }}>
-          <span>© {new Date().getFullYear()} Aperio Studio. All rights reserved.</span>
+          <span>© {new Date().getFullYear()} Aparous Solutions. All rights reserved.</span>
           <span>Crafted with Antigravity 3D principles & MERN Architecture.</span>
         </div>
       </footer>
@@ -2059,7 +2059,7 @@ export default function ClientHome() {
                   {selectedProject.title}
                 </h2>
                 <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
-                  Client: <strong>{selectedProject.client || 'Aperio Studio Partner'}</strong>
+                  Client: <strong>{selectedProject.client || 'Aparous Solutions Partner'}</strong>
                 </span>
               </div>
             </div>

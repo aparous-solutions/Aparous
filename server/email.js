@@ -53,14 +53,14 @@ export async function sendLeadNotification(lead) {
     });
 
     const mailOptions = {
-      from: `"Aperio Studio Notification" <${emailUser}>`,
-      to: 'aperiostudio92@gmail.com',
+      from: `"Aparous Solutions Notification" <${emailUser}>`,
+      to: 'aparoussolutions@gmail.com',
       subject: `New Lead Submitted: ${lead.businessName || lead.name}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; padding: 25px; border: 1px solid #eaeaea; border-radius: 12px; background-color: #fafafa; color: #333;">
           <div style="text-align: center; border-bottom: 2px solid #a14fff; padding-bottom: 15px; margin-bottom: 20px;">
             <h2 style="color: #6f26d9; margin: 0; font-size: 1.5rem; letter-spacing: 0.5px;">New Project Ascent Initialized</h2>
-            <p style="margin: 5px 0 0 0; color: #666; font-size: 0.85rem;">Aperio Studio Lead Qualification System</p>
+            <p style="margin: 5px 0 0 0; color: #666; font-size: 0.85rem;">Aparous Solutions Lead Qualification System</p>
           </div>
           
           <table style="width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 0.95rem;">
@@ -91,8 +91,8 @@ export async function sendLeadNotification(lead) {
           </table>
           
           <div style="margin-top: 30px; border-top: 1px solid #eaeaea; padding-top: 20px; text-align: center; font-size: 0.75rem; color: #999;">
-            <p style="margin: 0;">This notification was automatically dispatched by Aperio Studio CRM.</p>
-            <p style="margin: 5px 0 0 0;">Render Application Instance: <strong>https://aperio.onrender.com</strong></p>
+            <p style="margin: 0;">This notification was automatically dispatched by Aparous Solutions CRM.</p>
+            <p style="margin: 5px 0 0 0;">Render Application Instance: <strong>https://aparous.onrender.com</strong></p>
           </div>
         </div>
       `
@@ -115,7 +115,7 @@ export async function sendTelegramNotification(lead) {
     return;
   }
 
-  const messageText = `<b>🔔 New Lead Received on Aperio Studio!</b>\n\n` +
+  const messageText = `<b>🔔 New Lead Received on Aparous Solutions!</b>\n\n` +
     `👤 <b>Name:</b> ${lead.name}\n` +
     `📧 <b>Email:</b> ${lead.email}\n` +
     `🏢 <b>Business:</b> ${lead.businessName || 'N/A'}\n` +

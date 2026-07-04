@@ -87,7 +87,7 @@ export function analyzeLead(lead) {
   // 7. Simulated suggested email responder
   const clientName = lead.name || 'Valued Partner';
   const companyPhrase = company ? ` for ${company}` : '';
-  const suggestedResponse = `Hi ${clientName},\n\nThank you for reaching out to Aperio Studio. We read through your interest in developing a tailored digital solution${companyPhrase}.\n\nYour project details outline some fantastic parameters. I would love to arrange a quick 15-minute consultation to walk you through our recent case studies and sketch an interactive scope outline.\n\nPlease choose a convenient slot on our calendar: https://calendly.com/aperiostudio\n\nLooking forward to speaking,\n\nDigital Architect Team\nAperio Studio`;
+  const suggestedResponse = `Hi ${clientName},\n\nThank you for reaching out to Aparous Solutions. We read through your interest in developing a tailored digital solution${companyPhrase}.\n\nYour project details outline some fantastic parameters. I would love to arrange a quick 15-minute consultation to walk you through our recent case studies and sketch an interactive scope outline.\n\nPlease choose a convenient slot on our calendar: https://calendly.com/aparoussolutions\n\nLooking forward to speaking,\n\nDigital Architect Team\nAparous Solutions`;
 
   return {
     leadScore,
@@ -109,13 +109,13 @@ export function generateProposalWithAI(lead) {
   // AI Proposal Markdown Template
   return `# PROPOSAL OF PARTNERSHIP
 **Prepared for:** ${clientName} (${company})  
-**Drafted by:** Aperio Studio  
+**Drafted by:** Aparous Solutions  
 **Date:** ${new Date().toLocaleDateString()}
 
 ---
 
 ## 1. Executive Summary
-Aperio Studio builds high-converting digital products. Based on your project brief, we propose crafting a custom solution that addresses your functional requirements while maintaining a high-performance visual presence.
+Aparous Solutions builds high-converting digital products. Based on your project brief, we propose crafting a custom solution that addresses your functional requirements while maintaining a high-performance visual presence.
 
 ### Scope Brief:
 "${details}"
@@ -158,21 +158,21 @@ export function generateEmailWithAI(type, lead) {
 
   switch (type) {
     case 'welcome':
-      return `Subject: Welcome to Aperio Studio | Custom Design Blueprint
+      return `Subject: Welcome to Aparous Solutions | Custom Design Blueprint
 
 Hi ${name},
 
-Thanks for reaching out to Aperio Studio! We've received your request and our design team is already reviewing your details. 
+Thanks for reaching out to Aparous Solutions! We've received your request and our design team is already reviewing your details. 
 
 Our team specializes in premium web development, cinematic video editing, and AI automation. We will construct a custom project blueprint and send it over within 24 hours.
 
-If you'd like to expedite the process, you can schedule a direct call with our architect here: https://calendly.com/aperiostudio
+If you'd like to expedite the process, you can schedule a direct call with our architect here: https://calendly.com/aparoussolutions
 
 Best regards,
-Aperio Studio Team`;
+Aparous Solutions Team`;
 
     case 'proposal':
-      return `Subject: Interactive Proposal & Scope - Aperio Studio
+      return `Subject: Interactive Proposal & Scope - Aparous Solutions
 
 Hi ${name},
 
@@ -183,7 +183,7 @@ Attached is our customized proposal outlining the project milestones, deliverabl
 Let us know if these guidelines align with your timeframe, and we can initiate our kickoff session this week.
 
 Best regards,
-Aperio Studio Team`;
+Aparous Solutions Team`;
 
     case 'followup':
       return `Subject: Re: Next Steps for ${company}
@@ -197,10 +197,10 @@ We have some visual blueprints ready for the animations and particle layouts, an
 Are you free for a brief 10-minute call this week?
 
 Best regards,
-Aperio Studio Team`;
+Aparous Solutions Team`;
 
     case 'reminder':
-      return `Subject: Quick Follow-up: Aperio Studio Schedule
+      return `Subject: Quick Follow-up: Aparous Solutions Schedule
 
 Hi ${name},
 
@@ -211,7 +211,7 @@ Our production queue is booking up for the month, and we want to ensure we reser
 Let us know how you would like to proceed!
 
 Best regards,
-Aperio Studio Team`;
+Aparous Solutions Team`;
 
     case 'completion':
       return `Subject: Project Launch Complete! | Handoff Documentation
@@ -224,26 +224,26 @@ The site is fully responsive, optimized with 100/100 Lighthouse indicators, secu
 
 Attached is your system handoff guide, admin passcode logins, and training documentation for editing services or portfolio cards.
 
-Thank you for partnering with Aperio Studio!
+Thank you for partnering with Aparous Solutions!
 
 Best regards,
-Aperio Studio Team`;
+Aparous Solutions Team`;
 
     case 'thankyou':
-      return `Subject: Thank You from Aperio Studio!
+      return `Subject: Thank You from Aparous Solutions!
 
 Hi ${name},
 
 It was an absolute pleasure working with you to bring your digital vision to life. 
 
-If you have a moment, we would love to get your feedback on our work to add to our verified testimonials gallery: https://aperiostudio.com#feedback
+If you have a moment, we would love to get your feedback on our work to add to our verified testimonials gallery: https://aparoussolutions.com#feedback
 
 If you need any future maintenance packages or marketing analytics reviews, we are always here to help.
 
 Best regards,
-Aperio Studio Team`;
+Aparous Solutions Team`;
 
     default:
-      return `Hi ${name},\n\nThank you for collaborating with Aperio Studio.\n\nBest regards,\nAperio Studio Team`;
+      return `Hi ${name},\n\nThank you for collaborating with Aparous Solutions.\n\nBest regards,\nAparous Solutions Team`;
   }
 }
