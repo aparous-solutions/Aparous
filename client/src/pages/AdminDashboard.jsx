@@ -65,8 +65,8 @@ export default function AdminDashboard() {
   
   // Configurations state
   const [agencySettings, setAgencySettings] = useState({
-    companyName: 'Aparous Solutions',
-    email: 'aparoussolutions@gmail.com',
+    companyName: 'Aparous',
+    email: 'aparous.solutions@gmail.com',
     phone: '+1 (555) 000-0000',
     whatsApp: '+91 9849836092',
     address: 'San Francisco, CA',

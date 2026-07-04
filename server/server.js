@@ -237,7 +237,7 @@ app.post('/api/chat', async (req, res) => {
 
   // AI Dialogue flow control
   if (currentStep === 'greet') {
-    botReply = "Hi! I am Aparous Solutions' Digital Architect. I help businesses design, build, and scale their premium web applications and cinematic video productions. What is the name of your business or project?";
+    botReply = "Hi! I am Aparous' Digital Architect. I help businesses design, build, and scale their premium web applications and cinematic video productions. What is the name of your business or project?";
     currentStep = 'ask_business';
   } else if (currentStep === 'ask_business') {
     data.businessName = messages[messages.length - 1].content;
