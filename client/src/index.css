@@ -1061,7 +1061,33 @@ body::before {
 }
 
 /* --- RESPONSIVE TIMELINE --- */
+.testimonials-flex-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+.form-grid-responsive {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
 @media (max-width: 768px) {
+  .testimonials-flex-container {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .form-grid-responsive {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .nav-link-desktop {
+    display: none !important;
+  }
+
   .process-timeline::before,
   .timeline-progress-line {
     left: 20px;

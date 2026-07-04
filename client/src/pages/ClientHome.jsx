@@ -617,10 +617,10 @@ export default function ClientHome() {
             <span style={{ fontSize: '0.6rem', background: 'var(--accent-purple)', color: '#fff', padding: '2px 6px', borderRadius: '4px', textTransform: 'uppercase', letterSpacing: '1px' }}>Studio</span>
           </div>
 
-          <div style={{ display: 'flex', gap: '30px', alignItems: 'center' }}>
-            <a href="#services" style={{ color: 'var(--text-normal)', textDecoration: 'none', fontSize: '0.9rem', fontWeight: '500', transition: 'color 0.3s' }} onMouseEnter={e => e.target.style.color = '#fff'} onMouseLeave={e => e.target.style.color = 'var(--text-normal)'}>Services</a>
-            <a href="#portfolio" style={{ color: 'var(--text-normal)', textDecoration: 'none', fontSize: '0.9rem', fontWeight: '500', transition: 'color 0.3s' }} onMouseEnter={e => e.target.style.color = '#fff'} onMouseLeave={e => e.target.style.color = 'var(--text-normal)'}>Portfolio</a>
-            <a href="#testimonials" style={{ color: 'var(--text-normal)', textDecoration: 'none', fontSize: '0.9rem', fontWeight: '500', transition: 'color 0.3s' }} onMouseEnter={e => e.target.style.color = '#fff'} onMouseLeave={e => e.target.style.color = 'var(--text-normal)'}>Testimonials</a>
+          <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
+            <a href="#services" className="nav-link-desktop" style={{ color: 'var(--text-normal)', textDecoration: 'none', fontSize: '0.9rem', fontWeight: '500', transition: 'color 0.3s' }} onMouseEnter={e => e.target.style.color = '#fff'} onMouseLeave={e => e.target.style.color = 'var(--text-normal)'}>Services</a>
+            <a href="#portfolio" className="nav-link-desktop" style={{ color: 'var(--text-normal)', textDecoration: 'none', fontSize: '0.9rem', fontWeight: '500', transition: 'color 0.3s' }} onMouseEnter={e => e.target.style.color = '#fff'} onMouseLeave={e => e.target.style.color = 'var(--text-normal)'}>Portfolio</a>
+            <a href="#testimonials" className="nav-link-desktop" style={{ color: 'var(--text-normal)', textDecoration: 'none', fontSize: '0.9rem', fontWeight: '500', transition: 'color 0.3s' }} onMouseEnter={e => e.target.style.color = '#fff'} onMouseLeave={e => e.target.style.color = 'var(--text-normal)'}>Testimonials</a>
             <button onClick={() => setIsAuditModalOpen(true)} className="btn-secondary" style={{ padding: '8px 18px', fontSize: '0.85rem', cursor: 'pointer', border: '1px solid var(--accent-cyan)', color: 'var(--accent-cyan)', background: 'transparent' }} aria-label="Open free website audit form">Free Audit</button>
             <a href="#contact" className="btn-secondary" style={{ padding: '8px 20px', fontSize: '0.85rem' }}>Get in Touch</a>
           </div>
@@ -1156,7 +1156,7 @@ export default function ClientHome() {
 
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
           gap: '40px'
         }}>
           {projects.map((project) => (
@@ -1206,7 +1206,7 @@ export default function ClientHome() {
             <p style={{ color: 'var(--text-muted)' }}>What our startup founders and corporate partners say.</p>
           </div>
 
-          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '30px' }}>
+          <div className="testimonials-flex-container">
             <button onClick={prevTestimonial} style={{ background: 'transparent', border: '1px solid var(--glass-border)', color: '#fff', borderRadius: '50%', width: '45px', height: '45px', display: 'flex', alignItems: 'center', justify: 'center', cursor: 'pointer', transition: 'all 0.2s' }} onMouseEnter={e => e.target.style.borderColor = 'var(--accent-purple)'} onMouseLeave={e => e.target.style.borderColor = 'var(--glass-border)'}>
               <ChevronLeft size={20} />
             </button>
@@ -1334,7 +1334,7 @@ export default function ClientHome() {
                 />
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
+              <div className="form-grid-responsive">
                 <div>
                   <label style={{ display: 'block', fontSize: '0.8rem', color: 'var(--text-normal)', marginBottom: '8px', fontWeight: '500' }}>Company Name *</label>
                   <input
@@ -1575,7 +1575,7 @@ export default function ClientHome() {
               </div>
             ) : (
               <form onSubmit={handleFormSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
+                <div className="form-grid-responsive">
                   <div>
                     <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: '600', marginBottom: '8px', color: '#fff' }}>Name *</label>
                     <input type="text" name="name" required value={formData.name} onChange={handleInputChange} className="glass-input" placeholder="e.g. John Doe" />
@@ -1586,7 +1586,7 @@ export default function ClientHome() {
                   </div>
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
+                <div className="form-grid-responsive">
                   <div>
                     <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: '600', marginBottom: '8px', color: '#fff' }}>Corporate Email *</label>
                     <input type="email" name="email" required value={formData.email} onChange={handleInputChange} className="glass-input" placeholder="e.g. john@business.com" />
