@@ -2,8 +2,24 @@
   "cleanUrls": true,
   "rewrites": [
     {
-      "source": "/:path*",
+      "source": "/admin",
       "destination": "/index.html"
+    },
+    {
+      "source": "/admin",
+      "destination": "/client/dist/index.html"
+    },
+    {
+      "source": "/admin",
+      "destination": "/client/index.html"
+    },
+    {
+      "source": "/((?!assets/|favicon.svg|manifest.json|sw.js).*)",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/((?!assets/|favicon.svg|manifest.json|sw.js).*)",
+      "destination": "/client/dist/index.html"
     }
   ]
 }
