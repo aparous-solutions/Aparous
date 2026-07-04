@@ -1,11 +1,12 @@
 {
-  "name": "aperio-digital-server",
+  "name": "aparous-solutions-server",
   "version": "1.0.0",
   "type": "module",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "node --watch server.js"
+    "dev": "node --watch server.js",
+    "build": "echo 'No build step required for server'"
   },
   "dependencies": {
     "compression": "^1.8.1",
