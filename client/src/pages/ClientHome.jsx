@@ -82,6 +82,101 @@ const BACKUP_REVIEWS = [
   }
 ];
 
+// Premium 3D Cyber Starfield Canvas for scrolling storytelling
+const StorytellingCanvas = ({ progress }) => {
+  const canvasRef = useRef(null);
+  const particlesRef = useRef([]);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    
+    const handleResize = () => {
+      if (canvas.parentElement) {
+        canvas.width = canvas.parentElement.clientWidth;
+        canvas.height = canvas.parentElement.clientHeight;
+      }
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
+    // Initialize 3D particles if empty
+    if (particlesRef.current.length === 0) {
+      const count = 180;
+      for (let i = 0; i < count; i++) {
+        particlesRef.current.push({
+          x: (Math.random() - 0.5) * 1800,
+          y: (Math.random() - 0.5) * 1800,
+          z: Math.random() * 2000,
+          size: Math.random() * 2.2 + 0.8,
+          color: Math.random() > 0.65 ? '#00f2fe' : (Math.random() > 0.35 ? '#a14fff' : '#ffffff')
+        });
+      }
+    }
+
+    let animationId;
+    const render = () => {
+      ctx.fillStyle = '#05020c';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      const cx = canvas.width / 2;
+      const cy = canvas.height / 2;
+      const fov = 700;
+
+      // Scroll zooms in: we subtract scroll-driven depth
+      const scrollSpeedBoost = progress * 1600;
+
+      particlesRef.current.forEach(p => {
+        let z = p.z - scrollSpeedBoost;
+        while (z <= 0) z += 2000;
+        while (z > 2000) z -= 2000;
+        
+        // Perspective projection
+        const scale = fov / (fov + z);
+        const x2d = cx + p.x * scale;
+        const y2d = cy + p.y * scale;
+
+        // Draw particle
+        if (x2d >= 0 && x2d <= canvas.width && y2d >= 0 && y2d <= canvas.height) {
+          const alpha = Math.min(1, (2000 - z) / 600);
+          ctx.beginPath();
+          ctx.arc(x2d, y2d, p.size * scale * 1.6, 0, Math.PI * 2);
+          ctx.fillStyle = p.color;
+          ctx.globalAlpha = alpha * 0.75;
+          ctx.fill();
+        }
+      });
+      
+      // Draw receding vector lines to create tunnel zoom depth
+      ctx.globalAlpha = 0.06 + (progress * 0.06);
+      ctx.strokeStyle = '#a14fff';
+      ctx.lineWidth = 1;
+      const linesCount = 20;
+      for (let i = 0; i < linesCount; i++) {
+        const angle = (i / linesCount) * Math.PI * 2;
+        const xDir = Math.cos(angle);
+        const yDir = Math.sin(angle);
+        ctx.beginPath();
+        ctx.moveTo(cx + xDir * 60, cy + yDir * 60);
+        ctx.lineTo(cx + xDir * canvas.width * 1.2, cy + yDir * canvas.height * 1.2);
+        ctx.stroke();
+      }
+
+      ctx.globalAlpha = 1.0;
+      animationId = requestAnimationFrame(render);
+    };
+    render();
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      cancelAnimationFrame(animationId);
+    };
+  }, [progress]);
+
+  return <canvas ref={canvasRef} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: 1 }} />;
+};
+
 export default function ClientHome() {
   const [projects, setProjects] = useState([]);
   const [testimonials, setTestimonials] = useState([]);
@@ -1086,6 +1181,9 @@ export default function ClientHome() {
             <source src="https://cdn.pixabay.com/video/2021/04/17/71360-538965074_tiny.mp4" type="video/mp4" />
           </video>
 
+          {/* Premium real-time 3D Particle Starfield Tunnel */}
+          <StorytellingCanvas progress={storyProgress} />
+
           {/* Ambient Parallax Blobs fallback */}
           <div style={{
             position: 'absolute',
@@ -1144,8 +1242,8 @@ export default function ClientHome() {
           <div 
             className="scroll-story-glass-card"
             style={{
-              opacity: storyProgress < 0.05 ? storyProgress / 0.05 : (storyProgress > 0.95 ? (1 - storyProgress) / 0.05 : 1),
-              transform: `translateY(${(1 - Math.sin(storyProgress * Math.PI)) * 40}px) scale(${0.96 + Math.sin(storyProgress * Math.PI) * 0.04})`,
+              opacity: storyProgress > 0.92 ? (1 - storyProgress) / 0.08 : 1,
+              transform: `translateY(${(1 - Math.sin(storyProgress * Math.PI)) * 12}px) scale(${0.98 + Math.sin(storyProgress * Math.PI) * 0.02})`,
               zIndex: 5
             }}
           >
