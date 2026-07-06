@@ -1251,7 +1251,6 @@ body::before {
 .cinematic-scroll-section {
   position: relative;
   perspective: 1200px;
-  overflow: hidden;
   background: #030107;
 }
 
