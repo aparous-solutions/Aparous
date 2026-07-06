@@ -1163,21 +1163,6 @@ export default function ClientHome() {
         style={{ height: '300vh' }}
       >
         <div className="scroll-story-screen">
-          {/* Loop background video */}
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="scroll-story-bg-video"
-            style={{ 
-              transform: `translate(-50%, -50%) scale(${1 + storyProgress * 0.3})`,
-              filter: `saturate(${0.8 + storyProgress * 0.4}) contrast(1.1) brightness(${0.7 - storyProgress * 0.2})`
-            }}
-          >
-            <source src="https://cdn.pixabay.com/video/2021/04/17/71360-538965074_tiny.mp4" type="video/mp4" />
-          </video>
-
           {/* Premium real-time 3D Particle Starfield Tunnel */}
           <StorytellingCanvas progress={storyProgress} />
 
