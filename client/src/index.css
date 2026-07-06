@@ -28,11 +28,17 @@
   scroll-behavior: smooth;
 }
 
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   font-family: var(--font-body);
   background-color: var(--bg-deep);
   color: var(--text-normal);
-  overflow-x: hidden;
   line-height: 1.6;
 }
 

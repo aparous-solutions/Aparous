@@ -834,7 +834,7 @@ export default function ClientHome() {
 
             <h1 className="cinematic-reveal" style={{
               fontSize: 'clamp(2.6rem, 5vw, 4.8rem)',
-              lineHeight: '1.15',
+              lineHeight: '1.25',
               fontWeight: '800',
               marginBottom: '25px',
               letterSpacing: '-1.5px',
