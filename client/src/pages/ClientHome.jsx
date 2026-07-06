@@ -93,10 +93,8 @@ const StorytellingCanvas = ({ progress }) => {
     const ctx = canvas.getContext('2d');
     
     const handleResize = () => {
-      if (canvas.parentElement) {
-        canvas.width = canvas.parentElement.clientWidth;
-        canvas.height = canvas.parentElement.clientHeight;
-      }
+      canvas.width = canvas.parentElement ? canvas.parentElement.clientWidth : window.innerWidth;
+      canvas.height = canvas.parentElement ? canvas.parentElement.clientHeight : window.innerHeight;
     };
     handleResize();
     window.addEventListener('resize', handleResize);
@@ -117,8 +115,7 @@ const StorytellingCanvas = ({ progress }) => {
 
     let animationId;
     const render = () => {
-      ctx.fillStyle = '#05020c';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       const cx = canvas.width / 2;
       const cy = canvas.height / 2;
