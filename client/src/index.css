@@ -1246,3 +1246,75 @@ body::before {
   50% { transform: scale(1.3); opacity: 0.5; }
   100% { transform: scale(0.95); opacity: 1; }
 }
+
+/* --- PREMIUM CINEMATIC SCROLLING & STORYTELLING --- */
+.cinematic-scroll-section {
+  position: relative;
+  perspective: 1200px;
+  overflow: hidden;
+  background: #030107;
+}
+
+.cinematic-3d-scene {
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: transform 0.15s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.cinematic-hud-overlay {
+  pointer-events: none;
+  background: radial-gradient(circle at center, transparent 40%, rgba(5, 2, 12, 0.45) 100%);
+}
+
+.cinematic-lens-blur {
+  filter: blur(var(--scroll-blur, 0px));
+  transition: filter 0.1s ease-out;
+}
+
+.scroll-story-screen {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.scroll-story-bg-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%) scale(var(--video-zoom, 1));
+  object-fit: cover;
+  opacity: 0.35;
+  filter: saturate(0.8) contrast(1.15) brightness(0.7);
+  transition: transform 0.15s ease-out;
+  will-change: transform;
+}
+
+.scroll-story-glass-card {
+  position: relative;
+  z-index: 5;
+  background: rgba(10, 4, 20, 0.45);
+  backdrop-filter: blur(25px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  padding: 45px;
+  max-width: 650px;
+  transform: translateY(var(--card-y, 0px)) scale(var(--card-scale, 1));
+  opacity: var(--card-opacity, 1);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.75), 
+              inset 0 0 20px rgba(255, 255, 255, 0.03);
+  transition: transform 0.15s ease-out, opacity 0.15s ease-out;
+  will-change: transform, opacity;
+}
+
+.text-glow-cyan {
+  text-shadow: 0 0 15px rgba(0, 242, 254, 0.45);
+}
+

@@ -335,32 +335,93 @@ export default function ClientHome() {
     requestAnimationFrame(animateCount);
   }, [resultsSectionActive]);
 
-  // Scroll listener for the Process Timeline progress line
+  // Scroll listener for the Process Timeline progress line and cinematic storytelling
   const timelineRef = useRef(null);
   const [timelineProgress, setTimelineProgress] = useState(0);
+  
+  const storyRef = useRef(null);
+  const [storyProgress, setStoryProgress] = useState(0);
+  const [storyStep, setStoryStep] = useState(0);
+  
+  const [heroScrollScale, setHeroScrollScale] = useState(1);
+  const [heroScrollRotate, setHeroScrollRotate] = useState(0);
+
+  const storySteps = [
+    {
+      subtitle: "THE GAP",
+      title: "Silent Businesses in a Loud World",
+      desc: "Nearly 90% of local services, specialized manufacturers, and boutique brands hold elite offline authority but remain invisible online. They lose high-ticket leads daily simply because their web presence is standard.",
+      glow: "var(--accent-magenta)"
+    },
+    {
+      subtitle: "THE REVEAL",
+      title: "Cinematic 3D Digital Architecture",
+      desc: "Aparous uncovers your business potential. We craft digital portals utilizing hardware-accelerated CSS 3D parallax transform vectors, abstract particle canvases, and floating glass panels that command authority.",
+      glow: "var(--accent-cyan)"
+    },
+    {
+      subtitle: "THE ACCENT",
+      title: "Engineered to Dominate & Convert",
+      desc: "We deploy custom full-stack MERN engines optimized with 100/100 Lighthouse specs, Rate Limiters, Helmet security guards, and qualified AI lead capture pipelines. Built to convert traffic into revenue.",
+      glow: "var(--accent-purple)"
+    }
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
+      // 1. Process Timeline Progress
       const el = timelineRef.current;
-      if (!el) return;
-
-      const rect = el.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-      
-      const elementHeight = rect.height;
-      const elementTop = rect.top;
-
-      const start = windowHeight / 2;
-      const currentScroll = start - elementTop;
-      
-      let progress = 0;
-      if (currentScroll > 0) {
-        progress = Math.min(currentScroll / (elementHeight - 120), 1);
+      if (el) {
+        const rect = el.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        const elementHeight = rect.height;
+        const elementTop = rect.top;
+        const start = windowHeight / 2;
+        const currentScroll = start - elementTop;
+        let progress = 0;
+        if (currentScroll > 0) {
+          progress = Math.min(currentScroll / (elementHeight - 120), 1);
+        }
+        setTimelineProgress(progress * 100);
       }
-      setTimelineProgress(progress * 100);
+
+      // 2. Cinematic Storytelling Scroll Calculation
+      const storyEl = storyRef.current;
+      if (storyEl) {
+        const storyRect = storyEl.getBoundingClientRect();
+        const storyTop = storyRect.top;
+        const storyHeight = storyRect.height;
+        const windowHeight = window.innerHeight;
+        const scrollDistance = -storyTop;
+        const maxScroll = storyHeight - windowHeight;
+        let p = 0;
+        if (scrollDistance > 0 && maxScroll > 0) {
+          p = Math.min(scrollDistance / maxScroll, 1);
+        }
+        setStoryProgress(p);
+        const step = Math.min(Math.floor(p * 3), 2);
+        setStoryStep(step);
+      }
+
+      // 3. Hero Parallax scroll feedback
+      const scrollY = window.scrollY;
+      if (scrollY < window.innerHeight) {
+        const scale = Math.max(1 - (scrollY / window.innerHeight) * 0.12, 0.88);
+        const rotate = (scrollY / window.innerHeight) * 35;
+        setHeroScrollScale(scale);
+        setHeroScrollRotate(rotate);
+
+        if (!isHoveredHeroRef.current) {
+          const gridRotX = 70 + (scrollY / window.innerHeight) * 12;
+          setGridTransform({
+            transform: `perspective(600px) rotateX(${gridRotX.toFixed(1)}deg) translateZ(-120px)`,
+            transition: 'transform 0.1s ease-out'
+          });
+        }
+      }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -466,6 +527,8 @@ export default function ClientHome() {
     };
   }, []);
 
+  const isHoveredHeroRef = useRef(false);
+
   const handleHeroMouseMove = (e) => {
     if (!heroRef.current) return;
     const rect = heroRef.current.getBoundingClientRect();
@@ -490,12 +553,14 @@ export default function ClientHome() {
     });
 
     setIsHoveredHero(true);
+    isHoveredHeroRef.current = true;
   };
 
   const handleHeroMouseLeave = () => {
     setCubeTransform({});
     setGridTransform({});
     setIsHoveredHero(false);
+    isHoveredHeroRef.current = false;
   };
 
   const handleInputChange = (e) => {
@@ -733,7 +798,10 @@ export default function ClientHome() {
             position: 'relative'
           }}>
             <div className="cube-glow-ring" />
-            <div className="cube-container">
+            <div className="cube-container" style={{
+              transform: `scale(${heroScrollScale}) rotateY(${-heroScrollRotate}deg)`,
+              transition: 'transform 0.1s ease-out'
+            }}>
               <div 
                 className="cube"
                 style={cubeTransform}
@@ -992,6 +1060,164 @@ export default function ClientHome() {
             </p>
           </div>
 
+        </div>
+      </section>
+
+      {/* Cinematic Video Storytelling Section */}
+      <hr className="section-divider" />
+      <section 
+        ref={storyRef}
+        className="cinematic-scroll-section"
+        style={{ height: '300vh' }}
+      >
+        <div className="scroll-story-screen">
+          {/* Loop background video */}
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="scroll-story-bg-video"
+            style={{ 
+              transform: `translate(-50%, -50%) scale(${1 + storyProgress * 0.3})`,
+              filter: `saturate(${0.8 + storyProgress * 0.4}) contrast(1.1) brightness(${0.7 - storyProgress * 0.2})`
+            }}
+          >
+            <source src="https://cdn.pixabay.com/video/2021/04/17/71360-538965074_tiny.mp4" type="video/mp4" />
+          </video>
+
+          {/* Ambient Parallax Blobs fallback */}
+          <div style={{
+            position: 'absolute',
+            top: 0, left: 0, right: 0, bottom: 0,
+            pointerEvents: 'none',
+            overflow: 'hidden',
+            zIndex: 1
+          }}>
+            <div style={{
+              position: 'absolute',
+              width: '450px',
+              height: '450px',
+              borderRadius: '50%',
+              background: 'radial-gradient(circle, rgba(0, 242, 254, 0.15) 0%, transparent 70%)',
+              top: '20%',
+              left: `${10 + storyProgress * 15}%`,
+              transform: `scale(${1 + storyProgress * 0.5})`,
+              filter: 'blur(50px)',
+              transition: 'transform 0.2s ease-out'
+            }} />
+            <div style={{
+              position: 'absolute',
+              width: '500px',
+              height: '500px',
+              borderRadius: '50%',
+              background: 'radial-gradient(circle, rgba(161, 79, 255, 0.15) 0%, transparent 70%)',
+              bottom: '20%',
+              right: `${10 + storyProgress * 15}%`,
+              transform: `scale(${1.2 - storyProgress * 0.4})`,
+              filter: 'blur(60px)',
+              transition: 'transform 0.2s ease-out'
+            }} />
+          </div>
+
+          {/* HUD Overlay graphics */}
+          <div className="cinematic-hud-overlay" style={{
+            position: 'absolute',
+            top: 0, left: 0, right: 0, bottom: 0,
+            zIndex: 2,
+            border: '1px solid rgba(255,255,255,0.03)',
+            boxShadow: 'inset 0 0 100px rgba(0,0,0,0.8)'
+          }}>
+            {/* Top HUD elements */}
+            <div style={{ position: 'absolute', top: '35px', left: '8%', right: '8%', display: 'flex', justifyContent: 'space-between', fontFamily: 'monospace', fontSize: '0.65rem', color: 'rgba(255,255,255,0.25)', letterSpacing: '2px', textTransform: 'uppercase' }}>
+              <span>SYSTEM: APAROUS_HUD_V3</span>
+              <span>SCROLL_TICK: {(storyProgress * 100).toFixed(0)}%</span>
+            </div>
+            {/* Bottom HUD elements */}
+            <div style={{ position: 'absolute', bottom: '35px', left: '8%', right: '8%', display: 'flex', justifyContent: 'space-between', fontFamily: 'monospace', fontSize: '0.65rem', color: 'rgba(255,255,255,0.25)', letterSpacing: '1px' }}>
+              <span>COORDS: X={((10 + storyProgress * 15) * 10).toFixed(0)} / Y={((20 + storyProgress * 30) * 10).toFixed(0)}</span>
+              <span>STATUS: IMMERSIVE_MODE</span>
+            </div>
+          </div>
+
+          {/* Main Storytelling Glass Card */}
+          <div 
+            className="scroll-story-glass-card"
+            style={{
+              opacity: storyProgress < 0.05 ? storyProgress / 0.05 : (storyProgress > 0.95 ? (1 - storyProgress) / 0.05 : 1),
+              transform: `translateY(${(1 - Math.sin(storyProgress * Math.PI)) * 40}px) scale(${0.96 + Math.sin(storyProgress * Math.PI) * 0.04})`,
+              zIndex: 5
+            }}
+          >
+            <div style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px',
+              background: 'rgba(255, 255, 255, 0.03)',
+              border: '1px solid rgba(255, 255, 255, 0.05)',
+              borderRadius: '20px',
+              padding: '6px 14px',
+              fontSize: '0.75rem',
+              color: 'var(--text-bright)',
+              fontWeight: '600',
+              letterSpacing: '1px',
+              textTransform: 'uppercase',
+              marginBottom: '20px'
+            }}>
+              <span style={{
+                width: '6px',
+                height: '6px',
+                borderRadius: '50%',
+                background: storySteps[storyStep].glow,
+                boxShadow: `0 0 8px ${storySteps[storyStep].glow}`
+              }} />
+              {storySteps[storyStep].subtitle}
+            </div>
+
+            <h2 className="text-gradient" style={{
+              fontSize: 'clamp(1.8rem, 3.5vw, 2.5rem)',
+              fontFamily: 'var(--font-head)',
+              fontWeight: '800',
+              lineHeight: '1.2',
+              color: '#fff',
+              marginBottom: '20px',
+              transition: 'color 0.3s'
+            }}>
+              {storySteps[storyStep].title}
+            </h2>
+
+            <p style={{
+              fontSize: '1.02rem',
+              color: 'var(--text-normal)',
+              lineHeight: '1.7',
+              fontWeight: '300'
+            }}>
+              {storySteps[storyStep].desc}
+            </p>
+
+            {/* Interactive progress bar indicators inside card */}
+            <div style={{ display: 'flex', gap: '8px', marginTop: '35px' }}>
+              {[0, 1, 2].map((idx) => {
+                let fillWidth = '0%';
+                if (storyStep > idx) fillWidth = '100%';
+                else if (storyStep === idx) {
+                  const stepProgress = (storyProgress - (idx * 0.33)) / 0.33;
+                  fillWidth = `${Math.max(0, Math.min(stepProgress * 100, 100))}%`;
+                }
+                return (
+                  <div key={idx} style={{ flex: 1, height: '3px', background: 'rgba(255,255,255,0.06)', borderRadius: '2px', overflow: 'hidden' }}>
+                    <div style={{
+                      height: '100%',
+                      width: fillWidth,
+                      background: storySteps[idx].glow,
+                      boxShadow: `0 0 10px ${storySteps[idx].glow}`,
+                      transition: 'width 0.1s ease-out'
+                    }} />
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         </div>
       </section>
 
