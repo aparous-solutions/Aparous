@@ -225,13 +225,12 @@ export default function ClientHome() {
   const [gridTransform, setGridTransform] = useState({});
   const [isHoveredHero, setIsHoveredHero] = useState(false);
 
-  // Contact Form State
   const [formData, setFormData] = useState({
     name: '',
     company: '',
     email: '',
     phone: '',
-    budget: '$2,000+',
+    budget: '',
     service: 'Premium Websites',
     timeline: '1-3 Weeks',
     message: '',
@@ -698,7 +697,7 @@ export default function ClientHome() {
         company: '',
         email: '',
         phone: '',
-        budget: '$2,000+',
+        budget: '',
         service: 'Premium Websites',
         timeline: '1-3 Weeks',
         message: '',
@@ -1919,12 +1918,15 @@ export default function ClientHome() {
                   </div>
                   <div>
                     <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: '600', marginBottom: '8px', color: '#fff' }}>Allocated Budget</label>
-                    <select name="budget" value={formData.budget} onChange={handleInputChange} className="glass-input" style={{ background: 'rgba(10, 5, 20, 0.95)' }}>
-                      <option value="$2,000+">$2,000+</option>
-                      <option value="$5,000+">$5,000+</option>
-                      <option value="$10,000+">$10,000+ (Enterprise)</option>
-                      <option value="$20,000+">$20,000+ (Custom)</option>
-                    </select>
+                    <input
+                      type="text"
+                      name="budget"
+                      value={formData.budget}
+                      onChange={handleInputChange}
+                      className="glass-input"
+                      placeholder="e.g. $2,500"
+                      style={{ background: 'rgba(10, 5, 20, 0.95)' }}
+                    />
                   </div>
                   <div>
                     <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: '600', marginBottom: '8px', color: '#fff' }}>Target Timeline</label>
@@ -2195,7 +2197,6 @@ export default function ClientHome() {
           color: 'var(--text-muted)'
         }}>
           <span>© {new Date().getFullYear()} Aparous. All rights reserved.</span>
-          <span>Crafted with Antigravity 3D principles & MERN Architecture.</span>
         </div>
       </footer>
 
