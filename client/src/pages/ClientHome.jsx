@@ -73,7 +73,7 @@ const BACKUP_REVIEWS = [
   },
   {
     _id: "backup-rev-2",
-    name: "Lucky Singh",
+    name: "Lucky",
     company: "Bloodline Esports",
     projectName: "Esports Tournament Hub",
     rating: 5,
@@ -204,7 +204,7 @@ export default function ClientHome() {
   
   const [trustBarStats, setTrustBarStats] = useState([
     { id: "stat-1", label: "Trusted by Businesses", value: "⭐⭐⭐⭐⭐" },
-    { id: "stat-2", label: "Projects Delivered", value: "20+ Built" },
+    { id: "stat-2", label: "Projects Delivered", value: "10+ Built" },
     { id: "stat-3", label: "Device Responsiveness", value: "100% Fluid" },
     { id: "stat-4", label: "SEO Audited Core", value: "Optimized" },
     { id: "stat-5", label: "Tech Stack Integration", value: "Modern MERN" },
@@ -1632,7 +1632,7 @@ export default function ClientHome() {
                 <input
                   type="text"
                   required
-                  placeholder="e.g. Hemant Kumar"
+                  placeholder="e.g. Hemanth"
                   value={newReview.name}
                   onChange={(e) => setNewReview({ ...newReview, name: e.target.value })}
                   style={{ width: '100%', padding: '12px 16px', background: 'rgba(255, 255, 255, 0.02)', border: '1px solid var(--glass-border)', borderRadius: '8px', color: '#fff', fontSize: '0.9rem', outline: 'none' }}
