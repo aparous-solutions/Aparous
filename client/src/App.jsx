@@ -5,6 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
 import CanvasBackground from './components/CanvasBackground';
 import CustomCursor from './components/CustomCursor';
+import IntroPreloader from './components/IntroPreloader';
 import Chatbot from './components/Chatbot';
 import ClientHome from './pages/ClientHome';
 
@@ -58,6 +59,7 @@ function App() {
           path="/" 
           element={
             <>
+              <IntroPreloader />
               <CustomCursor />
               <CanvasBackground />
               <ClientHome />
