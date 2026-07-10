@@ -1472,6 +1472,202 @@ export default function ClientHome() {
         </div>
       </section>
 
+      {/* Dashboard Showcase Section (NEW) */}
+      <hr className="section-divider" />
+      <section id="dashboard-showcase" className="scroll-reveal" style={{ padding: '120px 8%', background: 'rgba(10, 4, 20, 0.2)', position: 'relative', overflow: 'hidden' }}>
+        <div className="hero-grid">
+          {/* Left Column: Copy */}
+          <div>
+            <span style={{ fontSize: '0.78rem', color: 'var(--accent-purple)', textTransform: 'uppercase', letterSpacing: '2px', fontWeight: '700', display: 'block', marginBottom: '10px' }}>
+              Operational Desk
+            </span>
+            <h2 style={{ fontSize: 'clamp(2rem, 4vw, 2.8rem)', marginBottom: '20px', fontFamily: 'var(--font-head)', fontWeight: '800', lineHeight: '1.2' }}>
+              Command Your Platform with a custom <span className="text-gradient-purple">Admin Suite</span>
+            </h2>
+            <p style={{ color: 'var(--text-normal)', fontSize: '1.05rem', lineHeight: '1.7', marginBottom: '30px', fontWeight: '300' }}>
+              Every client project includes a custom administrative dashboard. Real-time lead tracking, project updates, and website metrics are integrated into a single glassmorphic command desk.
+            </p>
+            
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+              {[
+                { title: "Real-time Lead Ingestion", desc: "Instantly capture and qualify leads with automated email/discord notifications." },
+                { title: "Project & Review Moderation", desc: "Easily modify portfolio items and client testimonials without touching the code." },
+                { title: "Fluid Data Visualizations", desc: "Track conversions, user retention, and traffic metrics using animated visual charts." }
+              ].map((feature, idx) => (
+                <div key={idx} style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
+                  <div style={{ color: 'var(--accent-cyan)', marginTop: '2px' }}>
+                    <CheckCircle size={18} />
+                  </div>
+                  <div>
+                    <h4 style={{ fontSize: '1rem', color: '#fff', fontWeight: '600', marginBottom: '4px' }}>{feature.title}</h4>
+                    <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem', lineHeight: '1.5' }}>{feature.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Right Column: Floating 3D SaaS Mockup */}
+          <div 
+            className="interactive"
+            onMouseMove={(e) => {
+              const rect = e.currentTarget.getBoundingClientRect();
+              const x = e.clientX - rect.left - rect.width / 2;
+              const y = e.clientY - rect.top - rect.height / 2;
+              const rotX = -(y / rect.height) * 22;
+              const rotY = (x / rect.width) * 22;
+              const mainPanel = e.currentTarget.querySelector('.main-dashboard-panel');
+              const widget1 = e.currentTarget.querySelector('.widget-feed');
+              const widget2 = e.currentTarget.querySelector('.widget-chart');
+              
+              if (mainPanel) mainPanel.style.transform = `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateZ(0px)`;
+              if (widget1) widget1.style.transform = `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateZ(40px) translate(-15px, 15px)`;
+              if (widget2) widget2.style.transform = `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateZ(60px) translate(25px, -20px)`;
+            }}
+            onMouseLeave={(e) => {
+              const mainPanel = e.currentTarget.querySelector('.main-dashboard-panel');
+              const widget1 = e.currentTarget.querySelector('.widget-feed');
+              const widget2 = e.currentTarget.querySelector('.widget-chart');
+              
+              if (mainPanel) mainPanel.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0px)';
+              if (widget1) widget1.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(20px) translate(-10px, 10px)';
+              if (widget2) widget2.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(35px) translate(15px, -15px)';
+            }}
+            style={{
+              position: 'relative',
+              width: '100%',
+              minHeight: '420px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              transformStyle: 'preserve-3d',
+              cursor: 'pointer'
+            }}
+          >
+            {/* Main Panel */}
+            <div className="glass-panel main-dashboard-panel" style={{
+              width: '85%',
+              height: '320px',
+              borderRadius: '16px',
+              padding: '25px',
+              transform: 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0px)',
+              transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+              background: 'rgba(10, 5, 25, 0.65)',
+              transformStyle: 'preserve-3d',
+              position: 'relative'
+            }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(255,255,255,0.06)', paddingBottom: '15px', marginBottom: '20px' }}>
+                <div style={{ display: 'flex', gap: '6px' }}>
+                  <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#ff5f56' }} />
+                  <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#ffbd2e' }} />
+                  <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#27c93f' }} />
+                </div>
+                <span style={{ fontSize: '0.65rem', fontFamily: 'monospace', color: 'rgba(255,255,255,0.3)', letterSpacing: '1px' }}>APAROUS_CONSOLE.SYS</span>
+              </div>
+
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '15px' }}>
+                <div>
+                  <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Monthly Operations Value</span>
+                  <span className="text-gradient-purple" style={{ fontSize: '1.8rem', fontWeight: '900', display: 'block', marginTop: '3px' }}>$34,820.00</span>
+                </div>
+                <div style={{ textAlign: 'right' }}>
+                  <span style={{ fontSize: '0.72rem', color: '#00ff64', display: 'inline-flex', alignItems: 'center', gap: '3px' }}>+18.5% ▲</span>
+                  <span style={{ fontSize: '0.68rem', color: 'var(--text-muted)', display: 'block', marginTop: '4px' }}>vs Last Month</span>
+                </div>
+              </div>
+
+              {/* SVG Animated Chart */}
+              <div style={{ width: '100%', height: '140px', position: 'relative' }}>
+                <svg viewBox="0 0 400 120" style={{ width: '100%', height: '100%', overflow: 'visible' }}>
+                  <defs>
+                    <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stopColor="#a14fff" stopOpacity="0.4" />
+                      <stop offset="100%" stopColor="#a14fff" stopOpacity="0" />
+                    </linearGradient>
+                  </defs>
+                  {/* Fill */}
+                  <path 
+                    d="M0 120 Q50 40 100 80 T200 30 T300 90 T400 20 L400 120 L0 120 Z" 
+                    fill="url(#chartGradient)" 
+                  />
+                  {/* Stroke line */}
+                  <path 
+                    d="M0 120 Q50 40 100 80 T200 30 T300 90 T400 20" 
+                    fill="none" 
+                    stroke="#00f2fe" 
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                    style={{
+                      strokeDasharray: 800,
+                      strokeDashoffset: 0,
+                    }}
+                  />
+                </svg>
+              </div>
+            </div>
+
+            {/* Widget 1: Floating Activity Feed */}
+            <div className="glass-panel widget-feed" style={{
+              position: 'absolute',
+              bottom: '30px',
+              left: '5%',
+              width: '200px',
+              padding: '15px',
+              borderRadius: '12px',
+              transform: 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(20px) translate(-10px, 10px)',
+              transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+              background: 'rgba(15, 8, 30, 0.75)',
+              zIndex: 10
+            }}>
+              <span style={{ fontSize: '0.62rem', textTransform: 'uppercase', color: 'var(--accent-cyan)', letterSpacing: '1px', display: 'block', marginBottom: '8px' }}>LIVE_INCOMING_LEADS</span>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <div style={{ fontSize: '0.72rem', color: '#fff', borderLeft: '2px solid #00f2fe', paddingLeft: '8px' }}>
+                  <strong>Aero Athletic</strong>
+                  <span style={{ display: 'block', color: 'var(--text-muted)', fontSize: '0.65rem' }}>$10,000+ • 1-3 Weeks</span>
+                </div>
+                <div style={{ fontSize: '0.72rem', color: '#fff', borderLeft: '2px solid #a14fff', paddingLeft: '8px' }}>
+                  <strong>Grow Athlete</strong>
+                  <span style={{ display: 'block', color: 'var(--text-muted)', fontSize: '0.65rem' }}>$2,500+ • 4-6 Weeks</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Widget 2: Floating Conversion rate circle chart */}
+            <div className="glass-panel widget-chart" style={{
+              position: 'absolute',
+              top: '40px',
+              right: '5%',
+              width: '180px',
+              padding: '15px',
+              borderRadius: '12px',
+              transform: 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(35px) translate(15px, -15px)',
+              transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+              background: 'rgba(15, 8, 30, 0.75)',
+              textAlign: 'center',
+              zIndex: 11
+            }}>
+              <span style={{ fontSize: '0.65rem', textTransform: 'uppercase', color: 'var(--text-muted)', display: 'block', marginBottom: '10px' }}>Qualifying rate</span>
+              <div style={{ position: 'relative', width: '70px', height: '70px', margin: '0 auto 8px auto', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <svg width="70" height="70" viewBox="0 0 36 36" style={{ transform: 'rotate(-90deg)' }}>
+                  <circle cx="18" cy="18" r="16" fill="none" stroke="rgba(255,255,255,0.03)" strokeWidth="3.5" />
+                  <path
+                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                    fill="none"
+                    stroke="var(--accent-purple)"
+                    strokeWidth="3.5"
+                    strokeDasharray="94, 100"
+                  />
+                </svg>
+                <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.85rem', fontWeight: '900', color: '#fff' }}>
+                  94%
+                </div>
+              </div>
+              <span style={{ fontSize: '0.68rem', color: 'var(--text-muted)' }}>18 Qualified leads today</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Client Logos Section (NEW) */}
       <hr className="section-divider" />
       <section id="client-logos" className="scroll-reveal" style={{ padding: '80px 8%', background: 'rgba(5, 2, 12, 0.1)' }}>

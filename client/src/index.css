@@ -1377,3 +1377,13 @@ body::after {
   z-index: 1;
 }
 
+@keyframes chartFill {
+  from { stroke-dashoffset: 800; }
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes chartCircleFill {
+  from { stroke-dashoffset: 100; }
+  to { stroke-dashoffset: 0; }
+}
+
