@@ -1147,192 +1147,95 @@ export default function ClientHome() {
       {/* Cinematic Video Storytelling Section */}
       <hr className="section-divider" />
       <section 
-        ref={storyRef}
-        className="cinematic-scroll-section"
-        style={{ height: '180vh' }}
+        id="storytelling-section"
+        className="scroll-reveal"
+        style={{ padding: '120px 8%', background: 'rgba(10, 4, 20, 0.1)', position: 'relative' }}
       >
-        <div className="scroll-story-screen">
-          {/* The R3F CanvasBackground renders particles and vectors in the backdrop context */}
+        <div style={{ textAlign: 'center', marginBottom: '80px' }}>
+          <span style={{ fontSize: '0.78rem', color: 'var(--accent-purple)', textTransform: 'uppercase', letterSpacing: '2px', fontWeight: '700', display: 'block', marginBottom: '10px' }}>
+            The Blueprint
+          </span>
+          <h2 style={{ fontSize: '2.5rem', marginBottom: '20px', fontFamily: 'var(--font-head)', fontWeight: '800' }}>
+            <CinematicTextReveal text="Our Digital Philosophy" />
+          </h2>
+          <p style={{ color: 'var(--text-muted)', maxWidth: '600px', margin: '0 auto', fontSize: '1.05rem' }}>
+            How we translate offline authority into high-end online positioning.
+          </p>
+        </div>
 
-          {/* Ambient Parallax Blobs fallback */}
-          <div style={{
-            position: 'absolute',
-            top: 0, left: 0, right: 0, bottom: 0,
-            pointerEvents: 'none',
-            overflow: 'hidden',
-            zIndex: 1
-          }}>
-            <div style={{
-              position: 'absolute',
-              width: '450px',
-              height: '450px',
-              borderRadius: '50%',
-              background: 'radial-gradient(circle, rgba(0, 242, 254, 0.15) 0%, transparent 70%)',
-              top: '20%',
-              left: `${10 + storyProgress * 15}%`,
-              transform: `scale(${1 + storyProgress * 0.5})`,
-              filter: 'blur(50px)',
-              transition: 'transform 0.2s ease-out'
-            }} />
-            <div style={{
-              position: 'absolute',
-              width: '500px',
-              height: '500px',
-              borderRadius: '50%',
-              background: 'radial-gradient(circle, rgba(161, 79, 255, 0.15) 0%, transparent 70%)',
-              bottom: '20%',
-              right: `${10 + storyProgress * 15}%`,
-              transform: `scale(${1.2 - storyProgress * 0.4})`,
-              filter: 'blur(60px)',
-              transition: 'transform 0.2s ease-out'
-            }} />
-          </div>
+        <div style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '40px',
+          maxWidth: '850px',
+          margin: '0 auto'
+        }}>
+          {storySteps.map((step, idx) => (
+            <motion.div 
+              key={idx} 
+              className="glass-panel" 
+              whileHover={{ 
+                y: -6,
+                borderColor: step.glow + '40',
+                boxShadow: `0 15px 35px -10px ${step.glow}15, inset 0 0 20px rgba(255, 255, 255, 0.02)`
+              }}
+              transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+              style={{ 
+                padding: '40px', 
+                borderRadius: '24px', 
+                border: '1px solid rgba(255, 255, 255, 0.05)',
+                background: 'rgba(10, 4, 20, 0.45)',
+                position: 'relative',
+                overflow: 'hidden',
+                transition: 'border-color 0.3s, box-shadow 0.3s'
+              }}
+            >
+              {/* Glow accent badge */}
+              <div style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                background: 'rgba(255, 255, 255, 0.03)',
+                border: '1px solid rgba(255, 255, 255, 0.05)',
+                borderRadius: '20px',
+                padding: '6px 14px',
+                fontSize: '0.75rem',
+                color: 'var(--text-bright)',
+                fontWeight: '600',
+                letterSpacing: '1px',
+                textTransform: 'uppercase',
+                marginBottom: '20px'
+              }}>
+                <span style={{
+                  width: '6px',
+                  height: '6px',
+                  borderRadius: '50%',
+                  background: step.glow,
+                  boxShadow: `0 0 8px ${step.glow}`
+                }} />
+                {step.subtitle}
+              </div>
 
-          {/* HUD Overlay graphics */}
-          <div className="cinematic-hud-overlay" style={{
-            position: 'absolute',
-            top: 0, left: 0, right: 0, bottom: 0,
-            zIndex: 2,
-            border: '1px solid rgba(255,255,255,0.03)',
-            boxShadow: 'inset 0 0 100px rgba(0,0,0,0.8)'
-          }}>
-            {/* Top HUD elements */}
-            <div style={{ position: 'absolute', top: '35px', left: '8%', right: '8%', display: 'flex', justifyContent: 'space-between', fontFamily: 'monospace', fontSize: '0.65rem', color: 'rgba(255,255,255,0.25)', letterSpacing: '2px', textTransform: 'uppercase' }}>
-              <span>SYSTEM: APAROUS_HUD_V3</span>
-              <span>SCROLL_TICK: {(storyProgress * 100).toFixed(0)}%</span>
-            </div>
-            {/* Bottom HUD elements */}
-            <div style={{ position: 'absolute', bottom: '35px', left: '8%', right: '8%', display: 'flex', justifyContent: 'space-between', fontFamily: 'monospace', fontSize: '0.65rem', color: 'rgba(255,255,255,0.25)', letterSpacing: '1px' }}>
-              <span>COORDS: X={((10 + storyProgress * 15) * 10).toFixed(0)} / Y={((20 + storyProgress * 30) * 10).toFixed(0)}</span>
-              <span>STATUS: IMMERSIVE_MODE</span>
-            </div>
-          </div>
+              <h3 style={{
+                fontSize: 'clamp(1.5rem, 3vw, 1.8rem)',
+                fontFamily: 'var(--font-head)',
+                fontWeight: '800',
+                color: '#fff',
+                marginBottom: '15px'
+              }}>
+                {step.title}
+              </h3>
 
-          {/* Animated 3D digital portal behind the card */}
-          <div style={{
-            position: 'absolute',
-            width: '380px',
-            height: '380px',
-            top: '50%',
-            left: '50%',
-            transform: `translate(-50%, -50%) rotate(${storyProgress * 180}deg)`,
-            pointerEvents: 'none',
-            zIndex: 3,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            transition: 'transform 0.1s ease-out'
-          }}>
-            {/* Outer Ring */}
-            <div style={{
-              position: 'absolute',
-              width: '100%',
-              height: '100%',
-              border: '1.5px dashed rgba(0, 242, 254, 0.3)',
-              borderRadius: '50%',
-              boxShadow: '0 0 40px rgba(0, 242, 254, 0.08)',
-              animation: 'spin 25s linear infinite'
-            }} />
-            {/* Middle Ring */}
-            <div style={{
-              position: 'absolute',
-              width: '82%',
-              height: '82%',
-              border: '1px solid rgba(161, 79, 255, 0.2)',
-              borderRadius: '50%',
-              animation: 'spin 18s linear infinite reverse'
-            }} />
-            {/* Inner Glowing Core */}
-            <div style={{
-              position: 'absolute',
-              width: '65%',
-              height: '65%',
-              background: `radial-gradient(circle, ${storySteps[storyStep].glow}25 0%, transparent 70%)`,
-              borderRadius: '50%',
-              filter: 'blur(35px)',
-              transform: `scale(${1 + Math.sin(storyProgress * Math.PI) * 0.25})`,
-              transition: 'background 0.6s ease'
-            }} />
-          </div>
-
-          {/* Main Storytelling Glass Card */}
-          <div 
-            className="scroll-story-glass-card"
-            style={{
-              opacity: 1,
-              transform: `translateY(${(1 - Math.sin(storyProgress * Math.PI)) * 12}px) scale(${0.98 + Math.sin(storyProgress * Math.PI) * 0.02})`,
-              zIndex: 5
-            }}
-          >
-            <div style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '8px',
-              background: 'rgba(255, 255, 255, 0.03)',
-              border: '1px solid rgba(255, 255, 255, 0.05)',
-              borderRadius: '20px',
-              padding: '6px 14px',
-              fontSize: '0.75rem',
-              color: 'var(--text-bright)',
-              fontWeight: '600',
-              letterSpacing: '1px',
-              textTransform: 'uppercase',
-              marginBottom: '20px'
-            }}>
-              <span style={{
-                width: '6px',
-                height: '6px',
-                borderRadius: '50%',
-                background: storySteps[storyStep].glow,
-                boxShadow: `0 0 8px ${storySteps[storyStep].glow}`
-              }} />
-              {storySteps[storyStep].subtitle}
-            </div>
-
-            <h2 className="text-gradient" style={{
-              fontSize: 'clamp(1.8rem, 3.5vw, 2.5rem)',
-              fontFamily: 'var(--font-head)',
-              fontWeight: '800',
-              lineHeight: '1.2',
-              color: '#fff',
-              marginBottom: '20px',
-              transition: 'color 0.3s'
-            }}>
-              {storySteps[storyStep].title}
-            </h2>
-
-            <p style={{
-              fontSize: '1.02rem',
-              color: 'var(--text-normal)',
-              lineHeight: '1.7',
-              fontWeight: '300'
-            }}>
-              {storySteps[storyStep].desc}
-            </p>
-
-            {/* Interactive progress bar indicators inside card */}
-            <div style={{ display: 'flex', gap: '8px', marginTop: '35px' }}>
-              {[0, 1, 2].map((idx) => {
-                let fillWidth = '0%';
-                if (storyStep > idx) fillWidth = '100%';
-                else if (storyStep === idx) {
-                  const stepProgress = (storyProgress - (idx * 0.33)) / 0.33;
-                  fillWidth = `${Math.max(0, Math.min(stepProgress * 100, 100))}%`;
-                }
-                return (
-                  <div key={idx} style={{ flex: 1, height: '3px', background: 'rgba(255,255,255,0.06)', borderRadius: '2px', overflow: 'hidden' }}>
-                    <div style={{
-                      height: '100%',
-                      width: fillWidth,
-                      background: storySteps[idx].glow,
-                      boxShadow: `0 0 10px ${storySteps[idx].glow}`,
-                      transition: 'width 0.1s ease-out'
-                    }} />
-                  </div>
-                );
-              })}
-            </div>
-          </div>
+              <p style={{
+                fontSize: '1rem',
+                color: 'var(--text-normal)',
+                lineHeight: '1.7',
+                fontWeight: '300'
+              }}>
+                {step.desc}
+              </p>
+            </motion.div>
+          ))}
         </div>
       </section>
 
