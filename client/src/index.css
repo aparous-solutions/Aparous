@@ -251,8 +251,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Scroll Reveal Base CSS */
 .scroll-reveal {
-  opacity: 0;
-  transform: translateY(40px) scale(0.98);
+  opacity: 1;
   transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
