@@ -1149,7 +1149,7 @@ export default function ClientHome() {
       <section 
         ref={storyRef}
         className="cinematic-scroll-section"
-        style={{ height: '300vh' }}
+        style={{ height: '180vh' }}
       >
         <div className="scroll-story-screen">
           {/* The R3F CanvasBackground renders particles and vectors in the backdrop context */}
@@ -1208,11 +1208,58 @@ export default function ClientHome() {
             </div>
           </div>
 
+          {/* Animated 3D digital portal behind the card */}
+          <div style={{
+            position: 'absolute',
+            width: '380px',
+            height: '380px',
+            top: '50%',
+            left: '50%',
+            transform: `translate(-50%, -50%) rotate(${storyProgress * 180}deg)`,
+            pointerEvents: 'none',
+            zIndex: 3,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            transition: 'transform 0.1s ease-out'
+          }}>
+            {/* Outer Ring */}
+            <div style={{
+              position: 'absolute',
+              width: '100%',
+              height: '100%',
+              border: '1.5px dashed rgba(0, 242, 254, 0.3)',
+              borderRadius: '50%',
+              boxShadow: '0 0 40px rgba(0, 242, 254, 0.08)',
+              animation: 'spin 25s linear infinite'
+            }} />
+            {/* Middle Ring */}
+            <div style={{
+              position: 'absolute',
+              width: '82%',
+              height: '82%',
+              border: '1px solid rgba(161, 79, 255, 0.2)',
+              borderRadius: '50%',
+              animation: 'spin 18s linear infinite reverse'
+            }} />
+            {/* Inner Glowing Core */}
+            <div style={{
+              position: 'absolute',
+              width: '65%',
+              height: '65%',
+              background: `radial-gradient(circle, ${storySteps[storyStep].glow}25 0%, transparent 70%)`,
+              borderRadius: '50%',
+              filter: 'blur(35px)',
+              transform: `scale(${1 + Math.sin(storyProgress * Math.PI) * 0.25})`,
+              transition: 'background 0.6s ease'
+            }} />
+          </div>
+
           {/* Main Storytelling Glass Card */}
           <div 
             className="scroll-story-glass-card"
             style={{
-              opacity: storyProgress > 0.92 ? (1 - storyProgress) / 0.08 : 1,
+              opacity: 1,
               transform: `translateY(${(1 - Math.sin(storyProgress * Math.PI)) * 12}px) scale(${0.98 + Math.sin(storyProgress * Math.PI) * 0.02})`,
               zIndex: 5
             }}
