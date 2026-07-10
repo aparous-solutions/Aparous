@@ -966,7 +966,9 @@ export default function ClientHome() {
       {/* Services Section */}
       <section id="services" className="scroll-reveal" style={{ padding: '120px 8%', borderTop: '1px solid var(--glass-border)', background: 'rgba(5,2,12,0.3)' }}>
         <div style={{ textAlign: 'center', marginBottom: '80px' }}>
-          <h2 style={{ fontSize: '2.5rem', marginBottom: '20px', fontFamily: 'var(--font-head)', fontWeight: '800' }}>Core Capabilities</h2>
+          <h2 style={{ fontSize: '2.5rem', marginBottom: '20px', fontFamily: 'var(--font-head)', fontWeight: '800' }}>
+            <CinematicTextReveal text="Core Capabilities" />
+          </h2>
           <p style={{ color: 'var(--text-muted)', maxWidth: '600px', margin: '0 auto', fontSize: '1rem' }}>
             We design high-converting visual systems built with elite engineering protocols.
           </p>
@@ -1287,7 +1289,9 @@ export default function ClientHome() {
       <hr className="section-divider" />
       <section id="why-choose-us" className="scroll-reveal" style={{ padding: '120px 8%', background: 'rgba(5, 2, 12, 0.2)' }}>
         <div style={{ textAlign: 'center', marginBottom: '80px' }}>
-          <h2 style={{ fontSize: '2.5rem', marginBottom: '20px', fontFamily: 'var(--font-head)', fontWeight: '800' }}>Why Choose Us</h2>
+          <h2 style={{ fontSize: '2.5rem', marginBottom: '20px', fontFamily: 'var(--font-head)', fontWeight: '800' }}>
+            <CinematicTextReveal text="Why Choose Us" />
+          </h2>
           <p style={{ color: 'var(--text-muted)', maxWidth: '600px', margin: '0 auto', fontSize: '1.05rem' }}>
             We combine elite engineering with business logic to maximize your conversion rates and organic visibility.
           </p>
@@ -1355,7 +1359,9 @@ export default function ClientHome() {
       <hr className="section-divider" />
       <section id="our-process" className="scroll-reveal" style={{ padding: '120px 8%', background: 'rgba(10, 4, 20, 0.3)' }}>
         <div style={{ textAlign: 'center', marginBottom: '80px' }}>
-          <h2 style={{ fontSize: '2.5rem', marginBottom: '20px', fontFamily: 'var(--font-head)', fontWeight: '800' }}>Our Process</h2>
+          <h2 style={{ fontSize: '2.5rem', marginBottom: '20px', fontFamily: 'var(--font-head)', fontWeight: '800' }}>
+            <CinematicTextReveal text="Our Process" />
+          </h2>
           <p style={{ color: 'var(--text-muted)', maxWidth: '600px', margin: '0 auto', fontSize: '1.05rem' }}>
             A structured, collaborative roadmap designed to take your digital presence from strategy to high-performing deployment.
           </p>
@@ -1400,7 +1406,9 @@ export default function ClientHome() {
       <hr className="section-divider" />
       <section ref={resultsRef} id="results" className="scroll-reveal" style={{ padding: '120px 8%', background: 'rgba(5, 2, 12, 0.4)', position: 'relative' }}>
         <div style={{ textAlign: 'center', marginBottom: '80px' }}>
-          <h2 style={{ fontSize: '2.5rem', marginBottom: '20px', fontFamily: 'var(--font-head)', fontWeight: '800' }}>Proven Milestones</h2>
+          <h2 style={{ fontSize: '2.5rem', marginBottom: '20px', fontFamily: 'var(--font-head)', fontWeight: '800' }}>
+            <CinematicTextReveal text="Proven Milestones" />
+          </h2>
           <p style={{ color: 'var(--text-muted)', maxWidth: '600px', margin: '0 auto', fontSize: '1.05rem' }}>
             Metrics and performance indicators that demonstrate our commitment to high-converting user experiences.
           </p>
@@ -1451,7 +1459,9 @@ export default function ClientHome() {
       <section id="portfolio" className="scroll-reveal" style={{ padding: '120px 8%' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '80px' }}>
           <div>
-            <h2 style={{ fontSize: '2.5rem', marginBottom: '15px' }}>Recent Work</h2>
+            <h2 style={{ fontSize: '2.5rem', marginBottom: '15px' }}>
+              <CinematicTextReveal text="Recent Work" />
+            </h2>
             <p style={{ color: 'var(--text-muted)', fontSize: '1rem' }}>Proof of concept case studies delivering digital value.</p>
           </div>
           <div style={{ color: 'var(--accent-cyan)', fontSize: '0.9rem', fontWeight: '600' }}>
