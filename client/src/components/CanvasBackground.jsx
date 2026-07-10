@@ -80,7 +80,7 @@ function MorphingGrid({ scrollProgress }) {
       rotation={[-Math.PI / 2.1, 0, 0]} 
       position={[0, -2.4, 0]}
     >
-      <planeGeometry args={[45, 45, 60, 60]} />
+      <planeGeometry args={[40, 40, 30, 30]} />
       <shaderMaterial
         vertexShader={WaveShaderMaterial.vertexShader}
         fragmentShader={WaveShaderMaterial.fragmentShader}
@@ -165,7 +165,7 @@ function SceneAssembly({ scrollProgress }) {
       <MorphingGrid scrollProgress={scrollProgress} />
 
       {/* Floating neon light nodes */}
-      <Stars radius={80} depth={40} count={2800} factor={4.5} saturation={0.5} fade speed={1.2} />
+      <Stars radius={80} depth={40} count={800} factor={4.5} saturation={0.5} fade speed={1.2} />
       <fog attach="fog" args={['#05020c', 4, 20]} />
       
       <CameraController scrollProgress={scrollProgress} />
@@ -175,8 +175,16 @@ function SceneAssembly({ scrollProgress }) {
 
 export default function CanvasBackground() {
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
     const handleScroll = () => {
       const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
       if (totalScroll <= 0) return;
@@ -185,8 +193,26 @@ export default function CanvasBackground() {
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
+
+  if (isMobile) {
+    return (
+      <div style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        zIndex: -2,
+        pointerEvents: 'none',
+      }} />
+    );
+  }
 
   return (
     <div style={{
@@ -199,7 +225,7 @@ export default function CanvasBackground() {
       pointerEvents: 'none',
       background: '#05020c',
     }}>
-      <Canvas gl={{ antialias: true, alpha: false }} camera={{ fov: 60, near: 0.1, far: 40 }}>
+      <Canvas dpr={[1, 1.5]} gl={{ antialias: false, alpha: false }} camera={{ fov: 60, near: 0.1, far: 40 }}>
         <color attach="background" args={['#05020c']} />
         <SceneAssembly scrollProgress={scrollProgress} />
       </Canvas>

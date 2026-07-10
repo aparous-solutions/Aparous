@@ -19,6 +19,9 @@ function App() {
     // Only run smooth momentum scrolling on the main client-facing path
     if (window.location.pathname !== '/') return;
 
+    // Disable smooth scroll on mobile devices to use native hardware momentum scrolling
+    if (window.innerWidth < 768) return;
+
     const lenis = new Lenis({
       duration: 1.5,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
