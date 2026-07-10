@@ -68,25 +68,101 @@ const PORT = process.env.PORT || 5000;
 
 // Security Middleware configurations
 app.use(helmet({
-  contentSecurityPolicy: false // Disable CSP to avoid blocking Three.js models, images, and fonts
+  contentSecurityPolicy: false, // Disable CSP to avoid blocking Three.js models, images, and fonts
+  xssFilter: true, // X-XSS-Protection header
+  noSniff: true, // X-Content-Type-Options nosniff
+  frameguard: { action: 'deny' }, // X-Frame-Options DENY
+  referrerPolicy: { policy: 'same-origin' }
 }));
 
 // Gzip Compression for asset size performance
 app.use(compression());
 
-// Rate Limiting to prevent spam/abuse
+// NoSQL Injection Protection Middleware
+const sanitizeInput = (obj) => {
+  if (obj instanceof Object) {
+    for (const key in obj) {
+      if (key.startsWith('$') || key.includes('.')) {
+        delete obj[key];
+      } else if (typeof obj[key] === 'object') {
+        sanitizeInput(obj[key]);
+      }
+    }
+  }
+};
+const nosqlSanitizer = (req, res, next) => {
+  sanitizeInput(req.body);
+  sanitizeInput(req.query);
+  sanitizeInput(req.params);
+  next();
+};
+app.use(nosqlSanitizer);
+
+// XSS Sanitizer Middleware (protects against scripts/html injections in forms)
+const cleanXss = (str) => {
+  if (typeof str !== 'string') return str;
+  return str
+    .replace(/<script[^>]*>([\s\S]*?)<\/script>/gi, '')
+    .replace(/<[^>]*>/g, '')
+    .replace(/javascript:/gi, '')
+    .trim();
+};
+const sanitizeXss = (obj) => {
+  if (obj instanceof Object) {
+    for (const key in obj) {
+      if (typeof obj[key] === 'string') {
+        obj[key] = cleanXss(obj[key]);
+      } else if (typeof obj[key] === 'object') {
+        sanitizeXss(obj[key]);
+      }
+    }
+  }
+};
+const xssSanitizer = (req, res, next) => {
+  sanitizeXss(req.body);
+  next();
+};
+app.use(xssSanitizer);
+
+// Global API Rate Limiter
 const apiLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 200, // limit each IP to 200 requests per windowMs
+  max: 180, // limit each IP to 180 requests per windowMs
   message: { error: 'Too many requests from this IP, please try again after 15 minutes.' },
   standardHeaders: true,
   legacyHeaders: false
 });
 app.use('/api/', apiLimiter);
 
-// Enable CORS for frontend
+// Brute force protection on login/leads form submission
+const formSubmitLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 12, // limit each IP to 12 form submissions per 15 mins to prevent spam/brute-force
+  message: { error: 'Form submission limit reached. Please try again after 15 minutes.' },
+  standardHeaders: true,
+  legacyHeaders: false
+});
+app.use('/api/leads', formSubmitLimiter);
+app.use('/api/audits', formSubmitLimiter);
+app.use('/api/admin/login', formSubmitLimiter);
+
+// Enable CORS with Domain Whitelist protection
+const allowedOrigins = [
+  'https://aparous.vercel.app',
+  'https://aparous-solutions.vercel.app',
+  'http://localhost:5173',
+  'http://localhost:3000'
+];
 const corsOptions = {
-  origin: '*', // Allow all origins for local development testing
+  origin: (origin, callback) => {
+    // Allow non-browser agents (e.g. mobile apps, postman, curl)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) !== -1 || process.env.NODE_ENV !== 'production') {
+      callback(null, true);
+    } else {
+      callback(new Error('Blocked by CORS policy: unauthorized origin.'));
+    }
+  },
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 };
