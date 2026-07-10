@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
+import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ChevronLeft, ChevronRight, Mail, Phone, MapPin, CheckCircle, Send, Cpu, Layout, Sparkles, Database, Shield, TrendingUp, Video, Star, Award, Check, Calendar, ExternalLink, X, Clock, HelpCircle, User } from 'lucide-react';
 import ProjectCard from '../components/ProjectCard';
@@ -82,96 +83,63 @@ const BACKUP_REVIEWS = [
   }
 ];
 
-// Premium 3D Cyber Starfield Canvas for scrolling storytelling
-const StorytellingCanvas = ({ progress }) => {
-  const canvasRef = useRef(null);
-  const particlesRef = useRef([]);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    
-    const handleResize = () => {
-      canvas.width = canvas.parentElement ? canvas.parentElement.clientWidth : window.innerWidth;
-      canvas.height = canvas.parentElement ? canvas.parentElement.clientHeight : window.innerHeight;
-    };
-    handleResize();
-    window.addEventListener('resize', handleResize);
-
-    // Initialize 3D particles if empty
-    if (particlesRef.current.length === 0) {
-      const count = 180;
-      for (let i = 0; i < count; i++) {
-        particlesRef.current.push({
-          x: (Math.random() - 0.5) * 1800,
-          y: (Math.random() - 0.5) * 1800,
-          z: Math.random() * 2000,
-          size: Math.random() * 2.2 + 0.8,
-          color: Math.random() > 0.65 ? '#00f2fe' : (Math.random() > 0.35 ? '#a14fff' : '#ffffff')
-        });
+// Word-by-word reveal component using Framer Motion
+const CinematicTextReveal = ({ text, className, delay = 0 }) => {
+  const words = typeof text === 'string' ? text.split(" ") : [];
+  
+  const containerVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.05,
+        delayChildren: delay,
       }
     }
+  };
 
-    let animationId;
-    const render = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+  const wordVariants = {
+    hidden: { 
+      opacity: 0, 
+      y: 15,
+      filter: "blur(6px)"
+    },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      filter: "blur(0px)",
+      transition: { 
+        duration: 0.6, 
+        ease: [0.16, 1, 0.3, 1] 
+      } 
+    }
+  };
 
-      const cx = canvas.width / 2;
-      const cy = canvas.height / 2;
-      const fov = 700;
-
-      // Scroll zooms in: we subtract scroll-driven depth
-      const scrollSpeedBoost = progress * 1600;
-
-      particlesRef.current.forEach(p => {
-        let z = p.z - scrollSpeedBoost;
-        while (z <= 0) z += 2000;
-        while (z > 2000) z -= 2000;
-        
-        // Perspective projection
-        const scale = fov / (fov + z);
-        const x2d = cx + p.x * scale;
-        const y2d = cy + p.y * scale;
-
-        // Draw particle
-        if (x2d >= 0 && x2d <= canvas.width && y2d >= 0 && y2d <= canvas.height) {
-          const alpha = Math.min(1, (2000 - z) / 600);
-          ctx.beginPath();
-          ctx.arc(x2d, y2d, p.size * scale * 1.6, 0, Math.PI * 2);
-          ctx.fillStyle = p.color;
-          ctx.globalAlpha = alpha * 0.75;
-          ctx.fill();
-        }
-      });
-      
-      // Draw receding vector lines to create tunnel zoom depth
-      ctx.globalAlpha = 0.06 + (progress * 0.06);
-      ctx.strokeStyle = '#a14fff';
-      ctx.lineWidth = 1;
-      const linesCount = 20;
-      for (let i = 0; i < linesCount; i++) {
-        const angle = (i / linesCount) * Math.PI * 2;
-        const xDir = Math.cos(angle);
-        const yDir = Math.sin(angle);
-        ctx.beginPath();
-        ctx.moveTo(cx + xDir * 60, cy + yDir * 60);
-        ctx.lineTo(cx + xDir * canvas.width * 1.2, cy + yDir * canvas.height * 1.2);
-        ctx.stroke();
-      }
-
-      ctx.globalAlpha = 1.0;
-      animationId = requestAnimationFrame(render);
-    };
-    render();
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-      cancelAnimationFrame(animationId);
-    };
-  }, [progress]);
-
-  return <canvas ref={canvasRef} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: 1 }} />;
+  return (
+    <motion.span
+      variants={containerVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-10%" }}
+      style={{ display: 'inline-block' }}
+      className={className}
+    >
+      {words.map((word, idx) => {
+        // Strip trailing punctuation to match keywords cleanly
+        const cleanWord = word.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
+        const isGradient = cleanWord === 'Premium' || cleanWord === 'Platforms';
+        return (
+          <motion.span
+            key={idx}
+            variants={wordVariants}
+            style={{ display: 'inline-block', marginRight: '0.22em' }}
+            className={isGradient ? 'text-gradient-purple' : ''}
+          >
+            {word}
+          </motion.span>
+        );
+      })}
+    </motion.span>
+  );
 };
 
 export default function ClientHome() {
@@ -828,15 +796,14 @@ export default function ClientHome() {
               <span>Revealing Your Business to the Digital Era</span>
             </div>
 
-            <h1 className="cinematic-reveal" style={{
+            <h1 style={{
               fontSize: 'clamp(2.6rem, 5vw, 4.8rem)',
               lineHeight: '1.25',
               fontWeight: '800',
               marginBottom: '25px',
               letterSpacing: '-1.5px',
-              animationDelay: '0.15s'
             }}>
-              We Craft <span className="text-gradient-purple">Premium Platforms</span> & Cinematic Visuals.
+              <CinematicTextReveal text="We Craft Premium Platforms & Cinematic Visuals." delay={0.1} />
             </h1>
 
             <p className="cinematic-reveal" style={{
@@ -1076,7 +1043,24 @@ export default function ClientHome() {
               bg: "rgba(161, 79, 255, 0.08)"
             }
           ].map((service, idx) => (
-            <div key={idx} className="glass-panel scroll-reveal" style={{ padding: '40px 30px', display: 'flex', flexDirection: 'column', height: '100%' }}>
+            <motion.div 
+              key={idx} 
+              className="glass-panel scroll-reveal" 
+              whileHover={{ 
+                y: -8,
+                scale: 1.02,
+                borderColor: service.color + '50',
+                boxShadow: `0 20px 40px -15px ${service.color}20, inset 0 0 20px rgba(255, 255, 255, 0.02)`
+              }}
+              transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+              style={{ 
+                padding: '40px 30px', 
+                display: 'flex', 
+                flexDirection: 'column', 
+                height: '100%', 
+                transition: 'border-color 0.3s, box-shadow 0.3s' 
+              }}
+            >
               <div style={{
                 background: service.bg,
                 color: service.color,
@@ -1105,7 +1089,7 @@ export default function ClientHome() {
                   {service.benefits}
                 </span>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </section>
@@ -1162,8 +1146,7 @@ export default function ClientHome() {
         style={{ height: '300vh' }}
       >
         <div className="scroll-story-screen">
-          {/* Premium real-time 3D Particle Starfield Tunnel */}
-          <StorytellingCanvas progress={storyProgress} />
+          {/* The R3F CanvasBackground renders particles and vectors in the backdrop context */}
 
           {/* Ambient Parallax Blobs fallback */}
           <div style={{
@@ -1325,7 +1308,24 @@ export default function ClientHome() {
             { title: "Dedicated Support", desc: "30 days of post-launch hyper-care with available customized maintenance SLA contracts.", icon: <Shield size={20} style={{ color: 'var(--accent-cyan)' }} /> },
             { title: "Scalable Architecture", desc: "Clean modular MERN/Fastify codes prepared to expand seamlessly as your userbase scales.", icon: <Cpu size={20} style={{ color: 'var(--accent-purple)' }} /> }
           ].map((item, idx) => (
-            <div key={idx} className="glass-panel scroll-reveal" style={{ padding: '35px 25px', display: 'flex', gap: '15px', alignItems: 'flex-start' }}>
+            <motion.div 
+              key={idx} 
+              className="glass-panel scroll-reveal" 
+              whileHover={{ 
+                y: -6,
+                scale: 1.015,
+                borderColor: 'rgba(161, 79, 255, 0.35)',
+                boxShadow: '0 15px 30px -10px rgba(161, 79, 255, 0.12), inset 0 0 20px rgba(255, 255, 255, 0.02)'
+              }}
+              transition={{ type: 'spring', stiffness: 350, damping: 25 }}
+              style={{ 
+                padding: '35px 25px', 
+                display: 'flex', 
+                gap: '15px', 
+                alignItems: 'flex-start',
+                transition: 'border-color 0.3s, box-shadow 0.3s'
+              }}
+            >
               <div style={{
                 background: 'rgba(255, 255, 255, 0.03)',
                 border: '1px solid rgba(255, 255, 255, 0.05)',
@@ -1346,7 +1346,7 @@ export default function ClientHome() {
                   {item.desc}
                 </p>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </section>

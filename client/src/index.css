@@ -1325,3 +1325,55 @@ body::before {
   text-shadow: 0 0 15px rgba(0, 242, 254, 0.45);
 }
 
+/* ====================================================
+   AWARDS-WINNING CINEMATIC DESIGN UPGRADES
+   ==================================================== */
+
+/* Elegant film noise texture overlay */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  opacity: 0.038;
+  z-index: 99999;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Custom modern scrollbar matching futuristic themes */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #05020c;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #a14fff 0%, #00f2fe 100%);
+  border: 2px solid #05020c;
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #00f2fe 0%, #a14fff 100%);
+}
+
+/* Glassmorphism panel styling enhancement */
+.glass-panel {
+  background: rgba(10, 5, 25, 0.45) !important;
+  backdrop-filter: blur(20px) saturate(120%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(120%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.5), inset 0 0 25px rgba(255, 255, 255, 0.01) !important;
+}
+
+.timeline-step-line {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  background: linear-gradient(to bottom, #a14fff, #00f2fe);
+  z-index: 1;
+}
+
