@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, ChevronLeft, ChevronRight, Mail, Phone, MapPin, CheckCircle, Send, Cpu, Layout, Sparkles, Database, Shield, TrendingUp, Video, Star, Award, Check, Calendar, ExternalLink, X, Clock, HelpCircle, User } from 'lucide-react';
 import ProjectCard from '../components/ProjectCard';
 import { API_BASE_URL } from '../config';
+import { MagneticButton, DecryptText } from '../components/InteractiveEffects';
 
 const BACKUP_PROJECTS = [
   {
@@ -817,13 +818,17 @@ export default function ClientHome() {
               We build premium websites and cinematic content that help businesses generate more leads, increase trust, and grow online.
             </p>
 
-            <div className="cinematic-reveal" style={{ display: 'flex', gap: '20px', animationDelay: '0.55s' }}>
-              <button onClick={() => setIsBookingOpen(true)} className="btn-primary shimmer-btn">
-                Book Free Consultation <ArrowRight size={18} />
-              </button>
-              <a href="#portfolio" className="btn-secondary">
-                View Portfolio
-              </a>
+            <div className="cinematic-reveal" style={{ display: 'flex', gap: '20px', animationDelay: '0.55s', alignItems: 'center' }}>
+              <MagneticButton>
+                <button onClick={() => setIsBookingOpen(true)} className="btn-primary shimmer-btn" style={{ display: 'flex', alignItems: 'center' }}>
+                  <DecryptText text="Book Free Consultation" /> <ArrowRight size={18} style={{ marginLeft: '6px' }} />
+                </button>
+              </MagneticButton>
+              <MagneticButton>
+                <a href="#portfolio" className="btn-secondary">
+                  <DecryptText text="View Portfolio" />
+                </a>
+              </MagneticButton>
             </div>
 
             <div className="cinematic-reveal" style={{
