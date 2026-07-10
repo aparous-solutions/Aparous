@@ -721,8 +721,7 @@ export default function ClientHome() {
 
       {/* Navigation Header */}
       <header role="banner" style={{ position: 'sticky', top: 0, zIndex: 50 }}>
-        <nav style={{
-          padding: '20px 8%',
+        <nav className="navbar-responsive" style={{
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
@@ -746,7 +745,7 @@ export default function ClientHome() {
             <a href="#services" className="nav-link-desktop" style={{ color: 'var(--text-normal)', textDecoration: 'none', fontSize: '0.9rem', fontWeight: '500', transition: 'color 0.3s' }} onMouseEnter={e => e.target.style.color = '#fff'} onMouseLeave={e => e.target.style.color = 'var(--text-normal)'}>Services</a>
             <a href="#portfolio" className="nav-link-desktop" style={{ color: 'var(--text-normal)', textDecoration: 'none', fontSize: '0.9rem', fontWeight: '500', transition: 'color 0.3s' }} onMouseEnter={e => e.target.style.color = '#fff'} onMouseLeave={e => e.target.style.color = 'var(--text-normal)'}>Portfolio</a>
             <a href="#testimonials" className="nav-link-desktop" style={{ color: 'var(--text-normal)', textDecoration: 'none', fontSize: '0.9rem', fontWeight: '500', transition: 'color 0.3s' }} onMouseEnter={e => e.target.style.color = '#fff'} onMouseLeave={e => e.target.style.color = 'var(--text-normal)'}>Testimonials</a>
-            <button onClick={() => setIsAuditModalOpen(true)} className="btn-secondary" style={{ padding: '8px 18px', fontSize: '0.85rem', cursor: 'pointer', border: '1px solid var(--accent-cyan)', color: 'var(--accent-cyan)', background: 'transparent' }} aria-label="Open free website audit form">Free Audit</button>
+            <button onClick={() => setIsAuditModalOpen(true)} className="btn-secondary nav-link-desktop" style={{ padding: '8px 18px', fontSize: '0.85rem', cursor: 'pointer', border: '1px solid var(--accent-cyan)', color: 'var(--accent-cyan)', background: 'transparent' }} aria-label="Open free website audit form">Free Audit</button>
             <a href="#contact" className="btn-secondary" style={{ padding: '8px 20px', fontSize: '0.85rem' }}>Get in Touch</a>
           </div>
         </nav>
