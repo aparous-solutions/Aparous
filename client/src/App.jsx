@@ -9,6 +9,7 @@ import IntroPreloader from './components/IntroPreloader';
 import Chatbot from './components/Chatbot';
 import ClientHome from './pages/ClientHome';
 import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 
 // Register GSAP ScrollTrigger globally
 gsap.registerPlugin(ScrollTrigger);
@@ -59,6 +60,7 @@ function App() {
   return (
     <Router>
       <Analytics />
+      <SpeedInsights />
       <Routes>
         <Route 
           path="/" 
