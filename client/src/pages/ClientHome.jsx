@@ -730,16 +730,29 @@ export default function ClientHome() {
           backdropFilter: 'blur(12px)',
           borderBottom: '1px solid var(--glass-border)'
         }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <span className="text-gradient" style={{
-              fontFamily: 'var(--font-head)',
-              fontSize: '1.6rem',
-              fontWeight: '800',
-              letterSpacing: '1px'
-            }}>
-              APAROUS
-            </span>
-            <span style={{ fontSize: '0.6rem', background: 'var(--accent-purple)', color: '#fff', padding: '2px 6px', borderRadius: '4px', textTransform: 'uppercase', letterSpacing: '1px' }}>Studio</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <img 
+              src="/logo.jpeg" 
+              alt="Aparous Logo" 
+              style={{
+                width: '32px',
+                height: '32px',
+                borderRadius: '8px',
+                objectFit: 'cover',
+                border: '1px solid rgba(255, 255, 255, 0.12)'
+              }}
+            />
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <span className="text-gradient" style={{
+                fontFamily: 'var(--font-head)',
+                fontSize: '1.45rem',
+                fontWeight: '800',
+                letterSpacing: '1px'
+              }}>
+                APAROUS
+              </span>
+              <span style={{ fontSize: '0.6rem', background: 'var(--accent-purple)', color: '#fff', padding: '2px 6px', borderRadius: '4px', textTransform: 'uppercase', letterSpacing: '1px' }}>Studio</span>
+            </div>
           </div>
 
           <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
