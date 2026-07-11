@@ -5,6 +5,7 @@ import { ArrowRight, ChevronLeft, ChevronRight, Mail, Phone, MapPin, CheckCircle
 import ProjectCard from '../components/ProjectCard';
 import { API_BASE_URL } from '../config';
 import { MagneticButton, DecryptText } from '../components/InteractiveEffects';
+import Tilt3D from '../components/Tilt3D';
 
 const BACKUP_PROJECTS = [
   {
@@ -1049,16 +1050,9 @@ export default function ClientHome() {
               bg: "rgba(161, 79, 255, 0.08)"
             }
           ].map((service, idx) => (
-            <motion.div 
+            <Tilt3D 
               key={idx} 
               className="glass-panel scroll-reveal" 
-              whileHover={{ 
-                y: -8,
-                scale: 1.02,
-                borderColor: service.color + '50',
-                boxShadow: `0 20px 40px -15px ${service.color}20, inset 0 0 20px rgba(255, 255, 255, 0.02)`
-              }}
-              transition={{ type: 'spring', stiffness: 300, damping: 25 }}
               style={{ 
                 padding: '40px 30px', 
                 display: 'flex', 
@@ -1095,7 +1089,7 @@ export default function ClientHome() {
                   {service.benefits}
                 </span>
               </div>
-            </motion.div>
+            </Tilt3D>
           ))}
         </div>
       </section>
@@ -1338,10 +1332,14 @@ export default function ClientHome() {
             return (
               <div key={idx} className={`timeline-item ${isActive ? 'active' : ''} scroll-reveal`}>
                 <div className="timeline-dot" />
-                <div className="glass-panel timeline-content-card" style={{
-                  background: isActive ? 'rgba(16, 8, 30, 0.65)' : 'var(--bg-card)',
-                  borderColor: isActive ? 'rgba(0, 242, 254, 0.25)' : 'var(--glass-border)'
-                }}>
+                <Tilt3D 
+                  className="glass-panel timeline-content-card" 
+                  style={{
+                    background: isActive ? 'rgba(16, 8, 30, 0.65)' : 'var(--bg-card)',
+                    borderColor: isActive ? 'rgba(0, 242, 254, 0.25)' : 'var(--glass-border)',
+                    cursor: 'pointer'
+                  }}
+                >
                   <div className="timeline-number">{step.num}</div>
                   <h3 style={{ fontSize: '1.3rem', marginBottom: '10px', fontFamily: 'var(--font-head)', fontWeight: '700', color: '#fff' }}>
                     {step.title}
@@ -1349,7 +1347,7 @@ export default function ClientHome() {
                   <p style={{ color: 'var(--text-normal)', fontSize: '0.9rem', lineHeight: '1.6' }}>
                     {step.desc}
                   </p>
-                </div>
+                </Tilt3D>
               </div>
             );
           })}
