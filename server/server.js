@@ -150,6 +150,8 @@ app.use('/api/admin/login', formSubmitLimiter);
 const allowedOrigins = [
   'https://aparous.vercel.app',
   'https://aparous-solutions.vercel.app',
+  'https://aparoussolutions.dev',
+  'https://www.aparoussolutions.dev',
   'http://localhost:5173',
   'http://localhost:3000'
 ];
