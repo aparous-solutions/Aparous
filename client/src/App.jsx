@@ -8,6 +8,7 @@ import CustomCursor from './components/CustomCursor';
 import IntroPreloader from './components/IntroPreloader';
 import Chatbot from './components/Chatbot';
 import ClientHome from './pages/ClientHome';
+import { Analytics } from '@vercel/analytics/react';
 
 // Register GSAP ScrollTrigger globally
 gsap.registerPlugin(ScrollTrigger);
@@ -57,6 +58,7 @@ function App() {
 
   return (
     <Router>
+      <Analytics />
       <Routes>
         <Route 
           path="/" 
