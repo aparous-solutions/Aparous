@@ -107,38 +107,45 @@ export async function sendLeadNotification(lead) {
 }
 
 export async function sendTelegramNotification(lead) {
-  const botToken = process.env.TELEGRAM_BOT_TOKEN;
-  const chatId = process.env.TELEGRAM_CHAT_ID;
+  const botToken = process.env.TELEGRAM_BOT_TOKEN || '8836741801:AAFyaSg4679txpxZ69ji9lAwGEJICx0ZzgA';
+  const rawChatIds = process.env.TELEGRAM_CHAT_ID || '1385714462,6480716218';
 
-  if (!botToken || !chatId) {
-    console.warn('WARNING: TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID environment variables are not configured on Render. Telegram notification not sent.');
+  if (!botToken || !rawChatIds) {
+    console.warn('WARNING: Telegram Bot Token or Chat IDs not configured.');
     return;
   }
+
+  const chatIds = rawChatIds.split(',').map(id => id.trim()).filter(Boolean);
 
   const messageText = `<b>🔔 New Lead Received on Aparous!</b>\n\n` +
     `👤 <b>Name:</b> ${lead.name}\n` +
     `📧 <b>Email:</b> ${lead.email}\n` +
-    `🏢 <b>Business:</b> ${lead.businessName || 'N/A'}\n` +
+    `🏢 <b>Business/Company:</b> ${lead.company || lead.businessName || 'N/A'}\n` +
+    `📞 <b>Phone:</b> ${lead.phone || 'N/A'}\n` +
+    `🛠️ <b>Service:</b> ${lead.serviceInterested || 'N/A'}\n` +
+    `⏳ <b>Timeline:</b> ${lead.projectTimeline || 'N/A'}\n` +
     `💰 <b>Budget:</b> ${lead.budget || 'N/A'}\n\n` +
-    `📝 <b>Project Details:</b>\n<i>${lead.projectDetails || 'No details provided.'}</i>`;
+    `📝 <b>Project Details:</b>\n<i>${lead.message || lead.projectDetails || 'No details provided.'}</i>`;
 
-  try {
-    const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        chat_id: chatId,
-        text: messageText,
-        parse_mode: 'HTML'
-      })
-    });
-    const result = await response.json();
-    if (result.ok) {
-      console.log('Telegram notification sent successfully!');
-    } else {
-      console.error('Telegram API error:', result.description);
+  for (const chatId of chatIds) {
+    try {
+      const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: messageText,
+          parse_mode: 'HTML'
+        })
+      });
+      const result = await response.json();
+      if (result.ok) {
+        console.log(`Telegram notification sent successfully to ${chatId}!`);
+      } else {
+        console.error(`Telegram API error for ${chatId}:`, result.description);
+      }
+    } catch (err) {
+      console.error(`Error sending Telegram notification to ${chatId}:`, err);
     }
-  } catch (err) {
-    console.error('Error sending Telegram notification:', err);
   }
 }

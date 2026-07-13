@@ -46,21 +46,30 @@ const BACKUP_PROJECTS = [
 const BACKUP_TESTIMONIALS = [
   {
     _id: "backup-test-1",
-    name: "Marcus Vance",
-    role: "CEO & Founder",
-    company: "Grow Athlete",
-    content: "Aparous transformed our online presence completely. The user experience they designed for our platform was cinematic and converted leads better than any platform we've used in the past five years. Extremely professional team.",
+    name: "Rajesh Nair",
+    role: "Product Lead",
+    company: "Velo Sports Media",
+    content: "Finding a team that actually gets both high-end React builds and cinematic video pacing is incredibly rare. Aparous took our ideas and built something that actually loads instantly and keeps visitors hooked. The response we've had is unreal.",
     rating: 5,
-    avatar: "MV"
+    avatar: "RN"
   },
   {
     _id: "backup-test-2",
-    name: "Sarah 'Valkyrie' Chen",
-    role: "Tournament Director",
-    company: "Bloodline Battle Esports Hub",
-    content: "Our tournament registrants were amazed by the fluid bracket updates and the dark-cyber dashboard. Working with them was an absolute pleasure; they understood the aesthetics of our gaming community perfectly.",
+    name: "Lucky",
+    role: "Founder",
+    company: "Bloodline Esports Hub",
+    content: "Our players are absolute critics when it comes to speed and dark mode designs. The tournament lobby Aparous designed ran perfectly, handling thousands of gamers logging in at once. They're definitely our go-to partners now.",
     rating: 5,
-    avatar: "SC"
+    avatar: "L"
+  },
+  {
+    _id: "backup-test-3",
+    name: "Ananya Sen",
+    role: "Director of Marketing",
+    company: "Peak Horizon",
+    content: "Aparous didn't just deliver a template; they built a custom lead flow system that fits our business like a glove. Our booking rate jumped within weeks of launching. They are fast, responsive, and know exactly what looks premium.",
+    rating: 5,
+    avatar: "AS"
   }
 ];
 
@@ -71,7 +80,7 @@ const BACKUP_REVIEWS = [
     company: "Grow Athlete",
     projectName: "Grow Athlete Scale-up Funnel",
     rating: 5,
-    feedback: "Aparous built a world-class landing system for our startup accelerator. Our lead generation conversion rate increased by 180% within the first month. Their attention to animations and performance is lease to say, brilliant.",
+    feedback: "We needed a clean landing page for our athletic program, and what we got was a work of art. The animations are smooth, loading times are nonexistent, and the team was super friendly throughout. Couldn't have asked for a better launch.",
     createdAt: "2026-07-03T18:00:00.000Z"
   },
   {
@@ -80,7 +89,7 @@ const BACKUP_REVIEWS = [
     company: "Bloodline Esports",
     projectName: "Esports Tournament Hub",
     rating: 5,
-    feedback: "The tournament portal is extremely fast, highly interactive, and handled thousands of concurrent registrations without a single hiccup. Our players loved the dark mode aesthetic and the tournament bracket layouts.",
+    feedback: "Honestly, the tournament brackets system they built is incredibly fast and responsive. Our players loved the dark sci-fi aesthetic. We had absolutely no lag or downtime during our biggest event.",
     createdAt: "2026-07-03T19:00:00.000Z"
   }
 ];
@@ -378,7 +387,7 @@ export default function ClientHome() {
       const progress = Math.min((timestamp - startTime) / duration, 1);
       const ease = progress * (2 - progress);
 
-      setProjectsCounter(Math.floor(ease * 20));
+      setProjectsCounter(Math.floor(ease * 10));
       setSatisfactionCounter(Math.floor(ease * 98));
       setRatingCounter(Number((ease * 5).toFixed(1)));
       setResponseCounter(Math.floor(ease * 48));
@@ -386,7 +395,7 @@ export default function ClientHome() {
       if (progress < 1) {
         requestAnimationFrame(animateCount);
       } else {
-        setProjectsCounter(20);
+        setProjectsCounter(10);
         setSatisfactionCounter(98);
         setRatingCounter(5);
         setResponseCounter(48);
@@ -834,7 +843,7 @@ export default function ClientHome() {
             <div className="cinematic-reveal" style={{ display: 'flex', gap: '20px', animationDelay: '0.55s', alignItems: 'center' }}>
               <MagneticButton>
                 <button onClick={() => setIsBookingOpen(true)} className="btn-primary shimmer-btn" style={{ display: 'flex', alignItems: 'center' }}>
-                  <DecryptText text="Book Free Consultation" /> <ArrowRight size={18} style={{ marginLeft: '6px' }} />
+                  Book Free Consultation <ArrowRight size={18} style={{ marginLeft: '6px' }} />
                 </button>
               </MagneticButton>
               <MagneticButton>
@@ -866,48 +875,51 @@ export default function ClientHome() {
             </div>
           </div>
 
-          {/* Right Column: 3D Interactive Core Widget */}
+          {/* Right Column: Premium Looping Video Player */}
           <div style={{
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            position: 'relative'
+            position: 'relative',
+            width: '100%',
           }}>
-            <div className="cube-glow-ring" />
-            <div className="cube-container" style={{
-              transform: `scale(${heroScrollScale}) rotateY(${-heroScrollRotate}deg)`,
-              transition: 'transform 0.1s ease-out'
-            }}>
-              <div 
-                className="cube"
-                style={cubeTransform}
+            <div className="cube-glow-ring" style={{ width: '100%', height: '100%', filter: 'blur(45px)', opacity: '0.45' }} />
+            <div 
+              className="glass-panel" 
+              style={{
+                position: 'relative',
+                width: '100%',
+                maxWidth: '480px',
+                aspectRatio: '16/9',
+                borderRadius: '16px',
+                overflow: 'hidden',
+                border: '1px solid rgba(161, 79, 255, 0.25)',
+                boxShadow: '0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(161, 79, 255, 0.15)',
+              }}
+            >
+              <video 
+                autoPlay 
+                loop 
+                muted 
+                playsInline 
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                }}
               >
-                {/* 6 Cube Faces */}
-                <div className="cube-face face-front">
-                  <Sparkles style={{ color: 'var(--accent-cyan)', marginBottom: '12px' }} size={26} />
-                  <span style={{ fontSize: '0.85rem', letterSpacing: '1px', textTransform: 'uppercase' }}>Aparous</span>
-                </div>
-                <div className="cube-face face-back">
-                  <TrendingUp style={{ color: '#00ff64', marginBottom: '12px' }} size={26} />
-                  <span style={{ fontSize: '0.85rem', letterSpacing: '1px', textTransform: 'uppercase' }}>Scale</span>
-                </div>
-                <div className="cube-face face-right">
-                  <Cpu style={{ color: 'var(--accent-purple)', marginBottom: '12px' }} size={26} />
-                  <span style={{ fontSize: '0.85rem', letterSpacing: '1px', textTransform: 'uppercase' }}>AI Build</span>
-                </div>
-                <div className="cube-face face-left">
-                  <Video style={{ color: 'var(--accent-magenta)', marginBottom: '12px' }} size={26} />
-                  <span style={{ fontSize: '0.85rem', letterSpacing: '1px', textTransform: 'uppercase' }}>Video Edit</span>
-                </div>
-                <div className="cube-face face-top">
-                  <Shield style={{ color: 'var(--accent-cyan)', marginBottom: '12px' }} size={26} />
-                  <span style={{ fontSize: '0.85rem', letterSpacing: '1px', textTransform: 'uppercase' }}>Trust</span>
-                </div>
-                <div className="cube-face face-bottom">
-                  <Layout style={{ color: 'var(--accent-purple)', marginBottom: '12px' }} size={26} />
-                  <span style={{ fontSize: '0.85rem', letterSpacing: '1px', textTransform: 'uppercase' }}>3D UX</span>
-                </div>
-              </div>
+                <source src="https://assets.mixkit.co/videos/preview/mixkit-abstract-digital-technology-background-31207-large.mp4" type="video/mp4" />
+              </video>
+              {/* Dark overlay mask for smooth integration */}
+              <div style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%',
+                background: 'linear-gradient(to bottom, rgba(5, 2, 12, 0.1) 0%, rgba(5, 2, 12, 0.4) 100%)',
+                pointerEvents: 'none'
+              }} />
             </div>
           </div>
         </div>
@@ -987,8 +999,8 @@ export default function ClientHome() {
           <h2 style={{ fontSize: '2.5rem', marginBottom: '20px', fontFamily: 'var(--font-head)', fontWeight: '800' }}>
             <CinematicTextReveal text="Core Capabilities" />
           </h2>
-          <p style={{ color: 'var(--text-muted)', maxWidth: '600px', margin: '0 auto', fontSize: '1rem' }}>
-            We design high-converting visual systems built with elite engineering protocols.
+          <p style={{ color: 'var(--text-muted)', maxWidth: '600px', margin: '0 auto', fontSize: '1.05rem' }}>
+            We build high-performance websites, apps, and cinematic content designed to make your business stand out.
           </p>
         </div>
 
@@ -1000,48 +1012,48 @@ export default function ClientHome() {
           {[
             {
               title: "Premium Websites",
-              description: "High-end corporate and portfolio sites featuring immersive 3D parallax effects, custom typography, and bespoke digital graphics.",
-              benefits: "Increases brand authority, showcases elite positioning, and hooks high-ticket clients.",
+              description: "Sleek, modern websites featuring smooth animations, clean typography, and unique designs tailored to your brand.",
+              benefits: "Creates an instant premium impression and builds trust with your visitors.",
               icon: <Layout size={20} />,
               color: "var(--accent-cyan)",
               bg: "rgba(0, 242, 254, 0.08)"
             },
             {
               title: "Web Applications",
-              description: "Interactive SaaS solutions, customer portals, and dynamic dashboards engineered with React and robust MERN/Fastify backends.",
-              benefits: "Streamlines business operations, automates user management, and scales customer utility.",
+              description: "Custom web software, client portals, and interactive dashboards built to be fast, reliable, and easy to use.",
+              benefits: "Simplifies your workflow, automates tasks, and scales seamlessly with your business.",
               icon: <Cpu size={20} />,
               color: "var(--accent-purple)",
               bg: "rgba(161, 79, 255, 0.08)"
             },
             {
               title: "Landing Pages",
-              description: "Conversion-optimized scale-up funnels featuring rapid load speeds, interactive ROI engines, and frictionless lead forms.",
-              benefits: "Reduces user acquisition costs, maximizes advertising ROI, and boosts email captures.",
+              description: "High-converting marketing pages focused on loading instantly and turning visitors into actual customers.",
+              benefits: "Boosts your conversion rates, captures more qualified leads, and maximizes ad spend.",
               icon: <TrendingUp size={20} />,
               color: "var(--accent-magenta)",
               bg: "rgba(255, 0, 160, 0.08)"
             },
             {
               title: "Video Editing",
-              description: "Elite commercial editing sync, precise color grading, layered sound design, and custom 3D VFX transitions.",
-              benefits: "Increases social engagement, commands audience retention, and drives organic brand affinity.",
+              description: "Professional video editing, dynamic cuts, color grading, sound design, and custom motion graphics.",
+              benefits: "Grabs viewer attention immediately, increases retention, and tells a compelling story.",
               icon: <Video size={20} />,
               color: "var(--accent-cyan)",
               bg: "rgba(0, 242, 254, 0.08)"
             },
             {
               title: "AI Automation",
-              description: "Smart qualified lead chatbots, automated database synchronization, and automated custom email response pipelines.",
-              benefits: "Saves hours of support time, qualifies prospects automatically, and converts traffic 24/7.",
+              description: "Automated chatbot qualifiers, database integrations, and email responder flows that handle repetitive tasks.",
+              benefits: "Saves you time, captures leads instantly, and handles customer inquiries 24/7.",
               icon: <Sparkles size={20} />,
               color: "var(--accent-purple)",
               bg: "rgba(161, 79, 255, 0.08)"
             },
             {
               title: "SEO Optimization",
-              description: "Semantic coding architecture, metadata schema markup, page speed auditing, and Google Search Console optimization.",
-              benefits: "Generates free organic search traffic, improves keyword rankings, and establishes search authority.",
+              description: "Clean code structure, fast loading times, proper search engine indexing, and Google Search Console setup.",
+              benefits: "Improves search visibility, drives organic traffic, and keeps your site loading lightning-fast.",
               icon: <CheckCircle size={20} />,
               color: "var(--accent-magenta)",
               bg: "rgba(255, 0, 160, 0.08)"
@@ -1444,202 +1456,6 @@ export default function ClientHome() {
               <ProjectCard project={project} onClick={() => { setSelectedProject(project); setIsProjectModalOpen(true); }} />
             </div>
           ))}
-        </div>
-      </section>
-
-      {/* Dashboard Showcase Section (NEW) */}
-      <hr className="section-divider" />
-      <section id="dashboard-showcase" className="scroll-reveal" style={{ padding: '120px 8%', background: 'rgba(10, 4, 20, 0.2)', position: 'relative', overflow: 'hidden' }}>
-        <div className="hero-grid">
-          {/* Left Column: Copy */}
-          <div>
-            <span style={{ fontSize: '0.78rem', color: 'var(--accent-purple)', textTransform: 'uppercase', letterSpacing: '2px', fontWeight: '700', display: 'block', marginBottom: '10px' }}>
-              Operational Desk
-            </span>
-            <h2 style={{ fontSize: 'clamp(2rem, 4vw, 2.8rem)', marginBottom: '20px', fontFamily: 'var(--font-head)', fontWeight: '800', lineHeight: '1.2' }}>
-              Command Your Platform with a custom <span className="text-gradient-purple">Admin Suite</span>
-            </h2>
-            <p style={{ color: 'var(--text-normal)', fontSize: '1.05rem', lineHeight: '1.7', marginBottom: '30px', fontWeight: '300' }}>
-              Every client project includes a custom administrative dashboard. Real-time lead tracking, project updates, and website metrics are integrated into a single glassmorphic command desk.
-            </p>
-            
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
-              {[
-                { title: "Real-time Lead Ingestion", desc: "Instantly capture and qualify leads with automated email/discord notifications." },
-                { title: "Project & Review Moderation", desc: "Easily modify portfolio items and client testimonials without touching the code." },
-                { title: "Fluid Data Visualizations", desc: "Track conversions, user retention, and traffic metrics using animated visual charts." }
-              ].map((feature, idx) => (
-                <div key={idx} style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
-                  <div style={{ color: 'var(--accent-cyan)', marginTop: '2px' }}>
-                    <CheckCircle size={18} />
-                  </div>
-                  <div>
-                    <h4 style={{ fontSize: '1rem', color: '#fff', fontWeight: '600', marginBottom: '4px' }}>{feature.title}</h4>
-                    <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem', lineHeight: '1.5' }}>{feature.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Right Column: Floating 3D SaaS Mockup */}
-          <div 
-            className="interactive"
-            onMouseMove={(e) => {
-              const rect = e.currentTarget.getBoundingClientRect();
-              const x = e.clientX - rect.left - rect.width / 2;
-              const y = e.clientY - rect.top - rect.height / 2;
-              const rotX = -(y / rect.height) * 22;
-              const rotY = (x / rect.width) * 22;
-              const mainPanel = e.currentTarget.querySelector('.main-dashboard-panel');
-              const widget1 = e.currentTarget.querySelector('.widget-feed');
-              const widget2 = e.currentTarget.querySelector('.widget-chart');
-              
-              if (mainPanel) mainPanel.style.transform = `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateZ(0px)`;
-              if (widget1) widget1.style.transform = `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateZ(40px) translate(-15px, 15px)`;
-              if (widget2) widget2.style.transform = `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateZ(60px) translate(25px, -20px)`;
-            }}
-            onMouseLeave={(e) => {
-              const mainPanel = e.currentTarget.querySelector('.main-dashboard-panel');
-              const widget1 = e.currentTarget.querySelector('.widget-feed');
-              const widget2 = e.currentTarget.querySelector('.widget-chart');
-              
-              if (mainPanel) mainPanel.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0px)';
-              if (widget1) widget1.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(20px) translate(-10px, 10px)';
-              if (widget2) widget2.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(35px) translate(15px, -15px)';
-            }}
-            style={{
-              position: 'relative',
-              width: '100%',
-              minHeight: '420px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              transformStyle: 'preserve-3d',
-              cursor: 'pointer'
-            }}
-          >
-            {/* Main Panel */}
-            <div className="glass-panel main-dashboard-panel" style={{
-              width: '85%',
-              height: '320px',
-              borderRadius: '16px',
-              padding: '25px',
-              transform: 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0px)',
-              transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
-              background: 'rgba(10, 5, 25, 0.65)',
-              transformStyle: 'preserve-3d',
-              position: 'relative'
-            }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(255,255,255,0.06)', paddingBottom: '15px', marginBottom: '20px' }}>
-                <div style={{ display: 'flex', gap: '6px' }}>
-                  <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#ff5f56' }} />
-                  <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#ffbd2e' }} />
-                  <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#27c93f' }} />
-                </div>
-                <span style={{ fontSize: '0.65rem', fontFamily: 'monospace', color: 'rgba(255,255,255,0.3)', letterSpacing: '1px' }}>APAROUS_CONSOLE.SYS</span>
-              </div>
-
-              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '15px' }}>
-                <div>
-                  <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Monthly Operations Value</span>
-                  <span className="text-gradient-purple" style={{ fontSize: '1.8rem', fontWeight: '900', display: 'block', marginTop: '3px' }}>$34,820.00</span>
-                </div>
-                <div style={{ textAlign: 'right' }}>
-                  <span style={{ fontSize: '0.72rem', color: '#00ff64', display: 'inline-flex', alignItems: 'center', gap: '3px' }}>+18.5% ▲</span>
-                  <span style={{ fontSize: '0.68rem', color: 'var(--text-muted)', display: 'block', marginTop: '4px' }}>vs Last Month</span>
-                </div>
-              </div>
-
-              {/* SVG Animated Chart */}
-              <div style={{ width: '100%', height: '140px', position: 'relative' }}>
-                <svg viewBox="0 0 400 120" style={{ width: '100%', height: '100%', overflow: 'visible' }}>
-                  <defs>
-                    <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stopColor="#a14fff" stopOpacity="0.4" />
-                      <stop offset="100%" stopColor="#a14fff" stopOpacity="0" />
-                    </linearGradient>
-                  </defs>
-                  {/* Fill */}
-                  <path 
-                    d="M0 120 Q50 40 100 80 T200 30 T300 90 T400 20 L400 120 L0 120 Z" 
-                    fill="url(#chartGradient)" 
-                  />
-                  {/* Stroke line */}
-                  <path 
-                    d="M0 120 Q50 40 100 80 T200 30 T300 90 T400 20" 
-                    fill="none" 
-                    stroke="#00f2fe" 
-                    strokeWidth="3"
-                    strokeLinecap="round"
-                    style={{
-                      strokeDasharray: 800,
-                      strokeDashoffset: 0,
-                    }}
-                  />
-                </svg>
-              </div>
-            </div>
-
-            {/* Widget 1: Floating Activity Feed */}
-            <div className="glass-panel widget-feed" style={{
-              position: 'absolute',
-              bottom: '30px',
-              left: '5%',
-              width: '200px',
-              padding: '15px',
-              borderRadius: '12px',
-              transform: 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(20px) translate(-10px, 10px)',
-              transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
-              background: 'rgba(15, 8, 30, 0.75)',
-              zIndex: 10
-            }}>
-              <span style={{ fontSize: '0.62rem', textTransform: 'uppercase', color: 'var(--accent-cyan)', letterSpacing: '1px', display: 'block', marginBottom: '8px' }}>LIVE_INCOMING_LEADS</span>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                <div style={{ fontSize: '0.72rem', color: '#fff', borderLeft: '2px solid #00f2fe', paddingLeft: '8px' }}>
-                  <strong>Aero Athletic</strong>
-                  <span style={{ display: 'block', color: 'var(--text-muted)', fontSize: '0.65rem' }}>$10,000+ • 1-3 Weeks</span>
-                </div>
-                <div style={{ fontSize: '0.72rem', color: '#fff', borderLeft: '2px solid #a14fff', paddingLeft: '8px' }}>
-                  <strong>Grow Athlete</strong>
-                  <span style={{ display: 'block', color: 'var(--text-muted)', fontSize: '0.65rem' }}>$2,500+ • 4-6 Weeks</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Widget 2: Floating Conversion rate circle chart */}
-            <div className="glass-panel widget-chart" style={{
-              position: 'absolute',
-              top: '40px',
-              right: '5%',
-              width: '180px',
-              padding: '15px',
-              borderRadius: '12px',
-              transform: 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(35px) translate(15px, -15px)',
-              transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
-              background: 'rgba(15, 8, 30, 0.75)',
-              textAlign: 'center',
-              zIndex: 11
-            }}>
-              <span style={{ fontSize: '0.65rem', textTransform: 'uppercase', color: 'var(--text-muted)', display: 'block', marginBottom: '10px' }}>Qualifying rate</span>
-              <div style={{ position: 'relative', width: '70px', height: '70px', margin: '0 auto 8px auto', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <svg width="70" height="70" viewBox="0 0 36 36" style={{ transform: 'rotate(-90deg)' }}>
-                  <circle cx="18" cy="18" r="16" fill="none" stroke="rgba(255,255,255,0.03)" strokeWidth="3.5" />
-                  <path
-                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                    fill="none"
-                    stroke="var(--accent-purple)"
-                    strokeWidth="3.5"
-                    strokeDasharray="94, 100"
-                  />
-                </svg>
-                <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.85rem', fontWeight: '900', color: '#fff' }}>
-                  94%
-                </div>
-              </div>
-              <span style={{ fontSize: '0.68rem', color: 'var(--text-muted)' }}>18 Qualified leads today</span>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -2095,7 +1911,7 @@ export default function ClientHome() {
                       value={formData.budget}
                       onChange={handleInputChange}
                       className="glass-input"
-                      placeholder="e.g. $2,500"
+                      placeholder="e.g. $2,500 / ₹2,00,000"
                       style={{ background: 'rgba(10, 5, 20, 0.95)' }}
                     />
                   </div>

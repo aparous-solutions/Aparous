@@ -7,7 +7,7 @@ export default function Chatbot() {
   const [messages, setMessages] = useState([
     {
       sender: 'bot',
-      content: "Hello! I am Aperio's Digital Architect. I help businesses design, build, and scale their premium web applications and cinematic video productions. What is the name of your business or project?"
+      content: "Hello! I am Aparous' Digital Architect. I help businesses design, build, and scale their premium web applications and cinematic video productions. What is the name of your business or project?"
     }
   ]);
   const [inputText, setInputText] = useState('');
@@ -112,29 +112,30 @@ export default function Chatbot() {
         </button>
       )}
 
-      {/* Expanded Chat Box */}
+      {/* Expanded Chat Box (White Background Theme) */}
       {isOpen && (
         <div
-          className="glass-panel"
           style={{
             width: '380px',
             height: '520px',
             display: 'flex',
             flexDirection: 'column',
             overflow: 'hidden',
-            border: '1px solid rgba(161, 79, 255, 0.25)',
-            boxShadow: '0 20px 50px rgba(0, 0, 0, 0.5), 0 0 25px rgba(161, 79, 255, 0.15)',
+            background: '#ffffff',
+            borderRadius: '16px',
+            border: '1px solid #e2e8f0',
+            boxShadow: '0 12px 40px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.04)',
           }}
         >
           {/* Header */}
           <div
             style={{
               padding: '16px 20px',
-              borderBottom: '1px solid var(--glass-border)',
+              borderBottom: '1px solid #e2e8f0',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
-              background: 'rgba(16, 8, 30, 0.8)',
+              background: '#ffffff',
             }}
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
@@ -143,13 +144,13 @@ export default function Chatbot() {
                   width: '10px',
                   height: '10px',
                   borderRadius: '50%',
-                  backgroundColor: 'var(--accent-cyan)',
-                  boxShadow: '0 0 8px var(--accent-cyan)',
+                  backgroundColor: '#10b981', // green active indicator
+                  boxShadow: '0 0 8px rgba(16, 185, 129, 0.5)',
                 }}
               />
               <div>
-                <h4 style={{ fontSize: '1rem', fontWeight: '700' }}>Aperio Digital Bot</h4>
-                <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>Lead Qualification Architect</span>
+                <h4 style={{ fontSize: '0.95rem', fontWeight: '700', color: '#0f172a', margin: 0 }}>Aparous Digital Bot</h4>
+                <span style={{ fontSize: '0.7rem', color: '#64748b' }}>Lead Qualification Architect</span>
               </div>
             </div>
             <button
@@ -157,12 +158,12 @@ export default function Chatbot() {
               style={{
                 background: 'transparent',
                 border: 'none',
-                color: 'var(--text-muted)',
+                color: '#94a3b8',
                 cursor: 'pointer',
                 transition: 'color 0.2s',
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = '#fff')}
-              onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}
+              onMouseEnter={(e) => (e.currentTarget.style.color = '#0f172a')}
+              onMouseLeave={(e) => (e.currentTarget.style.color = '#94a3b8')}
             >
               <X size={18} />
             </button>
@@ -177,6 +178,7 @@ export default function Chatbot() {
               display: 'flex',
               flexDirection: 'column',
               gap: '15px',
+              background: '#f8fafc', // light off-white body background
             }}
           >
             {messages.map((msg, index) => (
@@ -195,12 +197,12 @@ export default function Chatbot() {
                       width: '28px',
                       height: '28px',
                       borderRadius: '50%',
-                      background: 'rgba(161, 79, 255, 0.15)',
+                      background: 'rgba(124, 58, 237, 0.08)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      color: 'var(--accent-purple)',
-                      border: '1px solid rgba(161, 79, 255, 0.3)',
+                      color: '#7c3aed',
+                      border: '1px solid rgba(124, 58, 237, 0.2)',
                     }}
                   >
                     <Bot size={14} />
@@ -212,12 +214,13 @@ export default function Chatbot() {
                     padding: '10px 14px',
                     borderRadius: '12px',
                     fontSize: '0.88rem',
-                    lineHeight: '1.4',
-                    background: msg.sender === 'user' ? 'rgba(161, 79, 255, 0.2)' : 'rgba(255, 255, 255, 0.04)',
-                    border: msg.sender === 'user' ? '1px solid rgba(161, 79, 255, 0.3)' : '1px solid var(--glass-border)',
-                    color: msg.sender === 'user' ? '#fff' : 'var(--text-bright)',
+                    lineHeight: '1.45',
+                    background: msg.sender === 'user' ? 'var(--accent-purple)' : '#ffffff',
+                    border: msg.sender === 'user' ? '1px solid rgba(161, 79, 255, 0.1)' : '1px solid #e2e8f0',
+                    color: msg.sender === 'user' ? '#ffffff' : '#334155',
                     borderTopRightRadius: msg.sender === 'user' ? '2px' : '12px',
                     borderTopLeftRadius: msg.sender === 'bot' ? '2px' : '12px',
+                    boxShadow: msg.sender === 'bot' ? '0 1px 2px rgba(0, 0, 0, 0.02)' : 'none',
                   }}
                 >
                   {msg.content}
@@ -228,12 +231,12 @@ export default function Chatbot() {
                       width: '28px',
                       height: '28px',
                       borderRadius: '50%',
-                      background: 'rgba(0, 242, 254, 0.15)',
+                      background: 'rgba(15, 23, 42, 0.05)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      color: 'var(--accent-cyan)',
-                      border: '1px solid rgba(0, 242, 254, 0.3)',
+                      color: '#475569',
+                      border: '1px solid rgba(15, 23, 42, 0.1)',
                     }}
                   >
                     <User size={14} />
@@ -242,7 +245,7 @@ export default function Chatbot() {
               </div>
             ))}
             {isLoading && (
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-muted)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#64748b' }}>
                 <Loader2 size={16} className="animate-spin" style={{ animation: 'spin 1s linear infinite' }} />
                 <span style={{ fontSize: '0.8rem' }}>Architect is designing...</span>
               </div>
@@ -254,43 +257,58 @@ export default function Chatbot() {
           {leadState.step === 'complete' && (
             <div
               style={{
-                padding: '0 20px 10px 20px',
+                padding: '10px 20px',
                 display: 'flex',
                 gap: '8px',
                 flexWrap: 'wrap',
+                background: '#f8fafc',
               }}
             >
               <button
                 onClick={() => selectQuickPrompt("Tell me about website pricing.")}
                 style={{
-                  background: 'rgba(255, 255, 255, 0.03)',
-                  border: '1px solid var(--glass-border)',
-                  color: 'var(--accent-cyan)',
+                  background: '#ffffff',
+                  border: '1px solid #e2e8f0',
+                  color: '#7c3aed',
                   borderRadius: '15px',
-                  padding: '4px 10px',
+                  padding: '4px 12px',
                   fontSize: '0.75rem',
                   cursor: 'pointer',
                   transition: 'all 0.2s',
+                  boxShadow: '0 1px 2px rgba(0, 0, 0, 0.02)',
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(0, 242, 254, 0.08)')}
-                onMouseLeave={(e) => (e.currentTarget.style.background = 'rgba(255, 255, 255, 0.03)')}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = '#f1f5f9';
+                  e.currentTarget.style.borderColor = '#cbd5e1';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = '#ffffff';
+                  e.currentTarget.style.borderColor = '#e2e8f0';
+                }}
               >
                 Pricing Structure
               </button>
               <button
                 onClick={() => selectQuickPrompt("Show me details of recent works.")}
                 style={{
-                  background: 'rgba(255, 255, 255, 0.03)',
-                  border: '1px solid var(--glass-border)',
-                  color: 'var(--accent-purple)',
+                  background: '#ffffff',
+                  border: '1px solid #e2e8f0',
+                  color: '#7c3aed',
                   borderRadius: '15px',
-                  padding: '4px 10px',
+                  padding: '4px 12px',
                   fontSize: '0.75rem',
                   cursor: 'pointer',
                   transition: 'all 0.2s',
+                  boxShadow: '0 1px 2px rgba(0, 0, 0, 0.02)',
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(161, 79, 255, 0.08)')}
-                onMouseLeave={(e) => (e.currentTarget.style.background = 'rgba(255, 255, 255, 0.03)')}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = '#f1f5f9';
+                  e.currentTarget.style.borderColor = '#cbd5e1';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = '#ffffff';
+                  e.currentTarget.style.borderColor = '#e2e8f0';
+                }}
               >
                 Portfolio Info
               </button>
@@ -301,10 +319,10 @@ export default function Chatbot() {
           <div
             style={{
               padding: '15px 20px',
-              borderTop: '1px solid var(--glass-border)',
+              borderTop: '1px solid #e2e8f0',
               display: 'flex',
               gap: '10px',
-              background: 'rgba(16, 8, 30, 0.9)',
+              background: '#ffffff',
             }}
           >
             <input
@@ -316,17 +334,23 @@ export default function Chatbot() {
               disabled={isLoading}
               style={{
                 flex: 1,
-                background: 'rgba(255, 255, 255, 0.04)',
-                border: '1px solid var(--glass-border)',
+                background: '#f1f5f9',
+                border: '1px solid #cbd5e1',
                 borderRadius: '24px',
                 padding: '10px 16px',
-                color: '#fff',
+                color: '#0f172a',
                 fontSize: '0.88rem',
                 outline: 'none',
-                transition: 'border-color 0.2s',
+                transition: 'all 0.2s',
               }}
-              onFocus={(e) => (e.target.style.borderColor = 'rgba(161, 79, 255, 0.5)')}
-              onBlur={(e) => (e.target.style.borderColor = 'var(--glass-border)')}
+              onFocus={(e) => {
+                e.target.style.borderColor = '#7c3aed';
+                e.target.style.backgroundColor = '#ffffff';
+              }}
+              onBlur={(e) => {
+                e.target.style.borderColor = '#cbd5e1';
+                e.target.style.backgroundColor = '#f1f5f9';
+              }}
             />
             <button
               onClick={() => handleSendMessage()}

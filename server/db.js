@@ -340,20 +340,28 @@ async function seedDefaults() {
 
   const defaultTestimonials = [
     {
-      name: "Marcus Vance",
-      role: "CEO & Founder",
-      company: "Grow Athlete",
-      content: "Aparous transformed our online presence completely. The user experience they designed for our platform was cinematic and converted leads better than any platform we've used in the past five years. Extremely professional team.",
+      name: "Rajesh Nair",
+      role: "Product Lead",
+      company: "Velo Sports Media",
+      content: "Finding a team that actually gets both high-end React builds and cinematic video pacing is incredibly rare. Aparous took our ideas and built something that actually loads instantly and keeps visitors hooked. The response we've had is unreal.",
       rating: 5,
-      avatar: "MV"
+      avatar: "RN"
     },
     {
-      name: "Sarah 'Valkyrie' Chen",
-      role: "Tournament Director",
-      company: "Bloodline Battle Esports Hub",
-      content: "Our tournament registrants were amazed by the fluid bracket updates and the dark-cyber dashboard. Working with them was an absolute pleasure; they understood the aesthetics of our gaming community perfectly.",
+      name: "Lucky",
+      role: "Founder",
+      company: "Bloodline Esports Hub",
+      content: "Our players are absolute critics when it comes to speed and dark mode designs. The tournament lobby Aparous designed ran perfectly, handling thousands of gamers logging in at once. They're definitely our go-to partners now.",
       rating: 5,
-      avatar: "SC"
+      avatar: "L"
+    },
+    {
+      name: "Ananya Sen",
+      role: "Director of Marketing",
+      company: "Peak Horizon",
+      content: "Aparous didn't just deliver a template; they built a custom lead flow system that fits our business like a glove. Our booking rate jumped within weeks of launching. They are fast, responsive, and know exactly what looks premium.",
+      rating: 5,
+      avatar: "AS"
     }
   ];
 
@@ -364,16 +372,16 @@ async function seedDefaults() {
       email: "hemant@growathlete.com",
       projectName: "Grow Athlete Scale-up Funnel",
       rating: 5,
-      feedback: "Aparous built a world-class landing system for our startup accelerator. Our lead generation conversion rate increased by 180% within the first month. Their attention to animations and performance is lease to say, brilliant.",
+      feedback: "We needed a clean landing page for our athletic program, and what we got was a work of art. The animations are smooth, loading times are nonexistent, and the team was super friendly throughout. Couldn't have asked for a better launch.",
       status: "approved"
     },
     {
-      name: "Lucky Singh",
+      name: "Lucky",
       company: "Bloodline Esports",
       email: "lucky@bloodline.gg",
       projectName: "Esports Tournament Hub",
       rating: 5,
-      feedback: "The tournament portal is extremely fast, highly interactive, and handled thousands of concurrent registrations without a single hiccup. Our players loved the dark mode aesthetic and the tournament bracket layouts.",
+      feedback: "Honestly, the tournament brackets system they built is incredibly fast and responsive. Our players loved the dark sci-fi aesthetic. We had absolutely no lag or downtime during our biggest event.",
       status: "approved"
     }
   ];
@@ -394,6 +402,9 @@ async function seedDefaults() {
       await MongoReview.insertMany(defaultReviews);
       console.log('Seeded default reviews into MongoDB.');
     }
+    
+    // Automatically migrate legacy reviews names in Mongo
+    await MongoReview.updateMany({ name: "Lucky Singh" }, { name: "Lucky" });
   } else {
     const db = readJsonDb();
     let updated = false;
@@ -409,9 +420,21 @@ async function seedDefaults() {
       db.reviews = defaultReviews.map(r => ({ _id: generateId(), ...r, createdAt: new Date().toISOString() }));
       updated = true;
     }
+    
+    // Automatically migrate legacy reviews names in local JSON file
+    if (db.reviews && db.reviews.length > 0) {
+      db.reviews = db.reviews.map(r => {
+        if (r.name === 'Lucky Singh') {
+          updated = true;
+          return { ...r, name: 'Lucky' };
+        }
+        return r;
+      });
+    }
+    
     if (updated) {
       writeJsonDb(db);
-      console.log('Seeded default projects/testimonials/reviews into local JSON.');
+      console.log('Seeded and migrated local JSON DB.');
     }
   }
 }

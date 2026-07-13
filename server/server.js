@@ -323,7 +323,7 @@ app.post('/api/chat', async (req, res) => {
     currentStep = 'ask_details';
   } else if (currentStep === 'ask_details') {
     data.projectDetails = messages[messages.length - 1].content;
-    botReply = "Understood. A cinematic presentation would work wonders for this. What kind of budget do you have allocated for this launch? (e.g., $2k-$5k, $5k-$10k, or $10k+)";
+    botReply = "Understood. A cinematic presentation would work wonders for this. What kind of budget do you have allocated for this launch? (e.g., $2k-$5k / ₹1.5L-₹4L, $5k-$10k / ₹4L-₹8L, or $10k+ / ₹8L+)";
     currentStep = 'ask_budget';
   } else if (currentStep === 'ask_budget') {
     data.budget = messages[messages.length - 1].content;

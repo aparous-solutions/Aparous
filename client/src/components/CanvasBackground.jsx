@@ -225,10 +225,38 @@ export default function CanvasBackground() {
       pointerEvents: 'none',
       background: '#05020c',
     }}>
-      <Canvas dpr={[1, 1.5]} gl={{ antialias: false, alpha: false }} camera={{ fov: 60, near: 0.1, far: 40 }}>
-        <color attach="background" args={['#05020c']} />
-        <SceneAssembly scrollProgress={scrollProgress} />
-      </Canvas>
+      {/* Ambient glow centers */}
+      <div style={{
+        position: 'absolute',
+        top: '15%',
+        left: '10%',
+        width: '500px',
+        height: '500px',
+        background: 'radial-gradient(circle, rgba(161, 79, 255, 0.08) 0%, transparent 70%)',
+        filter: 'blur(80px)',
+        pointerEvents: 'none'
+      }} />
+      <div style={{
+        position: 'absolute',
+        bottom: '15%',
+        right: '10%',
+        width: '600px',
+        height: '600px',
+        background: 'radial-gradient(circle, rgba(0, 242, 254, 0.06) 0%, transparent 70%)',
+        filter: 'blur(100px)',
+        pointerEvents: 'none'
+      }} />
+      <div style={{
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: '800px',
+        height: '800px',
+        background: 'radial-gradient(circle, rgba(111, 38, 217, 0.04) 0%, transparent 80%)',
+        filter: 'blur(120px)',
+        pointerEvents: 'none'
+      }} />
     </div>
   );
 }
