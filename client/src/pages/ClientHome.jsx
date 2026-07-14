@@ -825,7 +825,7 @@ export default function ClientHome() {
               objectFit: 'cover'
             }}
           >
-            <source src="/public/intro.mp4" type="video/mp4" />
+            <source src="/intro.mp4" type="video/mp4" />
           </video>
           <div style={{
             position: 'absolute',
