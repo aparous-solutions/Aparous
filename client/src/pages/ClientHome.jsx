@@ -784,13 +784,15 @@ export default function ClientHome() {
         onMouseLeave={handleHeroMouseLeave}
         className="fade-in" 
         style={{
-          minHeight: '90vh',
+          minHeight: '95vh',
           display: 'flex',
+          flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
-          padding: '80px 8%',
+          padding: '100px 8% 80px 8%',
           position: 'relative',
-          overflow: 'hidden'
+          overflow: 'hidden',
+          gap: '40px'
         }}
       >
         {/* Receding 3D Wireframe Parallax Grid Floor */}
@@ -799,6 +801,43 @@ export default function ClientHome() {
         {/* Ambient Shifting Aurora Glow */}
         <div className="cinematic-aurora" />
         
+        {/* Full Screen Width Video Banner */}
+        <div className="cinematic-reveal" style={{
+          width: '100%',
+          maxWidth: '1200px',
+          aspectRatio: '21/9',
+          borderRadius: '16px',
+          overflow: 'hidden',
+          border: '1px solid rgba(161, 79, 255, 0.2)',
+          boxShadow: '0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(161, 79, 255, 0.15)',
+          position: 'relative',
+          animationDelay: '0.15s',
+          zIndex: 10
+        }}>
+          <video 
+            autoPlay 
+            loop 
+            muted 
+            playsInline 
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover'
+            }}
+          >
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-abstract-digital-technology-background-31207-large.mp4" type="video/mp4" />
+          </video>
+          <div style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            background: 'linear-gradient(to bottom, rgba(5, 2, 12, 0) 0%, rgba(5, 2, 12, 0.4) 100%)',
+            pointerEvents: 'none'
+          }} />
+        </div>
+
         <div className="hero-grid">
           {/* Left Column: Headline Copy */}
           <div>
@@ -875,51 +914,48 @@ export default function ClientHome() {
             </div>
           </div>
 
-          {/* Right Column: Premium Looping Video Player */}
+          {/* Right Column: 3D Interactive Core Widget */}
           <div style={{
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            position: 'relative',
-            width: '100%',
+            position: 'relative'
           }}>
-            <div className="cube-glow-ring" style={{ width: '100%', height: '100%', filter: 'blur(45px)', opacity: '0.45' }} />
-            <div 
-              className="glass-panel" 
-              style={{
-                position: 'relative',
-                width: '100%',
-                maxWidth: '480px',
-                aspectRatio: '16/9',
-                borderRadius: '16px',
-                overflow: 'hidden',
-                border: '1px solid rgba(161, 79, 255, 0.25)',
-                boxShadow: '0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(161, 79, 255, 0.15)',
-              }}
-            >
-              <video 
-                autoPlay 
-                loop 
-                muted 
-                playsInline 
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover',
-                }}
+            <div className="cube-glow-ring" />
+            <div className="cube-container" style={{
+              transform: `scale(${heroScrollScale}) rotateY(${-heroScrollRotate}deg)`,
+              transition: 'transform 0.1s ease-out'
+            }}>
+              <div 
+                className="cube"
+                style={cubeTransform}
               >
-                <source src="https://assets.mixkit.co/videos/preview/mixkit-abstract-digital-technology-background-31207-large.mp4" type="video/mp4" />
-              </video>
-              {/* Dark overlay mask for smooth integration */}
-              <div style={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                width: '100%',
-                height: '100%',
-                background: 'linear-gradient(to bottom, rgba(5, 2, 12, 0.1) 0%, rgba(5, 2, 12, 0.4) 100%)',
-                pointerEvents: 'none'
-              }} />
+                {/* 6 Cube Faces */}
+                <div className="cube-face face-front">
+                  <Sparkles style={{ color: 'var(--accent-cyan)', marginBottom: '12px' }} size={26} />
+                  <span style={{ fontSize: '0.85rem', letterSpacing: '1px', textTransform: 'uppercase' }}>Aparous</span>
+                </div>
+                <div className="cube-face face-back">
+                  <TrendingUp style={{ color: '#00ff64', marginBottom: '12px' }} size={26} />
+                  <span style={{ fontSize: '0.85rem', letterSpacing: '1px', textTransform: 'uppercase' }}>Scale</span>
+                </div>
+                <div className="cube-face face-right">
+                  <Cpu style={{ color: 'var(--accent-purple)', marginBottom: '12px' }} size={26} />
+                  <span style={{ fontSize: '0.85rem', letterSpacing: '1px', textTransform: 'uppercase' }}>AI Build</span>
+                </div>
+                <div className="cube-face face-left">
+                  <Video style={{ color: 'var(--accent-magenta)', marginBottom: '12px' }} size={26} />
+                  <span style={{ fontSize: '0.85rem', letterSpacing: '1px', textTransform: 'uppercase' }}>Video Edit</span>
+                </div>
+                <div className="cube-face face-top">
+                  <Shield style={{ color: 'var(--accent-cyan)', marginBottom: '12px' }} size={26} />
+                  <span style={{ fontSize: '0.85rem', letterSpacing: '1px', textTransform: 'uppercase' }}>Trust</span>
+                </div>
+                <div className="cube-face face-bottom">
+                  <Layout style={{ color: 'var(--accent-purple)', marginBottom: '12px' }} size={26} />
+                  <span style={{ fontSize: '0.85rem', letterSpacing: '1px', textTransform: 'uppercase' }}>3D UX</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
