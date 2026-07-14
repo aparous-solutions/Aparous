@@ -825,7 +825,7 @@ export default function ClientHome() {
               objectFit: 'cover'
             }}
           >
-            <source src="https://assets.mixkit.co/videos/preview/mixkit-abstract-digital-technology-background-31207-large.mp4" type="video/mp4" />
+            <source src="/public/intro.mp4" type="video/mp4" />
           </video>
           <div style={{
             position: 'absolute',
