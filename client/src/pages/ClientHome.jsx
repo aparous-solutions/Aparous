@@ -160,7 +160,6 @@ export default function ClientHome() {
   const [activeTestimonial, setActiveTestimonial] = useState(0);
   
   // Interactive modal states
-  const [isBookingOpen, setIsBookingOpen] = useState(false);
   const [isProjectModalOpen, setIsProjectModalOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);
   const [isAuditModalOpen, setIsAuditModalOpen] = useState(false);
@@ -547,7 +546,6 @@ export default function ClientHome() {
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') {
         setIsAuditModalOpen(false);
-        setIsBookingOpen(false);
         setIsProjectModalOpen(false);
       }
     };
@@ -881,7 +879,14 @@ export default function ClientHome() {
 
             <div className="cinematic-reveal" style={{ display: 'flex', gap: '20px', animationDelay: '0.55s', alignItems: 'center' }}>
               <MagneticButton>
-                <button onClick={() => setIsBookingOpen(true)} className="btn-primary shimmer-btn" style={{ display: 'flex', alignItems: 'center' }}>
+                <button 
+                  onClick={() => {
+                    const el = document.getElementById('contact');
+                    if (el) el.scrollIntoView({ behavior: 'smooth' });
+                  }} 
+                  className="btn-primary shimmer-btn" 
+                  style={{ display: 'flex', alignItems: 'center' }}
+                >
                   Book Free Consultation <ArrowRight size={18} style={{ marginLeft: '6px' }} />
                 </button>
               </MagneticButton>
@@ -1990,9 +1995,6 @@ export default function ClientHome() {
                   <button type="submit" disabled={isSubmitting} className="btn-primary shimmer-btn" style={{ flex: 1, justifyContent: 'center' }}>
                     {isSubmitting ? 'Submitting Scope...' : 'Submit Project Scope'} <Send size={15} />
                   </button>
-                  <button type="button" onClick={() => setIsBookingOpen(true)} className="btn-secondary" style={{ flex: 1 }}>
-                    Book Consultation
-                  </button>
                 </div>
                 {isSubmitting && (
                   <p style={{ color: 'var(--text-muted)', fontSize: '0.8rem', textAlign: 'center', marginTop: '5px' }}>
@@ -2259,100 +2261,7 @@ export default function ClientHome() {
         </svg>
       </a>
 
-      {/* Booking Consultation Popup Modal */}
-      {isBookingOpen && (
-        <div className="modal-overlay" onClick={() => setIsBookingOpen(false)}>
-          <div className="modal-content-container" style={{ maxWidth: '620px' }} onClick={(e) => e.stopPropagation()}>
-            <div style={{ padding: '40px', position: 'relative' }}>
-              
-              {/* Close Button */}
-              <button 
-                onClick={() => setIsBookingOpen(false)}
-                style={{ position: 'absolute', top: '25px', right: '25px', background: 'transparent', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', transition: 'color 0.2s' }}
-                onMouseEnter={e => e.target.style.color = '#fff'}
-                onMouseLeave={e => e.target.style.color = 'var(--text-muted)'}
-              >
-                <X size={24} />
-              </button>
 
-              <div style={{ textAlign: 'center', marginBottom: '30px' }}>
-                <Calendar size={32} style={{ color: 'var(--accent-cyan)', marginBottom: '15px' }} />
-                <h3 style={{ fontSize: '1.8rem', fontFamily: 'var(--font-head)', fontWeight: '800', marginBottom: '10px', color: '#fff' }}>
-                  Book Free Consultation
-                </h3>
-                <p style={{ color: 'var(--text-muted)', fontSize: '0.92rem', lineHeight: '1.5' }}>
-                  Select an available date below for our technical scoping call. We'll audit your business model, map features, and discuss integrations.
-                </p>
-              </div>
-
-              {/* Calendly Integration Placeholder / Mock Widget */}
-              <div className="glass-panel" style={{
-                background: 'rgba(255, 255, 255, 0.02)',
-                borderColor: 'rgba(255, 255, 255, 0.04)',
-                padding: '30px',
-                borderRadius: '12px',
-                textAlign: 'center'
-              }}>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', alignItems: 'center' }}>
-                  
-                  {/* Calendar Mock UI */}
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: '10px', maxWidth: '350px', width: '100%', fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-                    {['M', 'T', 'W', 'T', 'F', 'S', 'S'].map((day, idx) => (
-                      <span key={day + idx} style={{ fontWeight: '700', color: 'var(--accent-purple)' }}>{day}</span>
-                    ))}
-                    {Array.from({ length: 28 }).map((_, idx) => {
-                      const dayNum = idx + 1;
-                      const isAvailable = dayNum % 3 !== 0;
-                      return (
-                        <button
-                          key={`mock-day-${idx}`}
-                          type="button"
-                          disabled={!isAvailable}
-                          onClick={() => {
-                            alert(`Selected Slot: July ${dayNum}, 2026 for scoping call. Slotted successfully!`);
-                            setIsBookingOpen(false);
-                          }}
-                          style={{
-                            background: isAvailable ? 'rgba(0, 242, 254, 0.05)' : 'transparent',
-                            border: isAvailable ? '1px solid rgba(0, 242, 254, 0.2)' : 'none',
-                            borderRadius: '4px',
-                            padding: '6px',
-                            color: isAvailable ? '#fff' : 'rgba(255,255,255,0.1)',
-                            cursor: isAvailable ? 'pointer' : 'default',
-                            fontWeight: '600',
-                            outline: 'none'
-                          }}
-                        >
-                          {dayNum}
-                        </button>
-                      );
-                    })}
-                  </div>
-
-                  <div style={{ borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '20px', width: '100%' }}>
-                    <p style={{ fontSize: '0.82rem', color: 'var(--text-normal)', marginBottom: '15px' }}>
-                      Or click below to view our live scheduling parameters directly.
-                    </p>
-                    <button 
-                      type="button"
-                      onClick={() => {
-                        window.open('https://calendly.com', '_blank');
-                        setIsBookingOpen(false);
-                      }}
-                      className="btn-primary shimmer-btn"
-                      style={{ padding: '10px 24px', fontSize: '0.85rem' }}
-                    >
-                      Open Live Calendly <ExternalLink size={13} style={{ marginLeft: '6px' }} />
-                    </button>
-                  </div>
-
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* Portfolio Project Detail Modal */}
       {isProjectModalOpen && selectedProject && (

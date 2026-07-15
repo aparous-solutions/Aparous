@@ -4,7 +4,6 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
 import CanvasBackground from './components/CanvasBackground';
-import CustomCursor from './components/CustomCursor';
 import IntroPreloader from './components/IntroPreloader';
 import Chatbot from './components/Chatbot';
 import ClientHome from './pages/ClientHome';
@@ -44,17 +43,9 @@ function App() {
     gsap.ticker.add(tickHandler);
     gsap.ticker.lagSmoothing(0);
 
-    let rafId;
-    const raf = (time) => {
-      lenis.raf(time);
-      rafId = requestAnimationFrame(raf);
-    };
-    rafId = requestAnimationFrame(raf);
-
     return () => {
       lenis.destroy();
       gsap.ticker.remove(tickHandler);
-      cancelAnimationFrame(rafId);
     };
   }, []);
 
@@ -69,7 +60,6 @@ function App() {
           element={
             <>
               <IntroPreloader />
-              <CustomCursor />
               <CanvasBackground />
               <ClientHome />
               <Chatbot />
