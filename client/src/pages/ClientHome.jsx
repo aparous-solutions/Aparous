@@ -327,15 +327,7 @@ export default function ClientHome() {
       });
   }, []);
 
-  // Global mouse coordinates listener for background spotlight
-  useEffect(() => {
-    const updateMouseCoordinates = (e) => {
-      document.documentElement.style.setProperty('--mouse-x', `${e.clientX}px`);
-      document.documentElement.style.setProperty('--mouse-y', `${e.clientY}px`);
-    };
-    window.addEventListener('mousemove', updateMouseCoordinates);
-    return () => window.removeEventListener('mousemove', updateMouseCoordinates);
-  }, []);
+
 
   // Intersection Observer for scroll reveals
   useEffect(() => {
@@ -409,7 +401,6 @@ export default function ClientHome() {
   const [timelineProgress, setTimelineProgress] = useState(0);
   
   const storyRef = useRef(null);
-  const [storyProgress, setStoryProgress] = useState(0);
   const [storyStep, setStoryStep] = useState(0);
   
   const [heroScrollScale, setHeroScrollScale] = useState(1);
@@ -451,7 +442,14 @@ export default function ClientHome() {
         if (currentScroll > 0) {
           progress = Math.min(currentScroll / (elementHeight - 120), 1);
         }
-        setTimelineProgress(progress * 100);
+        
+        const newProgress = Math.round(progress * 100);
+        setTimelineProgress(prev => {
+          if (Math.abs(prev - newProgress) >= 1 || newProgress === 0 || newProgress === 100) {
+            return newProgress;
+          }
+          return prev;
+        });
       }
 
       // 2. Cinematic Storytelling Scroll Calculation
@@ -467,9 +465,12 @@ export default function ClientHome() {
         if (scrollDistance > 0 && maxScroll > 0) {
           p = Math.min(scrollDistance / maxScroll, 1);
         }
-        setStoryProgress(p);
+        
         const step = Math.min(Math.floor(p * 3), 2);
-        setStoryStep(step);
+        setStoryStep(prev => {
+          if (prev !== step) return step;
+          return prev;
+        });
       }
 
       // 3. Hero Parallax scroll feedback
@@ -477,14 +478,32 @@ export default function ClientHome() {
       if (scrollY < window.innerHeight) {
         const scale = Math.max(1 - (scrollY / window.innerHeight) * 0.12, 0.88);
         const rotate = (scrollY / window.innerHeight) * 35;
-        setHeroScrollScale(scale);
-        setHeroScrollRotate(rotate);
+        
+        setHeroScrollScale(prev => {
+          if (Math.abs(prev - scale) >= 0.015 || scale === 0.88 || scale === 1) {
+            return parseFloat(scale.toFixed(3));
+          }
+          return prev;
+        });
+        
+        setHeroScrollRotate(prev => {
+          if (Math.abs(prev - rotate) >= 1.5 || rotate === 0 || rotate === 35) {
+            return Math.round(rotate);
+          }
+          return prev;
+        });
 
         if (!isHoveredHeroRef.current) {
           const gridRotX = 70 + (scrollY / window.innerHeight) * 12;
-          setGridTransform({
-            transform: `perspective(600px) rotateX(${gridRotX.toFixed(1)}deg) translateZ(-120px)`,
-            transition: 'transform 0.1s ease-out'
+          const newTransform = `perspective(600px) rotateX(${gridRotX.toFixed(1)}deg) translateZ(-120px)`;
+          setGridTransform(prev => {
+            if (prev.transform !== newTransform) {
+              return {
+                transform: newTransform,
+                transition: 'transform 0.1s ease-out'
+              };
+            }
+            return prev;
           });
         }
       }

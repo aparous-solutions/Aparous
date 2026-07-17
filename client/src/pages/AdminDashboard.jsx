@@ -107,6 +107,13 @@ export default function AdminDashboard() {
     name: '', url: 'https://cdn.logo.com/placeholder.png', visibility: true, hoverColor: '#00f2fe', altText: '', order: 0
   });
 
+  const [isAddLeadModalOpen, setIsAddLeadModalOpen] = useState(false);
+  const [newLeadData, setNewLeadData] = useState({
+    name: '', email: '', phone: '', company: '', website: '', budget: '',
+    projectDetails: '', serviceInterested: 'Web Development', status: 'new',
+    priority: 'medium', source: 'Cold Call', notes: ''
+  });
+
   const [newMedia, setNewMedia] = useState({
     name: '', url: '', folder: 'General', type: 'image', size: 1024
   });
@@ -314,6 +321,58 @@ export default function AdminDashboard() {
       timeline: updatedTimeline
     });
     setNewNote('');
+  };
+
+  const handleAddLead = async (e) => {
+    e.preventDefault();
+    if (!newLeadData.name || !newLeadData.email) {
+      alert('Name and Email are required.');
+      return;
+    }
+    try {
+      const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${getToken()}`
+      };
+      
+      const payload = {
+        ...newLeadData,
+        conversations: newLeadData.notes ? [{
+          sender: 'Admin',
+          text: newLeadData.notes,
+          timestamp: new Date().toISOString()
+        }] : [],
+        timeline: [{
+          action: `Lead manually created via CRM (${newLeadData.source})`,
+          date: new Date().toISOString(),
+          user: 'Admin'
+        }]
+      };
+
+      const res = await fetch(`${API_BASE_URL}/api/admin/leads`, {
+        method: 'POST',
+        headers,
+        body: JSON.stringify(payload)
+      });
+
+      if (res.ok) {
+        const created = await res.json();
+        setLeads(prev => [created, ...prev]);
+        setIsAddLeadModalOpen(false);
+        setNewLeadData({
+          name: '', email: '', phone: '', company: '', website: '', budget: '',
+          projectDetails: '', serviceInterested: 'Web Development', status: 'new',
+          priority: 'medium', source: 'Cold Call', notes: ''
+        });
+        alert('Lead added successfully!');
+      } else {
+        const errData = await res.json();
+        alert(`Error adding lead: ${errData.error || 'Unknown error'}`);
+      }
+    } catch (err) {
+      console.error(err);
+      alert('Network or server connection error.');
+    }
   };
 
   // Drag and Drop handlers
@@ -1336,6 +1395,13 @@ export default function AdminDashboard() {
                   <h2 style={{ fontSize: '2rem', fontFamily: 'var(--font-head)', fontWeight: '800', marginBottom: '8px' }}>CRM Pipeline</h2>
                   <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>Drag and drop leads to transition stages. Changes save automatically.</p>
                 </div>
+                <button 
+                  onClick={() => setIsAddLeadModalOpen(true)}
+                  className="btn-primary" 
+                  style={{ padding: '8px 18px', fontSize: '0.82rem', display: 'flex', alignItems: 'center', gap: '8px', height: '38px' }}
+                >
+                  <Plus size={16} /> Add CRM Lead
+                </button>
               </div>
 
               {/* Kanban Columns viewport */}
@@ -1401,7 +1467,14 @@ export default function AdminDashboard() {
                   <h3 style={{ fontSize: '1.25rem', fontWeight: '800' }}>Leads CRM Archive</h3>
                   <p style={{ color: 'var(--text-muted)', fontSize: '0.82rem', marginTop: '4px' }}>Search and filter your corporate leads. Import spreadsheets or export archives.</p>
                 </div>
-                <div style={{ display: 'flex', gap: '12px' }}>
+                <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+                  <button 
+                    onClick={() => setIsAddLeadModalOpen(true)}
+                    className="btn-primary" 
+                    style={{ padding: '8px 16px', fontSize: '0.8rem', height: '36px', display: 'flex', alignItems: 'center', gap: '6px' }}
+                  >
+                    <Plus size={14} /> Add Lead
+                  </button>
                   <label className="btn-secondary" style={{ padding: '8px 16px', fontSize: '0.8rem', cursor: 'pointer', height: '36px', display: 'flex', alignItems: 'center', gap: '6px' }}>
                     <Upload size={14} /> Import Leads
                     <input type="file" accept=".csv" onChange={handleImportCSV} style={{ display: 'none' }} />
@@ -2435,6 +2508,193 @@ export default function AdminDashboard() {
                   </div>
                 </div>
               )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ADD LEAD POPUP MODAL */}
+      {isAddLeadModalOpen && (
+        <div className="modal-overlay" onClick={() => setIsAddLeadModalOpen(false)}>
+          <div className="modal-content-container" style={{ maxWidth: '640px', background: 'rgba(10, 4, 20, 0.98)', border: '1px solid var(--glass-border)' }} onClick={(e) => e.stopPropagation()}>
+            <div style={{ padding: '40px', position: 'relative' }}>
+              <button 
+                onClick={() => setIsAddLeadModalOpen(false)}
+                style={{ position: 'absolute', top: '25px', right: '25px', background: 'transparent', border: 'none', color: 'var(--text-muted)', cursor: 'pointer' }}
+              >
+                <X size={22} />
+              </button>
+
+              <div style={{ marginBottom: '25px' }}>
+                <h3 style={{ fontSize: '1.6rem', fontFamily: 'var(--font-head)', fontWeight: '800', color: '#fff' }}>Add CRM Lead Manually</h3>
+                <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginTop: '4px' }}>Track new sales leads, cold calls, or inbound emails in the pipeline.</p>
+              </div>
+
+              <form onSubmit={handleAddLead} style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
+                  <div>
+                    <label style={{ display: 'block', fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '5px' }}>Name *</label>
+                    <input 
+                      type="text" 
+                      required 
+                      value={newLeadData.name} 
+                      onChange={e => setNewLeadData({...newLeadData, name: e.target.value})} 
+                      className="glass-input" 
+                      placeholder="e.g. Lucky"
+                    />
+                  </div>
+                  <div>
+                    <label style={{ display: 'block', fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '5px' }}>Email *</label>
+                    <input 
+                      type="email" 
+                      required 
+                      value={newLeadData.email} 
+                      onChange={e => setNewLeadData({...newLeadData, email: e.target.value})} 
+                      className="glass-input" 
+                      placeholder="e.g. lucky@example.com"
+                    />
+                  </div>
+                </div>
+
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
+                  <div>
+                    <label style={{ display: 'block', fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '5px' }}>Phone</label>
+                    <input 
+                      type="text" 
+                      value={newLeadData.phone} 
+                      onChange={e => setNewLeadData({...newLeadData, phone: e.target.value})} 
+                      className="glass-input" 
+                      placeholder="e.g. +91 9876543210"
+                    />
+                  </div>
+                  <div>
+                    <label style={{ display: 'block', fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '5px' }}>Company</label>
+                    <input 
+                      type="text" 
+                      value={newLeadData.company} 
+                      onChange={e => setNewLeadData({...newLeadData, company: e.target.value})} 
+                      className="glass-input" 
+                      placeholder="e.g. Lucky Enterprises"
+                    />
+                  </div>
+                </div>
+
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
+                  <div>
+                    <label style={{ display: 'block', fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '5px' }}>Website</label>
+                    <input 
+                      type="text" 
+                      value={newLeadData.website} 
+                      onChange={e => setNewLeadData({...newLeadData, website: e.target.value})} 
+                      className="glass-input" 
+                      placeholder="e.g. https://lucky.com"
+                    />
+                  </div>
+                  <div>
+                    <label style={{ display: 'block', fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '5px' }}>Budget</label>
+                    <input 
+                      type="text" 
+                      value={newLeadData.budget} 
+                      onChange={e => setNewLeadData({...newLeadData, budget: e.target.value})} 
+                      className="glass-input" 
+                      placeholder="e.g. $5,000 / ₹4,00,000"
+                    />
+                  </div>
+                </div>
+
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '10px' }}>
+                  <div>
+                    <label style={{ display: 'block', fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '5px' }}>Service</label>
+                    <select 
+                      value={newLeadData.serviceInterested} 
+                      onChange={e => setNewLeadData({...newLeadData, serviceInterested: e.target.value})} 
+                      className="glass-input"
+                      style={{ background: '#0a0414', fontSize: '0.8rem' }}
+                    >
+                      <option value="Web Development">Web Development</option>
+                      <option value="AI Automation">AI Automation</option>
+                      <option value="Video Editing">Video Editing</option>
+                      <option value="UI/UX Consulting">UI/UX Consulting</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label style={{ display: 'block', fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '5px' }}>Priority</label>
+                    <select 
+                      value={newLeadData.priority} 
+                      onChange={e => setNewLeadData({...newLeadData, priority: e.target.value})} 
+                      className="glass-input"
+                      style={{ background: '#0a0414', fontSize: '0.8rem' }}
+                    >
+                      <option value="low">Low</option>
+                      <option value="medium">Medium</option>
+                      <option value="high">High</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label style={{ display: 'block', fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '5px' }}>Source</label>
+                    <select 
+                      value={newLeadData.source} 
+                      onChange={e => setNewLeadData({...newLeadData, source: e.target.value})} 
+                      className="glass-input"
+                      style={{ background: '#0a0414', fontSize: '0.8rem' }}
+                    >
+                      <option value="Cold Call">Cold Call</option>
+                      <option value="LinkedIn Outreach">LinkedIn Outreach</option>
+                      <option value="Manual Add">Manual Add</option>
+                      <option value="Referral">Referral</option>
+                      <option value="Website Form">Website Form</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '15px' }}>
+                  <div>
+                    <label style={{ display: 'block', fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '5px' }}>Initial Status</label>
+                    <select 
+                      value={newLeadData.status} 
+                      onChange={e => setNewLeadData({...newLeadData, status: e.target.value})} 
+                      className="glass-input"
+                      style={{ background: '#0a0414', fontSize: '0.8rem' }}
+                    >
+                      {PIPELINE_COLUMNS.map(col => (
+                        <option key={col.key} value={col.key}>{col.label}</option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label style={{ display: 'block', fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '5px' }}>Details / Requirements</label>
+                  <textarea 
+                    value={newLeadData.projectDetails} 
+                    onChange={e => setNewLeadData({...newLeadData, projectDetails: e.target.value})} 
+                    className="glass-input" 
+                    placeholder="Describe project details or requirements..."
+                    rows="3"
+                    style={{ fontSize: '0.85rem', resize: 'none' }}
+                  />
+                </div>
+
+                <div>
+                  <label style={{ display: 'block', fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '5px' }}>First Follow-up Note</label>
+                  <input 
+                    type="text" 
+                    value={newLeadData.notes} 
+                    onChange={e => setNewLeadData({...newLeadData, notes: e.target.value})} 
+                    className="glass-input" 
+                    placeholder="e.g. Left a voicemail on first cold call attempt."
+                  />
+                </div>
+
+                <div style={{ display: 'flex', gap: '15px', marginTop: '15px' }}>
+                  <button type="submit" className="btn-primary shimmer-btn" style={{ flex: 1, justifyContent: 'center' }}>
+                    Create Lead
+                  </button>
+                  <button type="button" onClick={() => setIsAddLeadModalOpen(false)} className="btn-secondary" style={{ flex: 1 }}>
+                    Cancel
+                  </button>
+                </div>
+              </form>
             </div>
           </div>
         </div>

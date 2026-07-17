@@ -888,11 +888,28 @@ app.delete('/api/admin/audits/:id', adminAuth, async (req, res) => {
   }
 });
 
+// Add a lead manually from admin dashboard
+app.post('/api/admin/leads', adminAuth, async (req, res) => {
+  try {
+    const newLead = await createLead(req.body);
+    res.status(201).json(newLead);
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to create lead manually' });
+  }
+});
+
 // ----------------------------------------------------
 // SERVER STARTUP
 // ----------------------------------------------------
-connectDB().then(() => {
-  app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
+  connectDB().then(() => {
+    app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`);
+    });
   });
-});
+} else {
+  // Ensure DB connection is initialized for serverless environments
+  connectDB();
+}
+
+export default app;
