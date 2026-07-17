@@ -777,7 +777,7 @@ export default function ClientHome() {
               }}>
                 APAROUS
               </span>
-              <span style={{ fontSize: '0.6rem', background: 'var(--accent-purple)', color: '#fff', padding: '2px 6px', borderRadius: '4px', textTransform: 'uppercase', letterSpacing: '1px' }}>Studio</span>
+              <span style={{ fontSize: '0.6rem', background: 'var(--accent-purple)', color: '#fff', padding: '2px 6px', borderRadius: '4px', textTransform: 'uppercase', letterSpacing: '1px' }}>Solutions</span>
             </div>
           </div>
 
