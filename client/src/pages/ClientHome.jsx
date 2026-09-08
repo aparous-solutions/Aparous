@@ -752,7 +752,7 @@ export default function ClientHome() {
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          background: 'rgba(5, 2, 12, 0.75)',
+          background: 'rgba(255, 255, 255, 0.88)',
           backdropFilter: 'blur(12px)',
           borderBottom: '1px solid var(--glass-border)'
         }}>
@@ -765,7 +765,7 @@ export default function ClientHome() {
                 height: '32px',
                 borderRadius: '8px',
                 objectFit: 'cover',
-                border: '1px solid rgba(255, 255, 255, 0.12)'
+                border: '1px solid #e2e8f0'
               }}
             />
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
@@ -782,11 +782,12 @@ export default function ClientHome() {
           </div>
 
           <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
-            <a href="#services" className="nav-link-desktop" style={{ color: 'var(--text-normal)', textDecoration: 'none', fontSize: '0.9rem', fontWeight: '500', transition: 'color 0.3s' }} onMouseEnter={e => e.target.style.color = '#fff'} onMouseLeave={e => e.target.style.color = 'var(--text-normal)'}>Services</a>
-            <a href="#portfolio" className="nav-link-desktop" style={{ color: 'var(--text-normal)', textDecoration: 'none', fontSize: '0.9rem', fontWeight: '500', transition: 'color 0.3s' }} onMouseEnter={e => e.target.style.color = '#fff'} onMouseLeave={e => e.target.style.color = 'var(--text-normal)'}>Portfolio</a>
-            <a href="#testimonials" className="nav-link-desktop" style={{ color: 'var(--text-normal)', textDecoration: 'none', fontSize: '0.9rem', fontWeight: '500', transition: 'color 0.3s' }} onMouseEnter={e => e.target.style.color = '#fff'} onMouseLeave={e => e.target.style.color = 'var(--text-normal)'}>Testimonials</a>
-            <button onClick={() => setIsAuditModalOpen(true)} className="btn-secondary nav-link-desktop" style={{ padding: '8px 18px', fontSize: '0.85rem', cursor: 'pointer', border: '1px solid var(--accent-cyan)', color: 'var(--accent-cyan)', background: 'transparent' }} aria-label="Open free website audit form">Free Audit</button>
-            <a href="#contact" className="btn-secondary" style={{ padding: '8px 20px', fontSize: '0.85rem' }}>Get in Touch</a>
+            <a href="#services" className="nav-link-desktop" style={{ color: 'var(--text-normal)', textDecoration: 'none', fontSize: '0.9rem', fontWeight: '500', transition: 'color 0.2s' }} onMouseEnter={e => e.target.style.color = '#0f172a'} onMouseLeave={e => e.target.style.color = 'var(--text-normal)'}>Services</a>
+            <a href="#why-choose-us" className="nav-link-desktop" style={{ color: 'var(--text-normal)', textDecoration: 'none', fontSize: '0.9rem', fontWeight: '500', transition: 'color 0.2s' }} onMouseEnter={e => e.target.style.color = '#0f172a'} onMouseLeave={e => e.target.style.color = 'var(--text-normal)'}>Why Us</a>
+            <a href="#our-process" className="nav-link-desktop" style={{ color: 'var(--text-normal)', textDecoration: 'none', fontSize: '0.9rem', fontWeight: '500', transition: 'color 0.2s' }} onMouseEnter={e => e.target.style.color = '#0f172a'} onMouseLeave={e => e.target.style.color = 'var(--text-normal)'}>Process</a>
+            <a href="#portfolio" className="nav-link-desktop" style={{ color: 'var(--text-normal)', textDecoration: 'none', fontSize: '0.9rem', fontWeight: '500', transition: 'color 0.2s' }} onMouseEnter={e => e.target.style.color = '#0f172a'} onMouseLeave={e => e.target.style.color = 'var(--text-normal)'}>Portfolio</a>
+            <a href="#faq" className="nav-link-desktop" style={{ color: 'var(--text-normal)', textDecoration: 'none', fontSize: '0.9rem', fontWeight: '500', transition: 'color 0.2s' }} onMouseEnter={e => e.target.style.color = '#0f172a'} onMouseLeave={e => e.target.style.color = 'var(--text-normal)'}>FAQ</a>
+            <a href="#contact" className="btn-primary" style={{ padding: '8px 20px', fontSize: '0.85rem' }}>Get in Touch</a>
           </div>
         </nav>
       </header>
@@ -801,23 +802,17 @@ export default function ClientHome() {
         onMouseLeave={handleHeroMouseLeave}
         className="fade-in" 
         style={{
-          minHeight: '95vh',
+          minHeight: '90vh',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
-          padding: '100px 8% 80px 8%',
+          padding: '80px 8% 60px 8%',
           position: 'relative',
           overflow: 'hidden',
           gap: '40px'
         }}
       >
-        {/* Receding 3D Wireframe Parallax Grid Floor */}
-        <div className="grid-overlay" style={gridTransform} />
-        
-        {/* Ambient Shifting Aurora Glow */}
-        <div className="cinematic-aurora" />
-        
         {/* Full Screen Width Video Banner */}
         <div className="cinematic-reveal" style={{
           width: '100%',
@@ -825,8 +820,8 @@ export default function ClientHome() {
           aspectRatio: '21/9',
           borderRadius: '16px',
           overflow: 'hidden',
-          border: '1px solid rgba(161, 79, 255, 0.2)',
-          boxShadow: '0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(161, 79, 255, 0.15)',
+          border: '1px solid #e2e8f0',
+          boxShadow: '0 12px 35px rgba(0, 0, 0, 0.06)',
           position: 'relative',
           animationDelay: '0.15s',
           zIndex: 10
@@ -850,7 +845,7 @@ export default function ClientHome() {
             left: 0,
             width: '100%',
             height: '100%',
-            background: 'linear-gradient(to bottom, rgba(5, 2, 12, 0) 0%, rgba(5, 2, 12, 0.4) 100%)',
+            background: 'linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.2) 100%)',
             pointerEvents: 'none'
           }} />
         </div>
@@ -862,38 +857,39 @@ export default function ClientHome() {
               display: 'inline-flex',
               alignItems: 'center',
               gap: '8px',
-              background: 'rgba(161, 79, 255, 0.08)',
-              border: '1px solid rgba(161, 79, 255, 0.2)',
+              background: 'rgba(124, 58, 237, 0.06)',
+              border: '1px solid rgba(124, 58, 237, 0.15)',
               borderRadius: '30px',
               padding: '8px 18px',
               marginBottom: '25px',
               fontSize: '0.85rem',
-              color: 'var(--text-bright)',
-              fontWeight: '500'
+              color: 'var(--accent-purple)',
+              fontWeight: '600'
             }}>
-              <Sparkles size={14} style={{ color: 'var(--accent-cyan)' }} />
-              <span>Revealing Your Business to the Digital Era</span>
+              <Sparkles size={14} style={{ color: 'var(--accent-purple)' }} />
+              <span>Premium Web Engineering & AI Automations</span>
             </div>
 
             <h1 style={{
-              fontSize: 'clamp(2.6rem, 5vw, 4.8rem)',
-              lineHeight: '1.25',
+              fontSize: 'clamp(2.5rem, 4.8vw, 4.5rem)',
+              lineHeight: '1.2',
               fontWeight: '800',
               marginBottom: '25px',
               letterSpacing: '-1.5px',
+              color: '#0f172a'
             }}>
-              <CinematicTextReveal text="We Craft Premium Platforms & Cinematic Visuals." delay={0.1} />
+              <CinematicTextReveal text="We Build Premium Websites & Intelligent AI Automations." delay={0.1} />
             </h1>
 
             <p className="cinematic-reveal" style={{
-              fontSize: 'clamp(1.05rem, 1.8vw, 1.25rem)',
+              fontSize: 'clamp(1.05rem, 1.6vw, 1.2rem)',
               color: 'var(--text-normal)',
               marginBottom: '40px',
               lineHeight: '1.7',
-              fontWeight: '300',
+              fontWeight: '400',
               animationDelay: '0.35s'
             }}>
-              We build premium websites and cinematic content that help businesses generate more leads, increase trust, and grow online.
+              A boutique agency crafting high-converting websites, custom web applications, and automated AI chatbots for modern brands.
             </p>
 
             <div className="cinematic-reveal" style={{ display: 'flex', gap: '20px', animationDelay: '0.55s', alignItems: 'center' }}>
@@ -903,10 +899,10 @@ export default function ClientHome() {
                     const el = document.getElementById('contact');
                     if (el) el.scrollIntoView({ behavior: 'smooth' });
                   }} 
-                  className="btn-primary shimmer-btn" 
+                  className="btn-primary" 
                   style={{ display: 'flex', alignItems: 'center' }}
                 >
-                  Book Free Consultation <ArrowRight size={18} style={{ marginLeft: '6px' }} />
+                  Get Started <ArrowRight size={18} style={{ marginLeft: '6px' }} />
                 </button>
               </MagneticButton>
               <MagneticButton>
@@ -923,14 +919,14 @@ export default function ClientHome() {
               marginTop: '35px',
               animationDelay: '0.75s'
             }}>
-              {['✓ SEO Optimized', '✓ Fast Delivery', '✓ Mobile Responsive', '✓ Secure Development', '✓ Modern Technology'].map((badge, idx) => (
+              {['✓ Fast Delivery', '✓ SEO Optimized', '✓ AI Chatbots', '✓ Mobile Fluid', '✓ Dedicated Support'].map((badge, idx) => (
                 <span key={idx} style={{
-                  fontSize: '0.78rem',
+                  fontSize: '0.8rem',
                   color: 'var(--text-muted)',
                   display: 'inline-flex',
                   alignItems: 'center',
                   fontWeight: '500',
-                  letterSpacing: '0.5px'
+                  letterSpacing: '0.3px'
                 }}>
                   {badge}
                 </span>
@@ -994,9 +990,9 @@ export default function ClientHome() {
           padding: '25px 35px',
           alignItems: 'center',
           textAlign: 'center',
-          background: 'rgba(10, 4, 20, 0.65)',
-          borderColor: 'rgba(161, 79, 255, 0.18)',
-          boxShadow: '0 8px 32px 0 rgba(161, 79, 255, 0.05)'
+          background: '#ffffff',
+          borderColor: '#e2e8f0',
+          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.04)'
         }}>
           {trustBarStats.map((stat) => (
             <div key={stat.id} style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
@@ -1053,124 +1049,92 @@ export default function ClientHome() {
         </div>
       </div>
 
-      {/* Services Section */}
-      <section id="services" className="scroll-reveal" style={{ padding: '120px 8%', borderTop: '1px solid var(--glass-border)', background: 'rgba(5,2,12,0.3)' }}>
-        <div style={{ textAlign: 'center', marginBottom: '80px' }}>
-          <h2 style={{ fontSize: '2.5rem', marginBottom: '20px', fontFamily: 'var(--font-head)', fontWeight: '800' }}>
-            <CinematicTextReveal text="Core Capabilities" />
+      {/* Services Section (MAX 3 CORE CAPABILITIES) */}
+      <section id="services" className="scroll-reveal" style={{ padding: '100px 8%', background: '#f8fafc', borderTop: '1px solid #e2e8f0', borderBottom: '1px solid #e2e8f0' }}>
+        <div style={{ textAlign: 'center', marginBottom: '60px' }}>
+          <span style={{ fontSize: '0.8rem', color: 'var(--accent-purple)', textTransform: 'uppercase', letterSpacing: '2px', fontWeight: '700', display: 'block', marginBottom: '10px' }}>
+            Core Capabilities
+          </span>
+          <h2 style={{ fontSize: '2.5rem', marginBottom: '15px', fontFamily: 'var(--font-head)', fontWeight: '800', color: '#0f172a' }}>
+            <CinematicTextReveal text="What We Build Best" />
           </h2>
-          <p style={{ color: 'var(--text-muted)', maxWidth: '600px', margin: '0 auto', fontSize: '1.05rem' }}>
-            We build high-performance websites, apps, and cinematic content designed to make your business stand out.
+          <p style={{ color: 'var(--text-muted)', maxWidth: '550px', margin: '0 auto', fontSize: '1.05rem' }}>
+            Focused agency pillars engineered for high performance, business logic, and maximum conversions.
           </p>
         </div>
 
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-          gap: '30px'
+          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+          gap: '30px',
+          maxWidth: '1200px',
+          margin: '0 auto'
         }}>
           {[
             {
-              title: "Premium Websites",
-              description: "Sleek, modern websites featuring smooth animations, clean typography, and unique designs tailored to your brand.",
-              benefits: "Creates an instant premium impression and builds trust with your visitors.",
-              icon: <Layout size={20} />,
-              color: "var(--accent-cyan)",
-              bg: "rgba(0, 242, 254, 0.08)"
-            },
-            {
-              title: "Web Applications",
-              description: "Custom web software, client portals, and interactive dashboards built to be fast, reliable, and easy to use.",
-              benefits: "Simplifies your workflow, automates tasks, and scales seamlessly with your business.",
-              icon: <Cpu size={20} />,
+              title: "Premium Web Development",
+              description: "Custom React/MERN web applications, boutique agency sites, and high-converting landing pages built with 100/100 Lighthouse performance, instant loading speeds, and fluid responsiveness.",
+              benefits: "Establishes immediate trust and turns site visitors into high-ticket clients.",
+              icon: <Layout size={22} />,
               color: "var(--accent-purple)",
-              bg: "rgba(161, 79, 255, 0.08)"
+              bg: "rgba(124, 58, 237, 0.08)"
             },
             {
-              title: "Landing Pages",
-              description: "High-converting marketing pages focused on loading instantly and turning visitors into actual customers.",
-              benefits: "Boosts your conversion rates, captures more qualified leads, and maximizes ad spend.",
-              icon: <TrendingUp size={20} />,
+              title: "AI Automations & Chatbots",
+              description: "Intelligent AI agents, automated lead qualification chatbots, custom LLM integrations, and seamless workflow engines designed to handle repetitive customer touchpoints.",
+              benefits: "Saves operational hours and captures qualified leads 24/7 automatically.",
+              icon: <Sparkles size={22} />,
+              color: "var(--accent-cyan)",
+              bg: "rgba(2, 132, 199, 0.08)"
+            },
+            {
+              title: "UI/UX Design & Branding",
+              description: "Modern user experience design, intuitive mobile-first interfaces, conversion-optimized design systems, and sleek visual identities built for modern digital platforms.",
+              benefits: "Ensures visual consistency, builds brand authority, and boosts user engagement.",
+              icon: <Shield size={22} />,
               color: "var(--accent-magenta)",
-              bg: "rgba(255, 0, 160, 0.08)"
-            },
-            {
-              title: "Video Editing",
-              description: "Professional video editing, dynamic cuts, color grading, sound design, and custom motion graphics.",
-              benefits: "Grabs viewer attention immediately, increases retention, and tells a compelling story.",
-              icon: <Video size={20} />,
-              color: "var(--accent-cyan)",
-              bg: "rgba(0, 242, 254, 0.08)"
-            },
-            {
-              title: "AI Automation",
-              description: "Automated chatbot qualifiers, database integrations, and email responder flows that handle repetitive tasks.",
-              benefits: "Saves you time, captures leads instantly, and handles customer inquiries 24/7.",
-              icon: <Sparkles size={20} />,
-              color: "var(--accent-purple)",
-              bg: "rgba(161, 79, 255, 0.08)"
-            },
-            {
-              title: "SEO Optimization",
-              description: "Clean code structure, fast loading times, proper search engine indexing, and Google Search Console setup.",
-              benefits: "Improves search visibility, drives organic traffic, and keeps your site loading lightning-fast.",
-              icon: <CheckCircle size={20} />,
-              color: "var(--accent-magenta)",
-              bg: "rgba(255, 0, 160, 0.08)"
-            },
-            {
-              title: "Brand Identity",
-              description: "Custom corporate logo design, vector guidelines, design systems, and digital asset templates tailored for modern platforms.",
-              benefits: "Ensures visual consistency, builds professional legitimacy, and creates a memorable brand.",
-              icon: <Shield size={20} />,
-              color: "var(--accent-cyan)",
-              bg: "rgba(0, 242, 254, 0.08)"
-            },
-            {
-              title: "Business Consultation",
-              description: "Strategic audit calls, conversion audits, feature mapping worksheets, and technical architecture planning.",
-              benefits: "Clarifies technical roadmaps, avoids costly design choices, and defines high-leverage growth paths.",
-              icon: <Phone size={20} />,
-              color: "var(--accent-purple)",
-              bg: "rgba(161, 79, 255, 0.08)"
+              bg: "rgba(219, 39, 119, 0.08)"
             }
           ].map((service, idx) => (
             <Tilt3D 
               key={idx} 
               className="glass-panel scroll-reveal" 
               style={{ 
-                padding: '40px 30px', 
+                padding: '40px 32px', 
                 display: 'flex', 
                 flexDirection: 'column', 
                 height: '100%', 
-                transition: 'border-color 0.3s, box-shadow 0.3s' 
+                background: '#ffffff',
+                border: '1px solid #e2e8f0',
+                borderRadius: '18px',
+                boxShadow: '0 4px 20px rgba(0, 0, 0, 0.04)',
+                transition: 'transform 0.3s, border-color 0.3s, box-shadow 0.3s' 
               }}
             >
               <div style={{
                 background: service.bg,
                 color: service.color,
-                width: '46px',
-                height: '46px',
-                borderRadius: '10px',
+                width: '50px',
+                height: '50px',
+                borderRadius: '12px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                marginBottom: '25px',
-                boxShadow: `0 0 15px ${service.color}15`
+                marginBottom: '25px'
               }}>
                 {service.icon}
               </div>
-              <h3 style={{ fontSize: '1.35rem', marginBottom: '15px', fontFamily: 'var(--font-head)', fontWeight: '700', color: '#fff' }}>
+              <h3 style={{ fontSize: '1.4rem', marginBottom: '15px', fontFamily: 'var(--font-head)', fontWeight: '700', color: '#0f172a' }}>
                 {service.title}
               </h3>
-              <p style={{ color: 'var(--text-normal)', fontSize: '0.9rem', lineHeight: '1.65', marginBottom: '20px', flexGrow: 1 }}>
+              <p style={{ color: 'var(--text-normal)', fontSize: '0.92rem', lineHeight: '1.65', marginBottom: '25px', flexGrow: 1 }}>
                 {service.description}
               </p>
-              <div style={{ borderTop: '1px solid rgba(255, 255, 255, 0.05)', paddingTop: '15px', marginTop: 'auto' }}>
-                <span style={{ display: 'block', fontSize: '0.68rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '5px', fontWeight: '700' }}>
-                  Business Benefit
+              <div style={{ borderTop: '1px solid #f1f5f9', paddingTop: '18px', marginTop: 'auto' }}>
+                <span style={{ display: 'block', fontSize: '0.7rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '6px', fontWeight: '700' }}>
+                  Core Advantage
                 </span>
-                <span style={{ fontSize: '0.82rem', color: service.color, fontWeight: '500', lineHeight: '1.4' }}>
+                <span style={{ fontSize: '0.85rem', color: service.color, fontWeight: '600', lineHeight: '1.4' }}>
                   {service.benefits}
                 </span>
               </div>
@@ -1179,207 +1143,77 @@ export default function ClientHome() {
         </div>
       </section>
 
-      {/* Scroll-Reveal Dual Engine Graphic Section (Aparous Engine) */}
-      <hr className="section-divider" />
-      <section className="scroll-reveal" style={{ padding: '120px 8%', background: 'rgba(10, 4, 20, 0.25)', overflow: 'hidden' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', gap: '50px', alignItems: 'center', maxWidth: '1200px', margin: '0 auto' }} className="engine-grid-responsive">
-          
-          {/* Left card: Cinematic Code */}
-          <div className="glass-panel reveal-left" style={{ padding: '40px 30px', minHeight: '220px' }}>
-            <h3 style={{ fontSize: '1.4rem', marginBottom: '15px', color: '#fff', display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <Layout size={20} style={{ color: 'var(--accent-cyan)' }} /> Cinematic Code
-            </h3>
-            <p style={{ color: 'var(--text-normal)', fontSize: '0.92rem', lineHeight: '1.65' }}>
-              High-performance React architectures designed with custom 3D canvas backgrounds, interactive WebGL physics, and silky-smooth micro-animations.
-            </p>
-          </div>
 
-          {/* Center Graphic: Orbiting Neon Coin */}
-          <div className="reveal-scale" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <div className="orbit-container">
-              <div className="orbit-ring">
-                <div className="orbit-bead" />
-                <div className="orbit-bead-secondary" />
-              </div>
-              <div className="cinematic-coin">
-                <div className="coin-shimmer" />
-                <div className="cinematic-coin-inner">
-                  <span className="coin-symbol">A</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Right card: High-Value Visuals */}
-          <div className="glass-panel reveal-right" style={{ padding: '40px 30px', minHeight: '220px' }}>
-            <h3 style={{ fontSize: '1.4rem', marginBottom: '15px', color: '#fff', display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <Video size={20} style={{ color: 'var(--accent-purple)' }} /> High-Value Visuals
-            </h3>
-            <p style={{ color: 'var(--text-normal)', fontSize: '0.92rem', lineHeight: '1.65' }}>
-              Elite commercial editing, custom color grading, dynamic sound design, and pacing optimized to capture attention and convert prospects.
-            </p>
-          </div>
-
-        </div>
-      </section>
-
-      {/* Cinematic Video Storytelling Section */}
-      <hr className="section-divider" />
-      <section 
-        id="storytelling-section"
-        className="scroll-reveal"
-        style={{ padding: '120px 8%', background: 'rgba(10, 4, 20, 0.1)', position: 'relative' }}
-      >
-        <div style={{ textAlign: 'center', marginBottom: '80px' }}>
-          <span style={{ fontSize: '0.78rem', color: 'var(--accent-purple)', textTransform: 'uppercase', letterSpacing: '2px', fontWeight: '700', display: 'block', marginBottom: '10px' }}>
-            The Blueprint
+      {/* Why Choose Us Section (3 VALUABLE CARDS) */}
+      <section id="why-choose-us" className="scroll-reveal" style={{ padding: '100px 8%', background: '#ffffff' }}>
+        <div style={{ textAlign: 'center', marginBottom: '60px' }}>
+          <span style={{ fontSize: '0.8rem', color: 'var(--accent-purple)', textTransform: 'uppercase', letterSpacing: '2px', fontWeight: '700', display: 'block', marginBottom: '10px' }}>
+            Why Aparous
           </span>
-          <h2 style={{ fontSize: '2.5rem', marginBottom: '20px', fontFamily: 'var(--font-head)', fontWeight: '800' }}>
-            <CinematicTextReveal text="Our Digital Philosophy" />
+          <h2 style={{ fontSize: '2.5rem', marginBottom: '15px', fontFamily: 'var(--font-head)', fontWeight: '800', color: '#0f172a' }}>
+            <CinematicTextReveal text="Built For Maximum Impact" />
           </h2>
-          <p style={{ color: 'var(--text-muted)', maxWidth: '600px', margin: '0 auto', fontSize: '1.05rem' }}>
-            How we translate offline authority into high-end online positioning.
-          </p>
-        </div>
-
-        <div style={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '40px',
-          maxWidth: '850px',
-          margin: '0 auto'
-        }}>
-          {storySteps.map((step, idx) => (
-            <motion.div 
-              key={idx} 
-              className="glass-panel" 
-              whileHover={{ 
-                y: -6,
-                borderColor: step.glow + '40',
-                boxShadow: `0 15px 35px -10px ${step.glow}15, inset 0 0 20px rgba(255, 255, 255, 0.02)`
-              }}
-              transition={{ type: 'spring', stiffness: 300, damping: 25 }}
-              style={{ 
-                padding: '40px', 
-                borderRadius: '24px', 
-                border: '1px solid rgba(255, 255, 255, 0.05)',
-                background: 'rgba(10, 4, 20, 0.45)',
-                position: 'relative',
-                overflow: 'hidden',
-                transition: 'border-color 0.3s, box-shadow 0.3s'
-              }}
-            >
-              {/* Glow accent badge */}
-              <div style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px',
-                background: 'rgba(255, 255, 255, 0.03)',
-                border: '1px solid rgba(255, 255, 255, 0.05)',
-                borderRadius: '20px',
-                padding: '6px 14px',
-                fontSize: '0.75rem',
-                color: 'var(--text-bright)',
-                fontWeight: '600',
-                letterSpacing: '1px',
-                textTransform: 'uppercase',
-                marginBottom: '20px'
-              }}>
-                <span style={{
-                  width: '6px',
-                  height: '6px',
-                  borderRadius: '50%',
-                  background: step.glow,
-                  boxShadow: `0 0 8px ${step.glow}`
-                }} />
-                {step.subtitle}
-              </div>
-
-              <h3 style={{
-                fontSize: 'clamp(1.5rem, 3vw, 1.8rem)',
-                fontFamily: 'var(--font-head)',
-                fontWeight: '800',
-                color: '#fff',
-                marginBottom: '15px'
-              }}>
-                {step.title}
-              </h3>
-
-              <p style={{
-                fontSize: '1rem',
-                color: 'var(--text-normal)',
-                lineHeight: '1.7',
-                fontWeight: '300'
-              }}>
-                {step.desc}
-              </p>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-      {/* Why Choose Us Section (NEW) */}
-      <hr className="section-divider" />
-      <section id="why-choose-us" className="scroll-reveal" style={{ padding: '120px 8%', background: 'rgba(5, 2, 12, 0.2)' }}>
-        <div style={{ textAlign: 'center', marginBottom: '80px' }}>
-          <h2 style={{ fontSize: '2.5rem', marginBottom: '20px', fontFamily: 'var(--font-head)', fontWeight: '800' }}>
-            <CinematicTextReveal text="Why Choose Us" />
-          </h2>
-          <p style={{ color: 'var(--text-muted)', maxWidth: '600px', margin: '0 auto', fontSize: '1.05rem' }}>
-            We combine elite engineering with business logic to maximize your conversion rates and organic visibility.
+          <p style={{ color: 'var(--text-muted)', maxWidth: '550px', margin: '0 auto', fontSize: '1.05rem' }}>
+            Combining clean engineering, AI efficiency, and dedicated support for measurable growth.
           </p>
         </div>
 
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
-          gap: '30px'
+          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+          gap: '30px',
+          maxWidth: '1200px',
+          margin: '0 auto'
         }}>
           {[
-            { title: "Fast Delivery", desc: "Deploy your premium web system in weeks, not months, using our rapid sprint architecture frameworks.", icon: <Sparkles size={20} style={{ color: 'var(--accent-cyan)' }} /> },
-            { title: "Business-Focused Strategy", desc: "Every button, interaction, and headline is engineered to solve specific operational bottlenecks and capture leads.", icon: <TrendingUp size={20} style={{ color: 'var(--accent-purple)' }} /> },
-            { title: "Conversion Optimized", desc: "Interactive lead calculators, qualifying bots, and sticky CTAs are customized to capture high-ticket prospects.", icon: <CheckCircle size={20} style={{ color: 'var(--accent-magenta)' }} /> },
-            { title: "Modern UI/UX", desc: "Immersive glassmorphism styling, clean animations, and fluid transitions that feel premium on every interaction.", icon: <Layout size={20} style={{ color: 'var(--accent-cyan)' }} /> },
-            { title: "SEO Friendly", desc: "Search console metadata markup, semantic tagging, and blazing speed performance built into our core codebase.", icon: <Check size={20} style={{ color: 'var(--accent-purple)' }} /> },
-            { title: "Responsive Design", desc: "Silky-smooth layouts that scale gracefully from ultra-wide display portals down to mobile devices.", icon: <Layout size={20} style={{ color: 'var(--accent-magenta)' }} /> },
-            { title: "Dedicated Support", desc: "30 days of post-launch hyper-care with available customized maintenance SLA contracts.", icon: <Shield size={20} style={{ color: 'var(--accent-cyan)' }} /> },
-            { title: "Scalable Architecture", desc: "Clean modular MERN/Fastify codes prepared to expand seamlessly as your userbase scales.", icon: <Cpu size={20} style={{ color: 'var(--accent-purple)' }} /> }
+            {
+              title: "Clean Code & Speed",
+              desc: "100/100 Lighthouse performance, ultra-fast loading, zero bloat, and modern SEO structure built natively into every platform.",
+              icon: <Sparkles size={22} style={{ color: 'var(--accent-purple)' }} />
+            },
+            {
+              title: "AI-Driven Efficiency",
+              desc: "Native integration of automated lead chatbots and smart business workflows to capture and qualify prospects 24/7.",
+              icon: <TrendingUp size={22} style={{ color: 'var(--accent-cyan)' }} />
+            },
+            {
+              title: "Dedicated Support",
+              desc: "Direct collaboration with studio engineering leads, transparent delivery timelines, and 30 days of post-launch hyper-care.",
+              icon: <Shield size={22} style={{ color: 'var(--accent-magenta)' }} />
+            }
           ].map((item, idx) => (
             <motion.div 
               key={idx} 
               className="glass-panel scroll-reveal" 
-              whileHover={{ 
-                y: -6,
-                scale: 1.015,
-                borderColor: 'rgba(161, 79, 255, 0.35)',
-                boxShadow: '0 15px 30px -10px rgba(161, 79, 255, 0.12), inset 0 0 20px rgba(255, 255, 255, 0.02)'
-              }}
-              transition={{ type: 'spring', stiffness: 350, damping: 25 }}
+              whileHover={{ y: -4 }}
               style={{ 
-                padding: '35px 25px', 
+                padding: '35px 30px', 
                 display: 'flex', 
-                gap: '15px', 
-                alignItems: 'flex-start',
-                transition: 'border-color 0.3s, box-shadow 0.3s'
+                flexDirection: 'column', 
+                gap: '15px',
+                background: '#ffffff',
+                border: '1px solid #e2e8f0',
+                borderRadius: '16px',
+                boxShadow: '0 4px 15px rgba(0, 0, 0, 0.03)'
               }}
             >
               <div style={{
-                background: 'rgba(255, 255, 255, 0.03)',
-                border: '1px solid rgba(255, 255, 255, 0.05)',
-                padding: '10px',
-                borderRadius: '10px',
-                display: 'flex',
+                background: 'rgba(124, 58, 237, 0.06)',
+                border: '1px solid #e2e8f0',
+                padding: '12px',
+                borderRadius: '12px',
+                display: 'inline-flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                flexShrink: 0
+                width: 'fit-content'
               }}>
                 {item.icon}
               </div>
               <div>
-                <h3 style={{ fontSize: '1.15rem', marginBottom: '8px', color: '#fff', fontFamily: 'var(--font-head)', fontWeight: '700' }}>
+                <h3 style={{ fontSize: '1.25rem', marginBottom: '10px', color: '#0f172a', fontFamily: 'var(--font-head)', fontWeight: '700' }}>
                   {item.title}
                 </h3>
-                <p style={{ color: 'var(--text-normal)', fontSize: '0.88rem', lineHeight: '1.55' }}>
+                <p style={{ color: 'var(--text-normal)', fontSize: '0.92rem', lineHeight: '1.6' }}>
                   {item.desc}
                 </p>
               </div>
@@ -1388,69 +1222,63 @@ export default function ClientHome() {
         </div>
       </section>
 
-      {/* Our Process Section (NEW) */}
-      <hr className="section-divider" />
-      <section id="our-process" className="scroll-reveal" style={{ padding: '120px 8%', background: 'rgba(10, 4, 20, 0.3)' }}>
-        <div style={{ textAlign: 'center', marginBottom: '80px' }}>
-          <h2 style={{ fontSize: '2.5rem', marginBottom: '20px', fontFamily: 'var(--font-head)', fontWeight: '800' }}>
-            <CinematicTextReveal text="Our Process" />
+      {/* Our Process Section (3 MINIMAL STEPS) */}
+      <section id="our-process" className="scroll-reveal" style={{ padding: '100px 8%', background: '#f8fafc', borderTop: '1px solid #e2e8f0', borderBottom: '1px solid #e2e8f0' }}>
+        <div style={{ textAlign: 'center', marginBottom: '60px' }}>
+          <span style={{ fontSize: '0.8rem', color: 'var(--accent-purple)', textTransform: 'uppercase', letterSpacing: '2px', fontWeight: '700', display: 'block', marginBottom: '10px' }}>
+            Simple Workflow
+          </span>
+          <h2 style={{ fontSize: '2.5rem', marginBottom: '15px', fontFamily: 'var(--font-head)', fontWeight: '800', color: '#0f172a' }}>
+            <CinematicTextReveal text="Our 3-Step Process" />
           </h2>
-          <p style={{ color: 'var(--text-muted)', maxWidth: '600px', margin: '0 auto', fontSize: '1.05rem' }}>
-            A structured, collaborative roadmap designed to take your digital presence from strategy to high-performing deployment.
+          <p style={{ color: 'var(--text-muted)', maxWidth: '550px', margin: '0 auto', fontSize: '1.05rem' }}>
+            A transparent roadmap taking your project from concept to live production.
           </p>
         </div>
 
-        <div ref={timelineRef} className="process-timeline">
-          {/* Scroll progress glowing bar */}
-          <div className="timeline-progress-line" style={{ height: `${timelineProgress}%` }} />
-
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+          gap: '30px',
+          maxWidth: '1200px',
+          margin: '0 auto'
+        }}>
           {[
-            { num: "01", title: "Discovery Call", desc: "A 30-minute scoping workshop where we dissect your business objectives, conversion bottlenecks, and project timeline requirements." },
-            { num: "02", title: "Requirement Analysis", desc: "We draft a comprehensive features spec worksheet, outline backend endpoints, and align on target KPIs." },
-            { num: "03", title: "UI/UX Planning", desc: "We construct high-fidelity interactive wireframes outlining animations and responsive styling, giving you a clear preview before code begins." },
-            { num: "04", title: "Development Phase", desc: "We build your platform using modular React engines, semantic styling codes, custom animations, and clean server routes." },
-            { num: "05", title: "Testing & QA", desc: "Rigorous diagnostic audits covering responsive layouts, load times, database security, and forms validation." },
-            { num: "06", title: "Deployment Launch", desc: "Deploying your site to robust cloud hosting, setting up domain names, configuring SSL parameters, and verifying webhook emails." },
-            { num: "07", title: "Support & Maintenance", desc: "30 days of hyper-care followed by retainers covering feature updates, SEO audits, and server optimization calls." }
-          ].map((step, idx) => {
-            const isActive = timelineProgress >= ((idx / 6) * 100) - 5;
-            return (
-              <div key={idx} className={`timeline-item ${isActive ? 'active' : ''} scroll-reveal`}>
-                <div className="timeline-dot" />
-                <Tilt3D 
-                  className="glass-panel timeline-content-card" 
-                  style={{
-                    background: isActive ? 'rgba(16, 8, 30, 0.65)' : 'var(--bg-card)',
-                    borderColor: isActive ? 'rgba(0, 242, 254, 0.25)' : 'var(--glass-border)',
-                    cursor: 'pointer'
-                  }}
-                >
-                  <div className="timeline-number">{step.num}</div>
-                  <h3 style={{ fontSize: '1.3rem', marginBottom: '10px', fontFamily: 'var(--font-head)', fontWeight: '700', color: '#fff' }}>
-                    {step.title}
-                  </h3>
-                  <p style={{ color: 'var(--text-normal)', fontSize: '0.9rem', lineHeight: '1.6' }}>
-                    {step.desc}
-                  </p>
-                </Tilt3D>
-              </div>
-            );
-          })}
+            { num: "01", title: "Discovery & Scope", desc: "A 30-minute scoping call to map out business goals, technical requirements, and target delivery timeline." },
+            { num: "02", title: "Design & Build", desc: "Custom UI/UX design and clean, modular engineering with continuous progress updates." },
+            { num: "03", title: "Launch & Scale", desc: "Rigorous QA testing, seamless production deployment, SSL setup, and post-launch support." }
+          ].map((step, idx) => (
+            <div key={idx} className="glass-panel scroll-reveal" style={{
+              padding: '35px 30px',
+              background: '#ffffff',
+              border: '1px solid #e2e8f0',
+              borderRadius: '16px',
+              boxShadow: '0 4px 15px rgba(0, 0, 0, 0.03)',
+              position: 'relative'
+            }}>
+              <span style={{
+                fontSize: '2rem',
+                fontWeight: '900',
+                fontFamily: 'var(--font-head)',
+                color: 'var(--accent-purple)',
+                display: 'block',
+                marginBottom: '15px'
+              }}>
+                {step.num}
+              </span>
+              <h3 style={{ fontSize: '1.3rem', marginBottom: '10px', fontFamily: 'var(--font-head)', fontWeight: '700', color: '#0f172a' }}>
+                {step.title}
+              </h3>
+              <p style={{ color: 'var(--text-normal)', fontSize: '0.92rem', lineHeight: '1.6' }}>
+                {step.desc}
+              </p>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* Results Section (NEW) */}
-      <hr className="section-divider" />
-      <section ref={resultsRef} id="results" className="scroll-reveal" style={{ padding: '120px 8%', background: 'rgba(5, 2, 12, 0.4)', position: 'relative' }}>
-        <div style={{ textAlign: 'center', marginBottom: '80px' }}>
-          <h2 style={{ fontSize: '2.5rem', marginBottom: '20px', fontFamily: 'var(--font-head)', fontWeight: '800' }}>
-            <CinematicTextReveal text="Proven Milestones" />
-          </h2>
-          <p style={{ color: 'var(--text-muted)', maxWidth: '600px', margin: '0 auto', fontSize: '1.05rem' }}>
-            Metrics and performance indicators that demonstrate our commitment to high-converting user experiences.
-          </p>
-        </div>
-
+      {/* Results Section */}
+      <section ref={resultsRef} id="results" className="scroll-reveal" style={{ padding: '80px 8%', background: '#ffffff', position: 'relative' }}>
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
@@ -1459,31 +1287,33 @@ export default function ClientHome() {
           margin: '0 auto'
         }}>
           {[
-            { value: `${projectsCounter}+`, label: "Projects Completed", desc: "Elite platforms delivered across accelerators, hubs, and video suites." },
-            { value: `${satisfactionCounter}%`, label: "Client Satisfaction", desc: "Verified score reflecting project outcomes and support communication." },
-            { value: `${ratingCounter}★`, label: "Average Rating", desc: "Top-tier rating based on client portal and video editing feedback." },
-            { value: `${responseCounter} Hours`, label: "Avg Response Time", desc: "Our commitment to high-priority client support dispatch loops." }
+            { value: `${projectsCounter}+`, label: "Projects Completed", desc: "Custom websites and AI automation systems deployed." },
+            { value: `${satisfactionCounter}%`, label: "Client Satisfaction", desc: "Verified rating reflecting quality and response times." },
+            { value: `${ratingCounter}★`, label: "Average Rating", desc: "Top score across client reviews and portal feedback." },
+            { value: `${responseCounter} Hours`, label: "Avg Response Time", desc: "Dedicated support commitment for client inquiries." }
           ].map((stat, idx) => (
             <div key={idx} className="glass-panel" style={{
-              padding: '40px 30px',
+              padding: '35px 25px',
               textAlign: 'center',
-              background: 'rgba(10, 4, 20, 0.55)',
-              borderColor: 'rgba(161, 79, 255, 0.12)'
+              background: '#ffffff',
+              border: '1px solid #e2e8f0',
+              borderRadius: '16px',
+              boxShadow: '0 2px 12px rgba(0, 0, 0, 0.02)'
             }}>
               <span className="text-gradient" style={{
-                fontSize: '2.8rem',
+                fontSize: '2.5rem',
                 fontWeight: '900',
                 fontFamily: 'var(--font-head)',
                 display: 'block',
-                marginBottom: '10px',
+                marginBottom: '8px',
                 lineHeight: 1
               }}>
                 {stat.value}
               </span>
-              <h4 style={{ fontSize: '1rem', color: '#fff', marginBottom: '10px', fontFamily: 'var(--font-head)', fontWeight: '700' }}>
+              <h4 style={{ fontSize: '0.95rem', color: '#0f172a', marginBottom: '8px', fontFamily: 'var(--font-head)', fontWeight: '700' }}>
                 {stat.label}
               </h4>
-              <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', lineHeight: '1.5' }}>
+              <p style={{ color: 'var(--text-muted)', fontSize: '0.82rem', lineHeight: '1.4' }}>
                 {stat.desc}
               </p>
             </div>
@@ -1491,25 +1321,26 @@ export default function ClientHome() {
         </div>
       </section>
 
+
+
       {/* Portfolio Section */}
-      <hr className="section-divider" />
-      <section id="portfolio" className="scroll-reveal" style={{ padding: '120px 8%' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '80px' }}>
+      <section id="portfolio" className="scroll-reveal" style={{ padding: '100px 8%', background: '#f8fafc', borderTop: '1px solid #e2e8f0', borderBottom: '1px solid #e2e8f0' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '60px' }}>
           <div>
-            <h2 style={{ fontSize: '2.5rem', marginBottom: '15px' }}>
-              <CinematicTextReveal text="Recent Work" />
+            <span style={{ fontSize: '0.8rem', color: 'var(--accent-purple)', textTransform: 'uppercase', letterSpacing: '2px', fontWeight: '700', display: 'block', marginBottom: '10px' }}>
+              Portfolio Showcase
+            </span>
+            <h2 style={{ fontSize: '2.5rem', marginBottom: '10px', color: '#0f172a' }}>
+              <CinematicTextReveal text="Recent Projects" />
             </h2>
-            <p style={{ color: 'var(--text-muted)', fontSize: '1rem' }}>Proof of concept case studies delivering digital value.</p>
-          </div>
-          <div style={{ color: 'var(--accent-cyan)', fontSize: '0.9rem', fontWeight: '600' }}>
-            Scroll to explore
+            <p style={{ color: 'var(--text-muted)', fontSize: '1rem' }}>Boutique web builds and custom AI applications.</p>
           </div>
         </div>
 
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-          gap: '40px'
+          gap: '30px'
         }}>
           {projects.map((project) => (
             <div key={project._id} className="perspective-container">
@@ -1519,47 +1350,19 @@ export default function ClientHome() {
         </div>
       </section>
 
-      {/* Client Logos Section (NEW) */}
-      <hr className="section-divider" />
-      <section id="client-logos" className="scroll-reveal" style={{ padding: '80px 8%', background: 'rgba(5, 2, 12, 0.1)' }}>
-        <div style={{ textAlign: 'center', marginBottom: '40px' }}>
-          <span style={{ fontSize: '0.75rem', color: 'var(--accent-cyan)', textTransform: 'uppercase', letterSpacing: '2px', fontWeight: '700', display: 'block', marginBottom: '10px' }}>
-            Trusted Collaborations
-          </span>
-          <h3 style={{ fontSize: '1.6rem', fontFamily: 'var(--font-head)', fontWeight: '800', color: '#fff' }}>
-            Powering Hyper-Growth Startups & Brands
-          </h3>
-        </div>
-
-        <div className="logos-marquee">
-          <div className="logos-track">
-            {/* First Set */}
-            {clientLogos.map((logo, i) => (
-              <div key={`logo-1-${i}`} className="logo-item">
-                {logo.name}
-              </div>
-            ))}
-            {/* Duplicate set for infinite scroll marquee loop */}
-            {clientLogos.map((logo, i) => (
-              <div key={`logo-2-${i}`} className="logo-item">
-                {logo.name}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Testimonials Section */}
-      <hr className="section-divider" />
       {testimonials.length > 0 && (
-        <section id="testimonials" className="scroll-reveal" style={{ padding: '120px 8%', background: 'rgba(16, 8, 30, 0.2)' }}>
+        <section id="testimonials" className="scroll-reveal" style={{ padding: '100px 8%', background: '#ffffff' }}>
           <div style={{ textAlign: 'center', marginBottom: '60px' }}>
-            <h2 style={{ fontSize: '2.5rem', marginBottom: '15px' }}>Partnership Audits</h2>
-            <p style={{ color: 'var(--text-muted)' }}>What our startup founders and corporate partners say.</p>
+            <span style={{ fontSize: '0.8rem', color: 'var(--accent-purple)', textTransform: 'uppercase', letterSpacing: '2px', fontWeight: '700', display: 'block', marginBottom: '10px' }}>
+              Client Trust
+            </span>
+            <h2 style={{ fontSize: '2.5rem', marginBottom: '15px', color: '#0f172a' }}>What Partners Say</h2>
+            <p style={{ color: 'var(--text-muted)' }}>Feedback from startup founders and business owners.</p>
           </div>
 
           <div className="testimonials-flex-container">
-            <button onClick={prevTestimonial} style={{ background: 'transparent', border: '1px solid var(--glass-border)', color: '#fff', borderRadius: '50%', width: '45px', height: '45px', display: 'flex', alignItems: 'center', justify: 'center', cursor: 'pointer', transition: 'all 0.2s' }} onMouseEnter={e => e.target.style.borderColor = 'var(--accent-purple)'} onMouseLeave={e => e.target.style.borderColor = 'var(--glass-border)'}>
+            <button onClick={prevTestimonial} style={{ background: '#ffffff', border: '1px solid #e2e8f0', color: '#0f172a', borderRadius: '50%', width: '45px', height: '45px', display: 'flex', alignItems: 'center', justify: 'center', cursor: 'pointer', transition: 'all 0.2s', boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
               <ChevronLeft size={20} />
             </button>
 
@@ -1567,27 +1370,31 @@ export default function ClientHome() {
               width: '600px',
               padding: '40px',
               textAlign: 'center',
-              position: 'relative'
+              position: 'relative',
+              background: '#ffffff',
+              border: '1px solid #e2e8f0',
+              borderRadius: '20px',
+              boxShadow: '0 8px 30px rgba(0,0,0,0.04)'
             }}>
               {/* Star Rating & Verified Badge */}
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px', marginBottom: '25px' }}>
                 <div style={{ display: 'flex', gap: '4px' }}>
                   {Array.from({ length: testimonials[activeTestimonial].rating }).map((_, i) => (
-                    <Star key={i} size={15} fill="#ffd700" color="#ffd700" />
+                    <Star key={i} size={16} fill="#f59e0b" color="#f59e0b" />
                   ))}
                 </div>
-                <div style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', background: 'rgba(0, 242, 254, 0.08)', border: '1px solid rgba(0, 242, 254, 0.2)', padding: '2px 10px', borderRadius: '15px', fontSize: '0.7rem', color: 'var(--accent-cyan)', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-                  <Award size={10} /> Verified Partner Audit
+                <div style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', background: 'rgba(124, 58, 237, 0.06)', border: '1px solid rgba(124, 58, 237, 0.15)', padding: '3px 12px', borderRadius: '15px', fontSize: '0.72rem', color: 'var(--accent-purple)', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                  <Award size={12} /> Verified Client Review
                 </div>
               </div>
 
               {/* Quote Content */}
               <p style={{
                 fontFamily: 'var(--font-body)',
-                fontSize: '1.15rem',
+                fontSize: '1.1rem',
                 lineHeight: '1.7',
                 fontStyle: 'italic',
-                color: 'var(--text-bright)',
+                color: '#334155',
                 marginBottom: '30px'
               }}>
                 "{testimonials[activeTestimonial].content}"
@@ -1599,8 +1406,8 @@ export default function ClientHome() {
                   width: '48px',
                   height: '48px',
                   borderRadius: '50%',
-                  background: 'rgba(161, 79, 255, 0.15)',
-                  border: '1px solid rgba(161, 79, 255, 0.3)',
+                  background: 'rgba(124, 58, 237, 0.1)',
+                  border: '1px solid rgba(124, 58, 237, 0.2)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -1611,25 +1418,23 @@ export default function ClientHome() {
                   {testimonials[activeTestimonial].avatar}
                 </div>
                 <div style={{ textAlign: 'left' }}>
-                  <h4 style={{ fontSize: '1.02rem', fontWeight: '700', color: '#fff' }}>{testimonials[activeTestimonial].name}</h4>
+                  <h4 style={{ fontSize: '1.02rem', fontWeight: '700', color: '#0f172a' }}>{testimonials[activeTestimonial].name}</h4>
                   <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', display: 'flex', flexDirection: 'column', gap: '2px' }}>
                     <span>{testimonials[activeTestimonial].role} at <strong>{testimonials[activeTestimonial].company}</strong></span>
-                    <span style={{ fontSize: '0.72rem', color: 'rgba(255,255,255,0.3)' }}>USA • Verified Project Audit</span>
                   </div>
                 </div>
               </div>
             </div>
 
-            <button onClick={nextTestimonial} style={{ background: 'transparent', border: '1px solid var(--glass-border)', color: '#fff', borderRadius: '50%', width: '45px', height: '45px', display: 'flex', alignItems: 'center', justify: 'center', cursor: 'pointer', transition: 'all 0.2s' }} onMouseEnter={e => e.target.style.borderColor = 'var(--accent-purple)'} onMouseLeave={e => e.target.style.borderColor = 'var(--glass-border)'}>
+            <button onClick={nextTestimonial} style={{ background: '#ffffff', border: '1px solid #e2e8f0', color: '#0f172a', borderRadius: '50%', width: '45px', height: '45px', display: 'flex', alignItems: 'center', justify: 'center', cursor: 'pointer', transition: 'all 0.2s', boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
               <ChevronRight size={20} />
             </button>
           </div>
         </section>
       )}
 
-      {/* Client Feedback Section (NEW) */}
-      <hr className="section-divider" />
-      <section id="feedback" className="scroll-reveal" style={{ padding: '120px 8%', background: 'rgba(10, 4, 20, 0.15)' }}>
+      {/* Client Feedback Section */}
+      <section id="feedback" className="scroll-reveal" style={{ padding: '100px 8%', background: '#f8fafc', borderTop: '1px solid #e2e8f0', borderBottom: '1px solid #e2e8f0' }}>
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
@@ -1640,16 +1445,16 @@ export default function ClientHome() {
           {/* Left Column: Average metrics and Form */}
           <div>
             <div style={{ marginBottom: '40px' }}>
-              <span style={{ fontSize: '0.75rem', color: 'var(--accent-magenta)', textTransform: 'uppercase', letterSpacing: '2px', fontWeight: '700', display: 'block', marginBottom: '10px' }}>
+              <span style={{ fontSize: '0.8rem', color: 'var(--accent-purple)', textTransform: 'uppercase', letterSpacing: '2px', fontWeight: '700', display: 'block', marginBottom: '10px' }}>
                 Share Your Experience
               </span>
-              <h2 style={{ fontSize: '2.5rem', marginBottom: '20px', fontFamily: 'var(--font-head)', fontWeight: '800' }}>Client Feedback</h2>
+              <h2 style={{ fontSize: '2.5rem', marginBottom: '15px', fontFamily: 'var(--font-head)', fontWeight: '800', color: '#0f172a' }}>Client Feedback</h2>
               <p style={{ color: 'var(--text-muted)', fontSize: '1rem', lineHeight: '1.6' }}>
-                We're committed to continuous improvements. Submit your verified audit review and rating below.
+                Submit your verified client review and rating below.
               </p>
 
               {/* Stats Card */}
-              <div className="glass-panel" style={{ display: 'inline-flex', alignItems: 'center', gap: '20px', padding: '15px 25px', marginTop: '25px', background: 'rgba(255, 0, 160, 0.03)', borderColor: 'rgba(255, 0, 160, 0.15)' }}>
+              <div className="glass-panel" style={{ display: 'inline-flex', alignItems: 'center', gap: '20px', padding: '15px 25px', marginTop: '20px', background: '#ffffff', border: '1px solid #e2e8f0' }}>
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                   <span className="text-gradient" style={{ fontSize: '2rem', fontWeight: '900', fontFamily: 'var(--font-head)' }}>
                     {reviews.length > 0 ? (reviews.reduce((acc, r) => acc + r.rating, 0) / reviews.length).toFixed(1) : "5.0"}
@@ -1658,11 +1463,11 @@ export default function ClientHome() {
                     Average Rating
                   </span>
                 </div>
-                <div style={{ width: '1px', height: '40px', background: 'rgba(255, 255, 255, 0.1)' }} />
+                <div style={{ width: '1px', height: '40px', background: '#e2e8f0' }} />
                 <div>
                   <div style={{ display: 'flex', gap: '3px', marginBottom: '5px' }}>
                     {[1, 2, 3, 4, 5].map((s) => (
-                      <Star key={s} size={14} fill="#ffd700" color="#ffd700" />
+                      <Star key={s} size={14} fill="#f59e0b" color="#f59e0b" />
                     ))}
                   </div>
                   <span style={{ fontSize: '0.8rem', color: 'var(--text-normal)' }}>
@@ -1673,57 +1478,57 @@ export default function ClientHome() {
             </div>
 
             {/* Submission Form */}
-            <form onSubmit={handleReviewSubmit} className="glass-panel" style={{ padding: '35px 30px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+            <form onSubmit={handleReviewSubmit} className="glass-panel" style={{ padding: '35px 30px', display: 'flex', flexDirection: 'column', gap: '20px', background: '#ffffff', border: '1px solid #e2e8f0' }}>
               <div>
-                <label style={{ display: 'block', fontSize: '0.8rem', color: 'var(--text-normal)', marginBottom: '8px', fontWeight: '500' }}>Full Name *</label>
+                <label style={{ display: 'block', fontSize: '0.8rem', color: '#0f172a', marginBottom: '8px', fontWeight: '600' }}>Full Name *</label>
                 <input
                   type="text"
                   required
                   placeholder="e.g. Hemanth"
                   value={newReview.name}
                   onChange={(e) => setNewReview({ ...newReview, name: e.target.value })}
-                  style={{ width: '100%', padding: '12px 16px', background: 'rgba(255, 255, 255, 0.02)', border: '1px solid var(--glass-border)', borderRadius: '8px', color: '#fff', fontSize: '0.9rem', outline: 'none' }}
+                  style={{ width: '100%', padding: '12px 16px', background: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '8px', color: '#0f172a', fontSize: '0.9rem', outline: 'none' }}
                 />
               </div>
 
               <div className="form-grid-responsive">
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.8rem', color: 'var(--text-normal)', marginBottom: '8px', fontWeight: '500' }}>Company Name *</label>
+                  <label style={{ display: 'block', fontSize: '0.8rem', color: '#0f172a', marginBottom: '8px', fontWeight: '600' }}>Company Name *</label>
                   <input
                     type="text"
                     required
                     placeholder="e.g. Grow Athlete"
                     value={newReview.company}
                     onChange={(e) => setNewReview({ ...newReview, company: e.target.value })}
-                    style={{ width: '100%', padding: '12px 16px', background: 'rgba(255, 255, 255, 0.02)', border: '1px solid var(--glass-border)', borderRadius: '8px', color: '#fff', fontSize: '0.9rem', outline: 'none' }}
+                    style={{ width: '100%', padding: '12px 16px', background: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '8px', color: '#0f172a', fontSize: '0.9rem', outline: 'none' }}
                   />
                 </div>
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.8rem', color: 'var(--text-normal)', marginBottom: '8px', fontWeight: '500' }}>Email Address *</label>
+                  <label style={{ display: 'block', fontSize: '0.8rem', color: '#0f172a', marginBottom: '8px', fontWeight: '600' }}>Email Address *</label>
                   <input
                     type="email"
                     required
                     placeholder="e.g. name@company.com"
                     value={newReview.email}
                     onChange={(e) => setNewReview({ ...newReview, email: e.target.value })}
-                    style={{ width: '100%', padding: '12px 16px', background: 'rgba(255, 255, 255, 0.02)', border: '1px solid var(--glass-border)', borderRadius: '8px', color: '#fff', fontSize: '0.9rem', outline: 'none' }}
+                    style={{ width: '100%', padding: '12px 16px', background: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '8px', color: '#0f172a', fontSize: '0.9rem', outline: 'none' }}
                   />
                 </div>
               </div>
 
               <div>
-                <label style={{ display: 'block', fontSize: '0.8rem', color: 'var(--text-normal)', marginBottom: '8px', fontWeight: '500' }}>Project Name</label>
+                <label style={{ display: 'block', fontSize: '0.8rem', color: '#0f172a', marginBottom: '8px', fontWeight: '600' }}>Project Name</label>
                 <input
                   type="text"
-                  placeholder="e.g. Marketing Funnel Optimization"
+                  placeholder="e.g. Agency Website Build"
                   value={newReview.projectName}
                   onChange={(e) => setNewReview({ ...newReview, projectName: e.target.value })}
-                  style={{ width: '100%', padding: '12px 16px', background: 'rgba(255, 255, 255, 0.02)', border: '1px solid var(--glass-border)', borderRadius: '8px', color: '#fff', fontSize: '0.9rem', outline: 'none' }}
+                  style={{ width: '100%', padding: '12px 16px', background: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '8px', color: '#0f172a', fontSize: '0.9rem', outline: 'none' }}
                 />
               </div>
 
               <div>
-                <label style={{ display: 'block', fontSize: '0.8rem', color: 'var(--text-normal)', marginBottom: '8px', fontWeight: '500' }}>Your Rating *</label>
+                <label style={{ display: 'block', fontSize: '0.8rem', color: '#0f172a', marginBottom: '8px', fontWeight: '600' }}>Your Rating *</label>
                 <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
                   {[1, 2, 3, 4, 5].map((star) => (
                     <button
@@ -1734,8 +1539,8 @@ export default function ClientHome() {
                     >
                       <Star
                         size={20}
-                        fill={star <= newReview.rating ? "#ffd700" : "none"}
-                        color={star <= newReview.rating ? "#ffd700" : "rgba(255, 255, 255, 0.2)"}
+                        fill={star <= newReview.rating ? "#f59e0b" : "none"}
+                        color={star <= newReview.rating ? "#f59e0b" : "#cbd5e1"}
                         style={{ transition: 'all 0.2s' }}
                       />
                     </button>
@@ -1747,33 +1552,33 @@ export default function ClientHome() {
               </div>
 
               <div>
-                <label style={{ display: 'block', fontSize: '0.8rem', color: 'var(--text-normal)', marginBottom: '8px', fontWeight: '500' }}>Review Feedback *</label>
+                <label style={{ display: 'block', fontSize: '0.8rem', color: '#0f172a', marginBottom: '8px', fontWeight: '600' }}>Review Feedback *</label>
                 <textarea
                   required
                   rows={4}
                   placeholder="Share details of your experience working with Aparous..."
                   value={newReview.feedback}
                   onChange={(e) => setNewReview({ ...newReview, feedback: e.target.value })}
-                  style={{ width: '100%', padding: '12px 16px', background: 'rgba(255, 255, 255, 0.02)', border: '1px solid var(--glass-border)', borderRadius: '8px', color: '#fff', fontSize: '0.9rem', outline: 'none', resize: 'vertical' }}
+                  style={{ width: '100%', padding: '12px 16px', background: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '8px', color: '#0f172a', fontSize: '0.9rem', outline: 'none', resize: 'vertical' }}
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={reviewSubmitStatus === 'submitting'}
-                className="btn-primary shimmer-btn"
-                style={{ width: '100%', padding: '14px', borderRadius: '8px', fontWeight: '700' }}
+                className="btn-primary"
+                style={{ width: '100%', padding: '14px', borderRadius: '8px', fontWeight: '700', justifyContent: 'center' }}
               >
                 {reviewSubmitStatus === 'submitting' ? 'Submitting...' : 'Submit Verified Review'}
               </button>
 
               {reviewSubmitStatus === 'success' && (
-                <div style={{ padding: '12px', background: 'rgba(0, 242, 254, 0.08)', border: '1px solid rgba(0, 242, 254, 0.3)', borderRadius: '6px', color: 'var(--accent-cyan)', fontSize: '0.85rem', textAlign: 'center' }}>
+                <div style={{ padding: '12px', background: 'rgba(124, 58, 237, 0.08)', border: '1px solid rgba(124, 58, 237, 0.2)', borderRadius: '6px', color: 'var(--accent-purple)', fontSize: '0.85rem', textAlign: 'center' }}>
                   Thank you! Your verified review has been submitted and auto-published.
                 </div>
               )}
               {reviewSubmitStatus === 'error' && (
-                <div style={{ padding: '12px', background: 'rgba(255, 0, 160, 0.08)', border: '1px solid rgba(255, 0, 160, 0.3)', borderRadius: '6px', color: 'var(--accent-magenta)', fontSize: '0.85rem', textAlign: 'center' }}>
+                <div style={{ padding: '12px', background: 'rgba(219, 39, 119, 0.08)', border: '1px solid rgba(219, 39, 119, 0.2)', borderRadius: '6px', color: 'var(--accent-magenta)', fontSize: '0.85rem', textAlign: 'center' }}>
                   Failed to submit review. Please try again.
                 </div>
               )}
@@ -1782,29 +1587,29 @@ export default function ClientHome() {
 
           {/* Right Column: Dynamic Feedback Grid Wall */}
           <div style={{ maxHeight: '720px', overflowY: 'auto', paddingRight: '10px' }}>
-            <span style={{ fontSize: '0.75rem', color: 'var(--accent-cyan)', textTransform: 'uppercase', letterSpacing: '2px', fontWeight: '700', display: 'block', marginBottom: '20px' }}>
+            <span style={{ fontSize: '0.8rem', color: 'var(--accent-purple)', textTransform: 'uppercase', letterSpacing: '2px', fontWeight: '700', display: 'block', marginBottom: '20px' }}>
               Verified Review Wall
             </span>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
               {reviews.map((rev) => (
-                <div key={rev._id} className="glass-panel" style={{ padding: '25px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                <div key={rev._id} className="glass-panel" style={{ padding: '25px', display: 'flex', flexDirection: 'column', gap: '12px', background: '#ffffff', border: '1px solid #e2e8f0' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                     <div>
-                      <h4 style={{ fontSize: '0.95rem', fontWeight: '700', color: '#fff' }}>{rev.name}</h4>
+                      <h4 style={{ fontSize: '0.95rem', fontWeight: '700', color: '#0f172a' }}>{rev.name}</h4>
                       <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
                         {rev.company} {rev.projectName && `• ${rev.projectName}`}
                       </span>
                     </div>
                     <div style={{ display: 'flex', gap: '2px' }}>
                       {Array.from({ length: rev.rating }).map((_, i) => (
-                        <Star key={i} size={11} fill="#ffd700" color="#ffd700" />
+                        <Star key={i} size={13} fill="#f59e0b" color="#f59e0b" />
                       ))}
                     </div>
                   </div>
-                  <p style={{ color: 'var(--text-normal)', fontSize: '0.85rem', lineHeight: '1.55', fontStyle: 'italic' }}>
+                  <p style={{ color: 'var(--text-normal)', fontSize: '0.88rem', lineHeight: '1.55', fontStyle: 'italic' }}>
                     "{rev.feedback}"
                   </p>
-                  <span style={{ fontSize: '0.68rem', color: 'rgba(255, 255, 255, 0.2)', alignSelf: 'flex-end', marginTop: '5px' }}>
+                  <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', alignSelf: 'flex-end', marginTop: '5px' }}>
                     {rev.createdAt ? new Date(rev.createdAt).toLocaleDateString() : 'Recent'}
                   </span>
                 </div>
@@ -1815,14 +1620,16 @@ export default function ClientHome() {
       </section>
 
       {/* FAQ Section */}
-      <hr className="section-divider" />
-      <section id="faq" className="scroll-reveal" style={{ padding: '120px 8%', background: 'rgba(5, 2, 12, 0.15)' }}>
+      <section id="faq" className="scroll-reveal" style={{ padding: '100px 8%', background: '#ffffff' }}>
         <div style={{ textAlign: 'center', marginBottom: '60px' }}>
-          <h2 style={{ fontSize: '2.5rem', marginBottom: '15px' }}>Frequently Asked Inquiries</h2>
-          <p style={{ color: 'var(--text-muted)' }}>Addressing architecture, process models, and project deliverables.</p>
+          <span style={{ fontSize: '0.8rem', color: 'var(--accent-purple)', textTransform: 'uppercase', letterSpacing: '2px', fontWeight: '700', display: 'block', marginBottom: '10px' }}>
+            Got Questions?
+          </span>
+          <h2 style={{ fontSize: '2.5rem', marginBottom: '15px', color: '#0f172a' }}>Frequently Asked Inquiries</h2>
+          <p style={{ color: 'var(--text-muted)' }}>Addressing timelines, process models, and project deliverables.</p>
         </div>
 
-        <div style={{ maxWidth: '800px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+        <div style={{ maxWidth: '800px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '16px' }}>
           {faqData.map((faq, index) => {
             const isOpen = activeFaq === index;
             return (
@@ -1832,9 +1639,11 @@ export default function ClientHome() {
                 style={{ 
                   padding: '24px 30px', 
                   cursor: 'pointer',
-                  border: isOpen ? '1px solid rgba(161, 79, 255, 0.4)' : '1px solid var(--glass-border)',
-                  boxShadow: isOpen ? '0 10px 30px rgba(161, 79, 255, 0.08)' : 'none',
-                  transition: 'all 0.3s ease'
+                  background: '#ffffff',
+                  border: isOpen ? '1px solid var(--accent-purple)' : '1px solid #e2e8f0',
+                  boxShadow: isOpen ? '0 4px 20px rgba(124, 58, 237, 0.08)' : '0 2px 8px rgba(0, 0, 0, 0.02)',
+                  borderRadius: '14px',
+                  transition: 'all 0.25s ease'
                 }}
                 onClick={() => toggleFaq(index)}
               >
@@ -1842,13 +1651,13 @@ export default function ClientHome() {
                   <h4 style={{ 
                     fontSize: '1.02rem', 
                     fontWeight: '700',
-                    color: isOpen ? 'var(--accent-cyan)' : 'var(--text-bright)',
-                    transition: 'color 0.3s'
+                    color: isOpen ? 'var(--accent-purple)' : '#0f172a',
+                    transition: 'color 0.2s'
                   }}>
                     {faq.q}
                   </h4>
                   <ChevronRight size={18} style={{ 
-                    color: isOpen ? 'var(--accent-cyan)' : 'var(--text-muted)',
+                    color: isOpen ? 'var(--accent-purple)' : 'var(--text-muted)',
                     transform: isOpen ? 'rotate(90deg)' : 'rotate(0)',
                     transition: 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)'
                   }} />
@@ -1877,49 +1686,53 @@ export default function ClientHome() {
       </section>
 
       {/* Contact Section */}
-      <hr className="section-divider" />
-      <section id="contact" className="scroll-reveal" style={{ padding: '120px 8%' }}>
+      <section id="contact" className="scroll-reveal" style={{ padding: '100px 8%', background: '#f8fafc', borderTop: '1px solid #e2e8f0' }}>
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-          gap: '60px'
+          gap: '60px',
+          maxWidth: '1200px',
+          margin: '0 auto'
         }}>
           <div>
-            <h2 style={{ fontSize: '2.5rem', marginBottom: '25px' }}>Initialize Ascent</h2>
+            <span style={{ fontSize: '0.8rem', color: 'var(--accent-purple)', textTransform: 'uppercase', letterSpacing: '2px', fontWeight: '700', display: 'block', marginBottom: '10px' }}>
+              Start A Project
+            </span>
+            <h2 style={{ fontSize: '2.5rem', marginBottom: '20px', color: '#0f172a' }}>Initialize Ascent</h2>
             <p style={{ color: 'var(--text-normal)', fontSize: '1rem', lineHeight: '1.7', marginBottom: '40px' }}>
-              Submit your project scope, and our digital architect will perform an audit and draft a cinematic 3D mockup proposal for your business.
+              Submit your project scope, and our digital team will analyze your requirements and deliver a custom project proposal within 24 hours.
             </p>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-                <div style={{ width: '45px', height: '45px', borderRadius: '50%', background: 'rgba(161, 79, 255, 0.1)', color: 'var(--accent-purple)', display: 'flex', alignItems: 'center', justify: 'center', paddingLeft: '11px' }}>
+                <div style={{ width: '45px', height: '45px', borderRadius: '50%', background: 'rgba(124, 58, 237, 0.08)', color: 'var(--accent-purple)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <Mail size={18} />
                 </div>
                 <div>
                   <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Email Communications</span>
-                  <p style={{ fontSize: '0.92rem', color: '#fff' }}>aparous.solutions@gmail.com</p>
+                  <p style={{ fontSize: '0.95rem', color: '#0f172a', fontWeight: '600' }}>aparous.solutions@gmail.com</p>
                 </div>
               </div>
 
               <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-                <div style={{ width: '45px', height: '45px', borderRadius: '50%', background: 'rgba(0, 242, 254, 0.1)', color: 'var(--accent-cyan)', display: 'flex', alignItems: 'center', justify: 'center', paddingLeft: '11px' }}>
+                <div style={{ width: '45px', height: '45px', borderRadius: '50%', background: 'rgba(2, 132, 199, 0.08)', color: 'var(--accent-cyan)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <Phone size={18} />
                 </div>
                 <div>
-                  <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Direct Hotline</span>
-                  <p style={{ fontSize: '0.92rem', color: '#fff' }}>+91 9849836092</p>
+                  <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Direct Line</span>
+                  <p style={{ fontSize: '0.95rem', color: '#0f172a', fontWeight: '600' }}>+91 9849836092</p>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="glass-panel" style={{ padding: '40px' }}>
+          <div className="glass-panel" style={{ padding: '40px', background: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '18px', boxShadow: '0 4px 20px rgba(0,0,0,0.03)' }}>
             {submitStatus === 'success' ? (
               <div style={{ textAlign: 'center', padding: '20px 0' }}>
-                <CheckCircle size={55} style={{ color: 'var(--accent-cyan)', marginBottom: '20px' }} />
-                <h3 style={{ fontSize: '1.6rem', marginBottom: '10px' }}>Ascent Initialized</h3>
+                <CheckCircle size={55} style={{ color: 'var(--accent-purple)', marginBottom: '20px' }} />
+                <h3 style={{ fontSize: '1.6rem', marginBottom: '10px', color: '#0f172a' }}>Scope Received</h3>
                 <p style={{ color: 'var(--text-normal)', fontSize: '0.95rem', lineHeight: '1.6' }}>
-                  Your submission has been captured in MongoDB. Our studio lead will analyze your business model and deliver your custom proposal within 24 hours.
+                  Thank you! Our studio lead will review your scope and deliver your custom proposal within 24 hours.
                 </p>
                 <button onClick={() => setSubmitStatus(null)} className="btn-secondary" style={{ marginTop: '25px', padding: '10px 24px', fontSize: '0.85rem' }}>
                   Submit Another Scope
@@ -1929,42 +1742,38 @@ export default function ClientHome() {
               <form onSubmit={handleFormSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
                 <div className="form-grid-responsive">
                   <div>
-                    <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: '600', marginBottom: '8px', color: '#fff' }}>Name *</label>
-                    <input type="text" name="name" required value={formData.name} onChange={handleInputChange} className="glass-input" placeholder="e.g. John Doe" />
+                    <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: '600', marginBottom: '8px', color: '#0f172a' }}>Name *</label>
+                    <input type="text" name="name" required value={formData.name} onChange={handleInputChange} className="glass-input" placeholder="e.g. John Doe" style={{ background: '#ffffff', color: '#0f172a', border: '1px solid #e2e8f0' }} />
                   </div>
                   <div>
-                    <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: '600', marginBottom: '8px', color: '#fff' }}>Company Name</label>
-                    <input type="text" name="company" value={formData.company} onChange={handleInputChange} className="glass-input" placeholder="e.g. Acme Corp" />
+                    <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: '600', marginBottom: '8px', color: '#0f172a' }}>Company Name</label>
+                    <input type="text" name="company" value={formData.company} onChange={handleInputChange} className="glass-input" placeholder="e.g. Acme Corp" style={{ background: '#ffffff', color: '#0f172a', border: '1px solid #e2e8f0' }} />
                   </div>
                 </div>
 
                 <div className="form-grid-responsive">
                   <div>
-                    <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: '600', marginBottom: '8px', color: '#fff' }}>Corporate Email *</label>
-                    <input type="email" name="email" required value={formData.email} onChange={handleInputChange} className="glass-input" placeholder="e.g. john@business.com" />
+                    <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: '600', marginBottom: '8px', color: '#0f172a' }}>Corporate Email *</label>
+                    <input type="email" name="email" required value={formData.email} onChange={handleInputChange} className="glass-input" placeholder="e.g. john@business.com" style={{ background: '#ffffff', color: '#0f172a', border: '1px solid #e2e8f0' }} />
                   </div>
                   <div>
-                    <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: '600', marginBottom: '8px', color: '#fff' }}>Phone Number</label>
-                    <input type="tel" name="phone" value={formData.phone} onChange={handleInputChange} className="glass-input" placeholder="e.g. +1 (555) 000-0000" />
+                    <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: '600', marginBottom: '8px', color: '#0f172a' }}>Phone Number</label>
+                    <input type="tel" name="phone" value={formData.phone} onChange={handleInputChange} className="glass-input" placeholder="e.g. +1 (555) 000-0000" style={{ background: '#ffffff', color: '#0f172a', border: '1px solid #e2e8f0' }} />
                   </div>
                 </div>
 
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '15px' }}>
                   <div>
-                    <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: '600', marginBottom: '8px', color: '#fff' }}>Service Required</label>
-                    <select name="service" value={formData.service} onChange={handleInputChange} className="glass-input" style={{ background: 'rgba(10, 5, 20, 0.95)' }}>
+                    <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: '600', marginBottom: '8px', color: '#0f172a' }}>Service Required</label>
+                    <select name="service" value={formData.service} onChange={handleInputChange} className="glass-input" style={{ background: '#ffffff', color: '#0f172a', border: '1px solid #e2e8f0' }}>
                       <option value="Premium Websites">Premium Websites</option>
+                      <option value="AI Automation">AI Automation & Chatbots</option>
+                      <option value="UI/UX Design">UI/UX & Branding</option>
                       <option value="Web Applications">Web Applications</option>
-                      <option value="Landing Pages">Landing Pages</option>
-                      <option value="Video Editing">Video Editing</option>
-                      <option value="AI Automation">AI Automation</option>
-                      <option value="SEO Optimization">SEO Optimization</option>
-                      <option value="Brand Identity">Brand Identity</option>
-                      <option value="Business Consultation">Business Consultation</option>
                     </select>
                   </div>
                   <div>
-                    <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: '600', marginBottom: '8px', color: '#fff' }}>Allocated Budget</label>
+                    <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: '600', marginBottom: '8px', color: '#0f172a' }}>Allocated Budget</label>
                     <input
                       type="text"
                       name="budget"
@@ -1972,12 +1781,12 @@ export default function ClientHome() {
                       onChange={handleInputChange}
                       className="glass-input"
                       placeholder="e.g. $2,500 / ₹2,00,000"
-                      style={{ background: 'rgba(10, 5, 20, 0.95)' }}
+                      style={{ background: '#ffffff', color: '#0f172a', border: '1px solid #e2e8f0' }}
                     />
                   </div>
                   <div>
-                    <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: '600', marginBottom: '8px', color: '#fff' }}>Target Timeline</label>
-                    <select name="timeline" value={formData.timeline} onChange={handleInputChange} className="glass-input" style={{ background: 'rgba(10, 5, 20, 0.95)' }}>
+                    <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: '600', marginBottom: '8px', color: '#0f172a' }}>Target Timeline</label>
+                    <select name="timeline" value={formData.timeline} onChange={handleInputChange} className="glass-input" style={{ background: '#ffffff', color: '#0f172a', border: '1px solid #e2e8f0' }}>
                       <option value="1-3 Weeks">1-3 Weeks</option>
                       <option value="4-6 Weeks">4-6 Weeks</option>
                       <option value="2-3 Months">2-3 Months</option>
@@ -1986,8 +1795,8 @@ export default function ClientHome() {
                 </div>
 
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: '600', marginBottom: '8px', color: '#fff' }}>Project Requirements</label>
-                  <textarea name="message" rows="3" value={formData.message} onChange={handleInputChange} className="glass-input" placeholder="What are we building? Tell us about features, user roles, or key business goals..." style={{ resize: 'none' }}></textarea>
+                  <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: '600', marginBottom: '8px', color: '#0f172a' }}>Project Requirements</label>
+                  <textarea name="message" rows="3" value={formData.message} onChange={handleInputChange} className="glass-input" placeholder="Tell us about key features, target audience, or business goals..." style={{ resize: 'none', background: '#ffffff', color: '#0f172a', border: '1px solid #e2e8f0' }}></textarea>
                 </div>
 
                 <div style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', marginTop: '5px' }}>
@@ -2000,26 +1809,21 @@ export default function ClientHome() {
                     style={{ marginTop: '3px', cursor: 'pointer' }}
                   />
                   <label htmlFor="privacy-checkbox" style={{ fontSize: '0.78rem', color: 'var(--text-muted)', lineHeight: '1.4', cursor: 'pointer' }}>
-                    I agree to the privacy policy, and authorize Aparous to contact me via email/phone regarding my web build scope audit.
+                    I agree to the privacy policy and authorize Aparous to contact me regarding my project scope.
                   </label>
                 </div>
 
                 {submitStatus === 'error' && (
-                  <p style={{ color: '#ff4d4d', fontSize: '0.85rem', fontWeight: '500' }}>
+                  <p style={{ color: '#ef4444', fontSize: '0.85rem', fontWeight: '500' }}>
                     Transmission error. Could not connect to API server. Please retry.
                   </p>
                 )}
 
                 <div style={{ display: 'flex', gap: '15px', marginTop: '10px' }}>
-                  <button type="submit" disabled={isSubmitting} className="btn-primary shimmer-btn" style={{ flex: 1, justifyContent: 'center' }}>
+                  <button type="submit" disabled={isSubmitting} className="btn-primary" style={{ flex: 1, justifyContent: 'center' }}>
                     {isSubmitting ? 'Submitting Scope...' : 'Submit Project Scope'} <Send size={15} />
                   </button>
                 </div>
-                {isSubmitting && (
-                  <p style={{ color: 'var(--text-muted)', fontSize: '0.8rem', textAlign: 'center', marginTop: '5px' }}>
-                    Note: If the server is sleeping, spin-up can take up to 40 seconds. Thank you for your patience.
-                  </p>
-                )}
               </form>
             )}
           </div>
@@ -2027,204 +1831,61 @@ export default function ClientHome() {
       </section>
       </main>
 
-      {/* Free Website Audit Modal */}
-      {isAuditModalOpen && (
-        <div className="modal-overlay" onClick={() => setIsAuditModalOpen(false)}>
-          <div className="modal-content-container" style={{ maxWidth: '520px' }} onClick={(e) => e.stopPropagation()}>
-            <div style={{ padding: '40px', position: 'relative' }}>
-              
-              {/* Close Button */}
-              <button 
-                onClick={() => setIsAuditModalOpen(false)}
-                style={{ position: 'absolute', top: '25px', right: '25px', background: 'transparent', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', transition: 'color 0.2s' }}
-                onMouseEnter={e => e.target.style.color = '#fff'}
-                onMouseLeave={e => e.target.style.color = 'var(--text-muted)'}
-                aria-label="Close website audit form"
-              >
-                <X size={24} />
-              </button>
-
-              <div style={{ textAlign: 'center', marginBottom: '30px' }}>
-                <Cpu size={32} style={{ color: 'var(--accent-cyan)', marginBottom: '15px' }} />
-                <h3 style={{ fontSize: '1.8rem', fontFamily: 'var(--font-head)', fontWeight: '800', marginBottom: '10px', color: '#fff' }}>
-                  Free Website Audit
-                </h3>
-                <p style={{ color: 'var(--text-muted)', fontSize: '0.92rem', lineHeight: '1.5' }}>
-                  Submit your business website URL, and our heuristic analysis parser will score your technical performance, SEO headers, and WCAG accessibility indicators.
-                </p>
-              </div>
-
-              {auditStatus === 'success' ? (
-                <div style={{ textAlign: 'center', padding: '20px 0' }}>
-                  <CheckCircle size={48} style={{ color: '#00ff64', marginBottom: '15px' }} />
-                  <h4 style={{ fontSize: '1.2rem', fontWeight: '700', marginBottom: '8px' }}>Request Submitted!</h4>
-                  <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem', lineHeight: '1.5' }}>
-                    We have successfully captured your website parameters. Our team will review the score logs and email you the full audit details shortly.
-                  </p>
-                  <button onClick={() => setIsAuditModalOpen(false)} className="btn-primary" style={{ marginTop: '20px', width: '100%', justifyContent: 'center' }}>Close</button>
-                </div>
-              ) : (
-                <form onSubmit={handleAuditSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
-                  <div>
-                    <label htmlFor="audit-web" style={{ display: 'block', fontSize: '0.8rem', marginBottom: '5px', color: 'var(--text-bright)' }}>Website URL *</label>
-                    <input 
-                      id="audit-web"
-                      type="url" 
-                      required 
-                      value={auditForm.websiteUrl} 
-                      onChange={e => setAuditForm(f => ({ ...f, websiteUrl: e.target.value }))}
-                      className="glass-input" 
-                      placeholder="https://example.com"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="audit-biz" style={{ display: 'block', fontSize: '0.8rem', marginBottom: '5px', color: 'var(--text-bright)' }}>Business Name</label>
-                    <input 
-                      id="audit-biz"
-                      type="text" 
-                      value={auditForm.businessName} 
-                      onChange={e => setAuditForm(f => ({ ...f, businessName: e.target.value }))}
-                      className="glass-input" 
-                      placeholder="My Business LLC"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="audit-email" style={{ display: 'block', fontSize: '0.8rem', marginBottom: '5px', color: 'var(--text-bright)' }}>Email Address *</label>
-                    <input 
-                      id="audit-email"
-                      type="email" 
-                      required 
-                      value={auditForm.email} 
-                      onChange={e => setAuditForm(f => ({ ...f, email: e.target.value }))}
-                      className="glass-input" 
-                      placeholder="contact@mycompany.com"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="audit-phone" style={{ display: 'block', fontSize: '0.8rem', marginBottom: '5px', color: 'var(--text-bright)' }}>Phone Number</label>
-                    <input 
-                      id="audit-phone"
-                      type="tel" 
-                      value={auditForm.phone} 
-                      onChange={e => setAuditForm(f => ({ ...f, phone: e.target.value }))}
-                      className="glass-input" 
-                      placeholder="+1 (555) 000-0000"
-                    />
-                  </div>
-                  {auditStatus === 'error' && (
-                    <p style={{ color: '#ff3333', fontSize: '0.8rem', textAlign: 'center' }}>{auditErrorMsg}</p>
-                  )}
-                  <button type="submit" disabled={auditStatus === 'submitting'} className="btn-primary" style={{ width: '100%', justifyContent: 'center', marginTop: '10px' }}>
-                    {auditStatus === 'submitting' ? 'Analyzing Site Headers...' : 'Generate Heuristic Score'}
-                  </button>
-                </form>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
-
       {/* Footer */}
-      <hr className="section-divider" />
       <footer style={{
-        padding: '80px 8% 40px 8%',
-        background: 'rgba(5, 2, 12, 0.45)',
+        padding: '60px 8% 40px 8%',
+        background: '#f8fafc',
+        borderTop: '1px solid #e2e8f0',
         display: 'flex',
         flexDirection: 'column',
-        gap: '60px'
+        gap: '40px'
       }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '40px' }}>
           
           {/* Col 1: Brand details */}
           <div style={{ gridColumn: 'span 2' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '15px' }}>
-              <span className="text-gradient" style={{ fontFamily: 'var(--font-head)', fontSize: '1.5rem', fontWeight: '800' }}>APAROUS</span>
-              <span style={{ fontSize: '0.55rem', background: 'var(--accent-purple)', color: '#fff', padding: '2px 6px', borderRadius: '3px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Studio</span>
+              <span className="text-gradient" style={{ fontFamily: 'var(--font-head)', fontSize: '1.4rem', fontWeight: '800' }}>APAROUS</span>
+              <span style={{ fontSize: '0.55rem', background: 'var(--accent-purple)', color: '#fff', padding: '2px 6px', borderRadius: '3px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Solutions</span>
             </div>
-            <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem', lineHeight: '1.6', marginBottom: '25px', maxWidth: '280px' }}>
-              We build premium web platforms and cinematic visual content that optimize conversions, build corporate trust, and scale brands.
+            <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem', lineHeight: '1.6', maxWidth: '280px' }}>
+              We build premium websites and intelligent AI automations for modern brands.
             </p>
-            
-            {/* Newsletter input */}
-            <form onSubmit={(e) => { e.preventDefault(); setNewsletterStatus(true); setNewsletterEmail(''); setTimeout(() => setNewsletterStatus(false), 5000); }} style={{ display: 'flex', gap: '10px', maxWidth: '300px' }}>
-              <input
-                type="email"
-                required
-                placeholder="Join our newsletter..."
-                value={newsletterEmail}
-                onChange={(e) => setNewsletterEmail(e.target.value)}
-                style={{
-                  flex: 1,
-                  padding: '10px 14px',
-                  background: 'rgba(255, 255, 255, 0.02)',
-                  border: '1px solid var(--glass-border)',
-                  borderRadius: '6px',
-                  color: '#fff',
-                  fontSize: '0.82rem',
-                  outline: 'none'
-                }}
-              />
-              <button type="submit" className="btn-primary" style={{ padding: '8px 16px', fontSize: '0.8rem' }}>
-                Join
-              </button>
-            </form>
-            {newsletterStatus && (
-              <span style={{ display: 'block', color: 'var(--accent-cyan)', fontSize: '0.75rem', marginTop: '8px' }}>
-                ✓ Subscribed! Welcome to Aparous Insights.
-              </span>
-            )}
           </div>
 
           {/* Col 2: Services */}
           <div>
-            <h4 style={{ fontSize: '0.88rem', marginBottom: '20px', color: '#fff', textTransform: 'uppercase', letterSpacing: '1px', fontFamily: 'var(--font-head)', fontWeight: '700' }}>
+            <h4 style={{ fontSize: '0.85rem', marginBottom: '16px', color: '#0f172a', textTransform: 'uppercase', letterSpacing: '1px', fontFamily: 'var(--font-head)', fontWeight: '700' }}>
               Services
             </h4>
-            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '12px', fontSize: '0.85rem' }}>
-              <li><a href="#services" style={{ color: 'var(--text-normal)', textDecoration: 'none', transition: 'color 0.2s' }} onMouseEnter={e => e.target.style.color = '#fff'} onMouseLeave={e => e.target.style.color = 'var(--text-normal)'}>Premium Websites</a></li>
-              <li><a href="#services" style={{ color: 'var(--text-normal)', textDecoration: 'none', transition: 'color 0.2s' }} onMouseEnter={e => e.target.style.color = '#fff'} onMouseLeave={e => e.target.style.color = 'var(--text-normal)'}>Web Applications</a></li>
-              <li><a href="#services" style={{ color: 'var(--text-normal)', textDecoration: 'none', transition: 'color 0.2s' }} onMouseEnter={e => e.target.style.color = '#fff'} onMouseLeave={e => e.target.style.color = 'var(--text-normal)'}>Landing Pages</a></li>
-              <li><a href="#services" style={{ color: 'var(--text-normal)', textDecoration: 'none', transition: 'color 0.2s' }} onMouseEnter={e => e.target.style.color = '#fff'} onMouseLeave={e => e.target.style.color = 'var(--text-normal)'}>Video Editing</a></li>
-              <li><a href="#services" style={{ color: 'var(--text-normal)', textDecoration: 'none', transition: 'color 0.2s' }} onMouseEnter={e => e.target.style.color = '#fff'} onMouseLeave={e => e.target.style.color = 'var(--text-normal)'}>AI Automation</a></li>
+            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '0.85rem' }}>
+              <li><a href="#services" style={{ color: 'var(--text-normal)', textDecoration: 'none', transition: 'color 0.2s' }} onMouseEnter={e => e.target.style.color = '#0f172a'} onMouseLeave={e => e.target.style.color = 'var(--text-normal)'}>Premium Websites</a></li>
+              <li><a href="#services" style={{ color: 'var(--text-normal)', textDecoration: 'none', transition: 'color 0.2s' }} onMouseEnter={e => e.target.style.color = '#0f172a'} onMouseLeave={e => e.target.style.color = 'var(--text-normal)'}>AI Automations</a></li>
+              <li><a href="#services" style={{ color: 'var(--text-normal)', textDecoration: 'none', transition: 'color 0.2s' }} onMouseEnter={e => e.target.style.color = '#0f172a'} onMouseLeave={e => e.target.style.color = 'var(--text-normal)'}>UI/UX Design</a></li>
             </ul>
           </div>
 
           {/* Col 3: Company */}
           <div>
-            <h4 style={{ fontSize: '0.88rem', marginBottom: '20px', color: '#fff', textTransform: 'uppercase', letterSpacing: '1px', fontFamily: 'var(--font-head)', fontWeight: '700' }}>
+            <h4 style={{ fontSize: '0.85rem', marginBottom: '16px', color: '#0f172a', textTransform: 'uppercase', letterSpacing: '1px', fontFamily: 'var(--font-head)', fontWeight: '700' }}>
               Company
             </h4>
-            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '12px', fontSize: '0.85rem' }}>
-              <li><a href="#why-choose-us" style={{ color: 'var(--text-normal)', textDecoration: 'none', transition: 'color 0.2s' }} onMouseEnter={e => e.target.style.color = '#fff'} onMouseLeave={e => e.target.style.color = 'var(--text-normal)'}>Why Us</a></li>
-              <li><a href="#portfolio" style={{ color: 'var(--text-normal)', textDecoration: 'none', transition: 'color 0.2s' }} onMouseEnter={e => e.target.style.color = '#fff'} onMouseLeave={e => e.target.style.color = 'var(--text-normal)'}>Portfolio</a></li>
-              <li><a href="#testimonials" style={{ color: 'var(--text-normal)', textDecoration: 'none', transition: 'color 0.2s' }} onMouseEnter={e => e.target.style.color = '#fff'} onMouseLeave={e => e.target.style.color = 'var(--text-normal)'}>Testimonials</a></li>
-              <li><a href="#faq" style={{ color: 'var(--text-normal)', textDecoration: 'none', transition: 'color 0.2s' }} onMouseEnter={e => e.target.style.color = '#fff'} onMouseLeave={e => e.target.style.color = 'var(--text-normal)'}>FAQ</a></li>
+            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '0.85rem' }}>
+              <li><a href="#why-choose-us" style={{ color: 'var(--text-normal)', textDecoration: 'none', transition: 'color 0.2s' }} onMouseEnter={e => e.target.style.color = '#0f172a'} onMouseLeave={e => e.target.style.color = 'var(--text-normal)'}>Why Us</a></li>
+              <li><a href="#our-process" style={{ color: 'var(--text-normal)', textDecoration: 'none', transition: 'color 0.2s' }} onMouseEnter={e => e.target.style.color = '#0f172a'} onMouseLeave={e => e.target.style.color = 'var(--text-normal)'}>Process</a></li>
+              <li><a href="#portfolio" style={{ color: 'var(--text-normal)', textDecoration: 'none', transition: 'color 0.2s' }} onMouseEnter={e => e.target.style.color = '#0f172a'} onMouseLeave={e => e.target.style.color = 'var(--text-normal)'}>Portfolio</a></li>
+              <li><a href="#faq" style={{ color: 'var(--text-normal)', textDecoration: 'none', transition: 'color 0.2s' }} onMouseEnter={e => e.target.style.color = '#0f172a'} onMouseLeave={e => e.target.style.color = 'var(--text-normal)'}>FAQ</a></li>
             </ul>
           </div>
 
-          {/* Col 4: Resources */}
+          {/* Col 4: Legal */}
           <div>
-            <h4 style={{ fontSize: '0.88rem', marginBottom: '20px', color: '#fff', textTransform: 'uppercase', letterSpacing: '1px', fontFamily: 'var(--font-head)', fontWeight: '700' }}>
-              Resources
-            </h4>
-            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '12px', fontSize: '0.85rem' }}>
-              <li><span style={{ color: 'var(--text-normal)' }}>Brand Kit</span></li>
-              <li><span style={{ color: 'var(--text-normal)' }}>ROI Calculator</span></li>
-              <li><span style={{ color: 'var(--text-normal)' }}>MERN Boilerplate</span></li>
-              <li><span style={{ color: 'var(--text-normal)' }}>Design System</span></li>
-            </ul>
-          </div>
-
-          {/* Col 5: Legal */}
-          <div>
-            <h4 style={{ fontSize: '0.88rem', marginBottom: '20px', color: '#fff', textTransform: 'uppercase', letterSpacing: '1px', fontFamily: 'var(--font-head)', fontWeight: '700' }}>
+            <h4 style={{ fontSize: '0.85rem', marginBottom: '16px', color: '#0f172a', textTransform: 'uppercase', letterSpacing: '1px', fontFamily: 'var(--font-head)', fontWeight: '700' }}>
               Legal
             </h4>
-            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '12px', fontSize: '0.85rem' }}>
-              <li><button onClick={() => alert('Privacy Policy: Aparous does not share client contact information or data scope details.')} style={{ background: 'transparent', border: 'none', padding: 0, color: 'var(--text-normal)', cursor: 'pointer', fontSize: '0.85rem', textAlign: 'left', transition: 'color 0.2s' }} onMouseEnter={e => e.target.style.color = '#fff'} onMouseLeave={e => e.target.style.color = 'var(--text-normal)'}>Privacy Policy</button></li>
-              <li><button onClick={() => alert('Terms of Service: Audit scapes are delivered in 24 hours. Code deployment includes 30 days support retainers.')} style={{ background: 'transparent', border: 'none', padding: 0, color: 'var(--text-normal)', cursor: 'pointer', fontSize: '0.85rem', textAlign: 'left', transition: 'color 0.2s' }} onMouseEnter={e => e.target.style.color = '#fff'} onMouseLeave={e => e.target.style.color = 'var(--text-normal)'}>Terms & Conditions</button></li>
-              <li><button onClick={() => alert('Refund Policy: Custom engineering sprints include detailed milestones. Completed milestone builds are non-refundable.')} style={{ background: 'transparent', border: 'none', padding: 0, color: 'var(--text-normal)', cursor: 'pointer', fontSize: '0.85rem', textAlign: 'left', transition: 'color 0.2s' }} onMouseEnter={e => e.target.style.color = '#fff'} onMouseLeave={e => e.target.style.color = 'var(--text-normal)'}>Refund Policy</button></li>
-              <li><button onClick={() => alert('Cookie Policy: We use local cookies for web analytics visits mapping and admin authorization states.')} style={{ background: 'transparent', border: 'none', padding: 0, color: 'var(--text-normal)', cursor: 'pointer', fontSize: '0.85rem', textAlign: 'left', transition: 'color 0.2s' }} onMouseEnter={e => e.target.style.color = '#fff'} onMouseLeave={e => e.target.style.color = 'var(--text-normal)'}>Cookie Policy</button></li>
+            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '0.85rem' }}>
+              <li><button onClick={() => alert('Privacy Policy: Aparous does not share client contact information or data scope details.')} style={{ background: 'transparent', border: 'none', padding: 0, color: 'var(--text-normal)', cursor: 'pointer', fontSize: '0.85rem', textAlign: 'left', transition: 'color 0.2s' }} onMouseEnter={e => e.target.style.color = '#0f172a'} onMouseLeave={e => e.target.style.color = 'var(--text-normal)'}>Privacy Policy</button></li>
+              <li><button onClick={() => alert('Terms of Service: Project scopes are delivered within agreed milestones.')} style={{ background: 'transparent', border: 'none', padding: 0, color: 'var(--text-normal)', cursor: 'pointer', fontSize: '0.85rem', textAlign: 'left', transition: 'color 0.2s' }} onMouseEnter={e => e.target.style.color = '#0f172a'} onMouseLeave={e => e.target.style.color = 'var(--text-normal)'}>Terms & Conditions</button></li>
             </ul>
           </div>
         </div>
@@ -2234,13 +1895,13 @@ export default function ClientHome() {
           justifyContent: 'space-between',
           alignItems: 'center',
           flexWrap: 'wrap',
-          gap: '20px',
-          paddingTop: '35px',
-          borderTop: '1px solid rgba(255, 255, 255, 0.04)',
+          gap: '15px',
+          paddingTop: '25px',
+          borderTop: '1px solid #e2e8f0',
           fontSize: '0.8rem',
           color: 'var(--text-muted)'
         }}>
-          <span>© {new Date().getFullYear()} Aparous. All rights reserved.</span>
+          <span>© {new Date().getFullYear()} Aparous Solutions. All rights reserved.</span>
         </div>
       </footer>
 
@@ -2296,48 +1957,48 @@ export default function ClientHome() {
               alignItems: 'flex-end',
               padding: '40px'
             }}>
-              {/* Image dark overlay gradient */}
-              <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, background: 'linear-gradient(to bottom, rgba(5,2,12,0.2) 0%, rgba(5,2,12,0.9) 100%)', zIndex: 1 }} />
+              {/* Image overlay gradient */}
+              <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, background: 'linear-gradient(to bottom, rgba(15,23,42,0.1) 0%, rgba(15,23,42,0.75) 100%)', zIndex: 1 }} />
               
               {/* Close Button */}
               <button 
                 onClick={() => setIsProjectModalOpen(false)}
-                style={{ position: 'absolute', top: '25px', right: '25px', background: 'rgba(5,2,12,0.6)', border: '1px solid var(--glass-border)', color: '#fff', borderRadius: '50%', width: '36px', height: '36px', display: 'flex', alignItems: 'center', justify: 'center', cursor: 'pointer', zIndex: 10, transition: 'all 0.2s' }}
-                onMouseEnter={e => e.target.style.borderColor = 'var(--accent-cyan)'}
-                onMouseLeave={e => e.target.style.borderColor = 'var(--glass-border)'}
+                style={{ position: 'absolute', top: '25px', right: '25px', background: 'rgba(255,255,255,0.9)', border: '1px solid #e2e8f0', color: '#0f172a', borderRadius: '50%', width: '36px', height: '36px', display: 'flex', alignItems: 'center', justify: 'center', cursor: 'pointer', zIndex: 10, transition: 'all 0.2s' }}
+                onMouseEnter={e => e.target.style.borderColor = 'var(--accent-purple)'}
+                onMouseLeave={e => e.target.style.borderColor = '#e2e8f0'}
               >
                 <X size={20} />
               </button>
 
               <div style={{ position: 'relative', zIndex: 2 }}>
-                <span style={{ fontSize: '0.8rem', color: 'var(--accent-cyan)', textTransform: 'uppercase', letterSpacing: '2px', fontWeight: '700', display: 'block', marginBottom: '8px' }}>
+                <span style={{ fontSize: '0.8rem', color: '#ffffff', textTransform: 'uppercase', letterSpacing: '2px', fontWeight: '700', display: 'block', marginBottom: '8px' }}>
                   {selectedProject.category}
                 </span>
-                <h2 style={{ fontSize: '2.5rem', fontFamily: 'var(--font-head)', fontWeight: '800', color: '#fff', marginBottom: '5px' }}>
+                <h2 style={{ fontSize: '2.5rem', fontFamily: 'var(--font-head)', fontWeight: '800', color: '#ffffff', marginBottom: '5px' }}>
                   {selectedProject.title}
                 </h2>
-                <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
+                <span style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.85)' }}>
                   Client: <strong>{selectedProject.client || 'Aparous Partner'}</strong>
                 </span>
               </div>
             </div>
 
             {/* Modal Body Contents */}
-            <div style={{ padding: '40px', display: 'flex', flexDirection: 'column', gap: '35px' }}>
+            <div style={{ padding: '40px', display: 'flex', flexDirection: 'column', gap: '35px', background: '#ffffff' }}>
               
               {/* Key Metrics row */}
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '20px' }}>
-                <div className="glass-panel" style={{ padding: '20px', background: 'rgba(0, 242, 254, 0.03)', borderColor: 'rgba(0, 242, 254, 0.15)' }}>
+                <div className="glass-panel" style={{ padding: '20px', background: '#f8fafc', borderColor: '#e2e8f0' }}>
                   <span style={{ display: 'block', fontSize: '0.72rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '5px' }}>Business Outcome</span>
                   <span className="text-gradient" style={{ fontSize: '1.25rem', fontWeight: '800', fontFamily: 'var(--font-head)' }}>{selectedProject.impact || 'N/A'}</span>
                 </div>
-                <div className="glass-panel" style={{ padding: '20px', background: 'rgba(161, 79, 255, 0.03)', borderColor: 'rgba(161, 79, 255, 0.15)' }}>
+                <div className="glass-panel" style={{ padding: '20px', background: '#f8fafc', borderColor: '#e2e8f0' }}>
                   <span style={{ display: 'block', fontSize: '0.72rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '5px' }}>Dev Timeline</span>
-                  <span style={{ fontSize: '1.15rem', color: '#fff', fontWeight: '700' }}>3-4 Weeks</span>
+                  <span style={{ fontSize: '1.15rem', color: '#0f172a', fontWeight: '700' }}>3-4 Weeks</span>
                 </div>
-                <div className="glass-panel" style={{ padding: '20px', background: 'rgba(255, 0, 160, 0.03)', borderColor: 'rgba(255, 0, 160, 0.15)' }}>
+                <div className="glass-panel" style={{ padding: '20px', background: '#f8fafc', borderColor: '#e2e8f0' }}>
                   <span style={{ display: 'block', fontSize: '0.72rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '5px' }}>Target Audience</span>
-                  <span style={{ fontSize: '1.15rem', color: '#fff', fontWeight: '700' }}>B2B / Consumer</span>
+                  <span style={{ fontSize: '1.15rem', color: '#0f172a', fontWeight: '700' }}>B2B / Consumer</span>
                 </div>
               </div>
 
@@ -2347,21 +2008,21 @@ export default function ClientHome() {
                 {/* Left: Overview, Problem & Solution */}
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '25px' }}>
                   <div>
-                    <h4 style={{ fontSize: '1.1rem', fontFamily: 'var(--font-head)', fontWeight: '700', color: '#fff', marginBottom: '10px' }}>Project Overview</h4>
+                    <h4 style={{ fontSize: '1.1rem', fontFamily: 'var(--font-head)', fontWeight: '700', color: '#0f172a', marginBottom: '10px' }}>Project Overview</h4>
                     <p style={{ color: 'var(--text-normal)', fontSize: '0.94rem', lineHeight: '1.75' }}>
                       {selectedProject.description}
                     </p>
                   </div>
                   <div>
-                    <h4 style={{ fontSize: '1.1rem', fontFamily: 'var(--font-head)', fontWeight: '700', color: '#fff', marginBottom: '10px' }}>The Problem</h4>
+                    <h4 style={{ fontSize: '1.1rem', fontFamily: 'var(--font-head)', fontWeight: '700', color: '#0f172a', marginBottom: '10px' }}>The Problem</h4>
                     <p style={{ color: 'var(--text-normal)', fontSize: '0.94rem', lineHeight: '1.75' }}>
                       The client was experiencing drop-offs on their legacy booking funnel. Latent asset load speeds and non-intuitive layouts resulted in lost prospects and high user acquisition friction.
                     </p>
                   </div>
                   <div>
-                    <h4 style={{ fontSize: '1.1rem', fontFamily: 'var(--font-head)', fontWeight: '700', color: '#fff', marginBottom: '10px' }}>The Solution</h4>
+                    <h4 style={{ fontSize: '1.1rem', fontFamily: 'var(--font-head)', fontWeight: '700', color: '#0f172a', marginBottom: '10px' }}>The Solution</h4>
                     <p style={{ color: 'var(--text-normal)', fontSize: '0.94rem', lineHeight: '1.75' }}>
-                      We engineered a fluid React front-end utilizing radial spotlight layers and custom Three.js canvas widget animations. We simplified the scoping form, added instant connection metrics loaders, and established async notifications qualifying leads instantly.
+                      We engineered a fluid React front-end utilizing responsive components and clean UI design patterns. We simplified the scoping form, added instant feedback loaders, and established reliable API integrations.
                     </p>
                   </div>
                 </div>
@@ -2369,16 +2030,17 @@ export default function ClientHome() {
                 {/* Right: Stack, Features & Deliverables */}
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '25px' }}>
                   <div>
-                    <h4 style={{ fontSize: '1rem', fontFamily: 'var(--font-head)', fontWeight: '700', color: '#fff', marginBottom: '12px' }}>Technology Stack</h4>
+                    <h4 style={{ fontSize: '1rem', fontFamily: 'var(--font-head)', fontWeight: '700', color: '#0f172a', marginBottom: '12px' }}>Technology Stack</h4>
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
                       {(selectedProject.tags && (Array.isArray(selectedProject.tags) ? selectedProject.tags : typeof selectedProject.tags === 'string' ? selectedProject.tags.split(',') : [])).map((tag, idx) => (
                         <span key={`tag-${idx}`} style={{
-                          background: 'rgba(0, 242, 254, 0.05)',
-                          border: '1px solid rgba(0, 242, 254, 0.15)',
+                          background: 'rgba(124, 58, 237, 0.06)',
+                          border: '1px solid #e2e8f0',
                           borderRadius: '4px',
                           padding: '4px 10px',
                           fontSize: '0.78rem',
-                          color: '#fff'
+                          color: '#0f172a',
+                          fontWeight: '500'
                         }}>
                           {tag.trim()}
                         </span>
@@ -2387,12 +2049,12 @@ export default function ClientHome() {
                   </div>
 
                   <div>
-                    <h4 style={{ fontSize: '1rem', fontFamily: 'var(--font-head)', fontWeight: '700', color: '#fff', marginBottom: '12px' }}>Key Deliverables</h4>
+                    <h4 style={{ fontSize: '1rem', fontFamily: 'var(--font-head)', fontWeight: '700', color: '#0f172a', marginBottom: '12px' }}>Key Deliverables</h4>
                     <ul style={{ paddingLeft: '18px', color: 'var(--text-normal)', fontSize: '0.88rem', display: 'flex', flexDirection: 'column', gap: '8px', lineHeight: '1.5' }}>
-                      <li>Bespoke Interactive 3D Canvas Widget</li>
+                      <li>Custom Fluid Responsive Interface</li>
                       <li>High-Speed React Router Front-end</li>
-                      <li>Async Email & Telegram Notifications</li>
-                      <li>Mongoose / MongoDB Analytics Suite</li>
+                      <li>API Lead Qualification Integrations</li>
+                      <li>SEO Optimization Suite</li>
                       <li>Mobile Layout Optimization Audit</li>
                     </ul>
                   </div>
@@ -2405,7 +2067,7 @@ export default function ClientHome() {
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-                borderTop: '1px solid rgba(255, 255, 255, 0.05)',
+                borderTop: '1px solid #e2e8f0',
                 paddingTop: '30px',
                 marginTop: '15px'
               }}>
@@ -2413,18 +2075,18 @@ export default function ClientHome() {
                   <button 
                     type="button"
                     onClick={() => handlePrevProject(selectedProject._id)}
-                    style={{ background: 'transparent', border: '1px solid var(--glass-border)', color: '#fff', borderRadius: '4px', padding: '8px 16px', fontSize: '0.82rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px', transition: 'all 0.2s', outline: 'none' }}
-                    onMouseEnter={e => e.target.style.borderColor = 'var(--accent-cyan)'}
-                    onMouseLeave={e => e.target.style.borderColor = 'var(--glass-border)'}
+                    style={{ background: '#ffffff', border: '1px solid #e2e8f0', color: '#0f172a', borderRadius: '4px', padding: '8px 16px', fontSize: '0.82rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px', transition: 'all 0.2s', outline: 'none' }}
+                    onMouseEnter={e => e.target.style.borderColor = 'var(--accent-purple)'}
+                    onMouseLeave={e => e.target.style.borderColor = '#e2e8f0'}
                   >
                     <ChevronLeft size={14} /> Previous
                   </button>
                   <button 
                     type="button"
                     onClick={() => handleNextProject(selectedProject._id)}
-                    style={{ background: 'transparent', border: '1px solid var(--glass-border)', color: '#fff', borderRadius: '4px', padding: '8px 16px', fontSize: '0.82rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px', transition: 'all 0.2s', outline: 'none' }}
-                    onMouseEnter={e => e.target.style.borderColor = 'var(--accent-cyan)'}
-                    onMouseLeave={e => e.target.style.borderColor = 'var(--glass-border)'}
+                    style={{ background: '#ffffff', border: '1px solid #e2e8f0', color: '#0f172a', borderRadius: '4px', padding: '8px 16px', fontSize: '0.82rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px', transition: 'all 0.2s', outline: 'none' }}
+                    onMouseEnter={e => e.target.style.borderColor = 'var(--accent-purple)'}
+                    onMouseLeave={e => e.target.style.borderColor = '#e2e8f0'}
                   >
                     Next <ChevronRight size={14} />
                   </button>
@@ -2434,7 +2096,7 @@ export default function ClientHome() {
                   href={selectedProject.link || '#'} 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="btn-primary shimmer-btn"
+                  className="btn-primary"
                   style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '10px 24px', fontSize: '0.85rem' }}
                 >
                   Visit Website <ExternalLink size={13} />

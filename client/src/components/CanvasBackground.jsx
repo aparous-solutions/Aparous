@@ -223,38 +223,27 @@ export default function CanvasBackground() {
       height: '100%',
       zIndex: -2,
       pointerEvents: 'none',
-      background: '#05020c',
+      background: '#ffffff',
     }}>
-      {/* Ambient glow centers */}
+      {/* Soft light ambient glow centers */}
       <div style={{
         position: 'absolute',
-        top: '15%',
-        left: '10%',
-        width: '500px',
-        height: '500px',
-        background: 'radial-gradient(circle, rgba(161, 79, 255, 0.08) 0%, transparent 70%)',
-        filter: 'blur(80px)',
+        top: '10%',
+        left: '15%',
+        width: '600px',
+        height: '600px',
+        background: 'radial-gradient(circle, rgba(124, 58, 237, 0.04) 0%, transparent 70%)',
+        filter: 'blur(90px)',
         pointerEvents: 'none'
       }} />
       <div style={{
         position: 'absolute',
         bottom: '15%',
-        right: '10%',
+        right: '15%',
         width: '600px',
         height: '600px',
-        background: 'radial-gradient(circle, rgba(0, 242, 254, 0.06) 0%, transparent 70%)',
+        background: 'radial-gradient(circle, rgba(2, 132, 199, 0.04) 0%, transparent 70%)',
         filter: 'blur(100px)',
-        pointerEvents: 'none'
-      }} />
-      <div style={{
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        width: '800px',
-        height: '800px',
-        background: 'radial-gradient(circle, rgba(111, 38, 217, 0.04) 0%, transparent 80%)',
-        filter: 'blur(120px)',
         pointerEvents: 'none'
       }} />
     </div>
