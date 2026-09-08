@@ -199,9 +199,7 @@ export default function ClientHome() {
   
   // 3D Cube mouse state
   const heroRef = useRef(null);
-  const [cubeTransform, setCubeTransform] = useState({});
-  const [gridTransform, setGridTransform] = useState({});
-  const [isHoveredHero, setIsHoveredHero] = useState(false);
+  const cubeRef = useRef(null);
 
   const [formData, setFormData] = useState({
     name: '',
@@ -428,84 +426,36 @@ export default function ClientHome() {
   ];
 
   useEffect(() => {
+    let ticking = false;
+
     const handleScroll = () => {
-      // 1. Process Timeline Progress
-      const el = timelineRef.current;
-      if (el) {
-        const rect = el.getBoundingClientRect();
-        const windowHeight = window.innerHeight;
-        const elementHeight = rect.height;
-        const elementTop = rect.top;
-        const start = windowHeight / 2;
-        const currentScroll = start - elementTop;
-        let progress = 0;
-        if (currentScroll > 0) {
-          progress = Math.min(currentScroll / (elementHeight - 120), 1);
-        }
-        
-        const newProgress = Math.round(progress * 100);
-        setTimelineProgress(prev => {
-          if (Math.abs(prev - newProgress) >= 1 || newProgress === 0 || newProgress === 100) {
-            return newProgress;
-          }
-          return prev;
-        });
-      }
-
-      // 2. Cinematic Storytelling Scroll Calculation
-      const storyEl = storyRef.current;
-      if (storyEl) {
-        const storyRect = storyEl.getBoundingClientRect();
-        const storyTop = storyRect.top;
-        const storyHeight = storyRect.height;
-        const windowHeight = window.innerHeight;
-        const scrollDistance = -storyTop;
-        const maxScroll = storyHeight - windowHeight;
-        let p = 0;
-        if (scrollDistance > 0 && maxScroll > 0) {
-          p = Math.min(scrollDistance / maxScroll, 1);
-        }
-        
-        const step = Math.min(Math.floor(p * 3), 2);
-        setStoryStep(prev => {
-          if (prev !== step) return step;
-          return prev;
-        });
-      }
-
-      // 3. Hero Parallax scroll feedback
-      const scrollY = window.scrollY;
-      if (scrollY < window.innerHeight) {
-        const scale = Math.max(1 - (scrollY / window.innerHeight) * 0.12, 0.88);
-        const rotate = (scrollY / window.innerHeight) * 35;
-        
-        setHeroScrollScale(prev => {
-          if (Math.abs(prev - scale) >= 0.015 || scale === 0.88 || scale === 1) {
-            return parseFloat(scale.toFixed(3));
-          }
-          return prev;
-        });
-        
-        setHeroScrollRotate(prev => {
-          if (Math.abs(prev - rotate) >= 1.5 || rotate === 0 || rotate === 35) {
-            return Math.round(rotate);
-          }
-          return prev;
-        });
-
-        if (!isHoveredHeroRef.current) {
-          const gridRotX = 70 + (scrollY / window.innerHeight) * 12;
-          const newTransform = `perspective(600px) rotateX(${gridRotX.toFixed(1)}deg) translateZ(-120px)`;
-          setGridTransform(prev => {
-            if (prev.transform !== newTransform) {
-              return {
-                transform: newTransform,
-                transition: 'transform 0.1s ease-out'
-              };
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          // Process Timeline Progress
+          const el = timelineRef.current;
+          if (el) {
+            const rect = el.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+            const elementHeight = rect.height;
+            const elementTop = rect.top;
+            const start = windowHeight / 2;
+            const currentScroll = start - elementTop;
+            let progress = 0;
+            if (currentScroll > 0) {
+              progress = Math.min(currentScroll / (elementHeight - 120), 1);
             }
-            return prev;
-          });
-        }
+            
+            const newProgress = Math.round(progress * 100);
+            setTimelineProgress(prev => {
+              if (Math.abs(prev - newProgress) >= 3 || newProgress === 0 || newProgress === 100) {
+                return newProgress;
+              }
+              return prev;
+            });
+          }
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
@@ -617,37 +567,22 @@ export default function ClientHome() {
   const isHoveredHeroRef = useRef(false);
 
   const handleHeroMouseMove = (e) => {
-    if (!heroRef.current) return;
+    if (!heroRef.current || !cubeRef.current) return;
     const rect = heroRef.current.getBoundingClientRect();
-    // Mouse coords relative to Hero section center
     const x = e.clientX - rect.left - rect.width / 2;
     const y = e.clientY - rect.top - rect.height / 2;
     
-    // Rotate cube by up to 55 degrees based on mouse offset
-    const rotX = -(y / rect.height) * 55;
-    const rotY = (x / rect.width) * 55;
+    const rotX = -(y / rect.height) * 45;
+    const rotY = (x / rect.width) * 45;
     
-    setCubeTransform({
-      transform: `rotateX(${rotX.toFixed(1)}deg) rotateY(${rotY.toFixed(1)}deg)`,
-      animation: 'none'
-    });
-
-    // Rotate/tilt grid floor overlay in parallax (rotateX base is 70deg)
-    const gridRotX = 70 - (y / rect.height) * 15;
-    const gridRotY = (x / rect.width) * 15;
-    setGridTransform({
-      transform: `perspective(600px) rotateX(${gridRotX.toFixed(1)}deg) rotateY(${gridRotY.toFixed(1)}deg) translateZ(-120px)`
-    });
-
-    setIsHoveredHero(true);
-    isHoveredHeroRef.current = true;
+    cubeRef.current.style.transform = `rotateX(${rotX.toFixed(1)}deg) rotateY(${rotY.toFixed(1)}deg)`;
+    cubeRef.current.style.animation = 'none';
   };
 
   const handleHeroMouseLeave = () => {
-    setCubeTransform({});
-    setGridTransform({});
-    setIsHoveredHero(false);
-    isHoveredHeroRef.current = false;
+    if (!cubeRef.current) return;
+    cubeRef.current.style.transform = '';
+    cubeRef.current.style.animation = 'spinCube 20s infinite linear';
   };
 
   const handleInputChange = (e) => {
@@ -947,8 +882,8 @@ export default function ClientHome() {
               transition: 'transform 0.1s ease-out'
             }}>
               <div 
+                ref={cubeRef}
                 className="cube"
-                style={cubeTransform}
               >
                 {/* 6 Cube Faces */}
                 <div className="cube-face face-front">
@@ -1050,7 +985,7 @@ export default function ClientHome() {
       </div>
 
       {/* Services Section (MAX 3 CORE CAPABILITIES) */}
-      <section id="services" className="scroll-reveal" style={{ padding: '100px 8%', background: '#f8fafc', borderTop: '1px solid #e2e8f0', borderBottom: '1px solid #e2e8f0' }}>
+      <section id="services" className="scroll-reveal" style={{ padding: '100px 8%', background: '#ffffff', borderTop: '1px solid #e2e8f0', borderBottom: '1px solid #e2e8f0' }}>
         <div style={{ textAlign: 'center', marginBottom: '60px' }}>
           <span style={{ fontSize: '0.8rem', color: 'var(--accent-purple)', textTransform: 'uppercase', letterSpacing: '2px', fontWeight: '700', display: 'block', marginBottom: '10px' }}>
             Core Capabilities
@@ -1222,58 +1157,57 @@ export default function ClientHome() {
         </div>
       </section>
 
-      {/* Our Process Section (3 MINIMAL STEPS) */}
-      <section id="our-process" className="scroll-reveal" style={{ padding: '100px 8%', background: '#f8fafc', borderTop: '1px solid #e2e8f0', borderBottom: '1px solid #e2e8f0' }}>
+      {/* Our Process Section (Interactive Vertical Timeline) */}
+      <section id="our-process" className="scroll-reveal" style={{ padding: '100px 8%', background: '#ffffff', borderTop: '1px solid #e2e8f0', borderBottom: '1px solid #e2e8f0' }}>
         <div style={{ textAlign: 'center', marginBottom: '60px' }}>
           <span style={{ fontSize: '0.8rem', color: 'var(--accent-purple)', textTransform: 'uppercase', letterSpacing: '2px', fontWeight: '700', display: 'block', marginBottom: '10px' }}>
-            Simple Workflow
+            Structured Roadmap
           </span>
           <h2 style={{ fontSize: '2.5rem', marginBottom: '15px', fontFamily: 'var(--font-head)', fontWeight: '800', color: '#0f172a' }}>
-            <CinematicTextReveal text="Our 3-Step Process" />
+            <CinematicTextReveal text="Our Process" />
           </h2>
-          <p style={{ color: 'var(--text-muted)', maxWidth: '550px', margin: '0 auto', fontSize: '1.05rem' }}>
-            A transparent roadmap taking your project from concept to live production.
+          <p style={{ color: 'var(--text-muted)', maxWidth: '600px', margin: '0 auto', fontSize: '1.05rem' }}>
+            A transparent, 7-step collaborative roadmap taking your vision from strategy to high-performing deployment.
           </p>
         </div>
 
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-          gap: '30px',
-          maxWidth: '1200px',
-          margin: '0 auto'
-        }}>
+        <div ref={timelineRef} className="process-timeline">
+          {/* Scroll progress glowing bar */}
+          <div className="timeline-progress-line" style={{ height: `${timelineProgress}%` }} />
+
           {[
-            { num: "01", title: "Discovery & Scope", desc: "A 30-minute scoping call to map out business goals, technical requirements, and target delivery timeline." },
-            { num: "02", title: "Design & Build", desc: "Custom UI/UX design and clean, modular engineering with continuous progress updates." },
-            { num: "03", title: "Launch & Scale", desc: "Rigorous QA testing, seamless production deployment, SSL setup, and post-launch support." }
-          ].map((step, idx) => (
-            <div key={idx} className="glass-panel scroll-reveal" style={{
-              padding: '35px 30px',
-              background: '#ffffff',
-              border: '1px solid #e2e8f0',
-              borderRadius: '16px',
-              boxShadow: '0 4px 15px rgba(0, 0, 0, 0.03)',
-              position: 'relative'
-            }}>
-              <span style={{
-                fontSize: '2rem',
-                fontWeight: '900',
-                fontFamily: 'var(--font-head)',
-                color: 'var(--accent-purple)',
-                display: 'block',
-                marginBottom: '15px'
-              }}>
-                {step.num}
-              </span>
-              <h3 style={{ fontSize: '1.3rem', marginBottom: '10px', fontFamily: 'var(--font-head)', fontWeight: '700', color: '#0f172a' }}>
-                {step.title}
-              </h3>
-              <p style={{ color: 'var(--text-normal)', fontSize: '0.92rem', lineHeight: '1.6' }}>
-                {step.desc}
-              </p>
-            </div>
-          ))}
+            { num: "01", title: "Discovery Call", desc: "A 30-minute scoping workshop where we dissect your business objectives, conversion bottlenecks, and project timeline requirements." },
+            { num: "02", title: "Requirement Analysis", desc: "We draft a comprehensive features spec worksheet, outline backend endpoints, and align on target KPIs." },
+            { num: "03", title: "UI/UX Planning", desc: "We construct high-fidelity interactive wireframes outlining animations and responsive styling, giving you a clear preview before code begins." },
+            { num: "04", title: "Development Phase", desc: "We build your platform using modular React engines, semantic code, custom animations, and clean server routes." },
+            { num: "05", title: "Testing & QA", desc: "Rigorous diagnostic audits covering responsive layouts, load times, database security, and form validations." },
+            { num: "06", title: "Deployment Launch", desc: "Deploying your site to robust cloud hosting, setting up domain names, configuring SSL parameters, and verifying emails." },
+            { num: "07", title: "Support & Maintenance", desc: "30 days of hyper-care followed by retainers covering feature updates, SEO audits, and server optimization calls." }
+          ].map((step, idx) => {
+            const isActive = timelineProgress >= ((idx / 6) * 100) - 5;
+            return (
+              <div key={idx} className={`timeline-item ${isActive ? 'active' : ''} scroll-reveal`}>
+                <div className="timeline-dot" />
+                <Tilt3D 
+                  className="glass-panel timeline-content-card" 
+                  style={{
+                    background: '#ffffff',
+                    border: isActive ? '1px solid var(--accent-purple)' : '1px solid #e2e8f0',
+                    boxShadow: isActive ? '0 8px 30px rgba(124, 58, 237, 0.1)' : '0 4px 15px rgba(0, 0, 0, 0.03)',
+                    cursor: 'pointer'
+                  }}
+                >
+                  <div className="timeline-number">{step.num}</div>
+                  <h3 style={{ fontSize: '1.3rem', marginBottom: '10px', fontFamily: 'var(--font-head)', fontWeight: '700', color: '#0f172a' }}>
+                    {step.title}
+                  </h3>
+                  <p style={{ color: 'var(--text-normal)', fontSize: '0.9rem', lineHeight: '1.6' }}>
+                    {step.desc}
+                  </p>
+                </Tilt3D>
+              </div>
+            );
+          })}
         </div>
       </section>
 
@@ -1324,7 +1258,7 @@ export default function ClientHome() {
 
 
       {/* Portfolio Section */}
-      <section id="portfolio" className="scroll-reveal" style={{ padding: '100px 8%', background: '#f8fafc', borderTop: '1px solid #e2e8f0', borderBottom: '1px solid #e2e8f0' }}>
+      <section id="portfolio" className="scroll-reveal" style={{ padding: '100px 8%', background: '#ffffff', borderTop: '1px solid #e2e8f0', borderBottom: '1px solid #e2e8f0' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '60px' }}>
           <div>
             <span style={{ fontSize: '0.8rem', color: 'var(--accent-purple)', textTransform: 'uppercase', letterSpacing: '2px', fontWeight: '700', display: 'block', marginBottom: '10px' }}>
@@ -1434,7 +1368,7 @@ export default function ClientHome() {
       )}
 
       {/* Client Feedback Section */}
-      <section id="feedback" className="scroll-reveal" style={{ padding: '100px 8%', background: '#f8fafc', borderTop: '1px solid #e2e8f0', borderBottom: '1px solid #e2e8f0' }}>
+      <section id="feedback" className="scroll-reveal" style={{ padding: '100px 8%', background: '#ffffff', borderTop: '1px solid #e2e8f0', borderBottom: '1px solid #e2e8f0' }}>
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
@@ -1686,7 +1620,7 @@ export default function ClientHome() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="scroll-reveal" style={{ padding: '100px 8%', background: '#f8fafc', borderTop: '1px solid #e2e8f0' }}>
+      <section id="contact" className="scroll-reveal" style={{ padding: '100px 8%', background: '#ffffff', borderTop: '1px solid #e2e8f0' }}>
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
@@ -1834,7 +1768,7 @@ export default function ClientHome() {
       {/* Footer */}
       <footer style={{
         padding: '60px 8% 40px 8%',
-        background: '#f8fafc',
+        background: '#ffffff',
         borderTop: '1px solid #e2e8f0',
         display: 'flex',
         flexDirection: 'column',
