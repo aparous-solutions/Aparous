@@ -293,7 +293,7 @@ export default function ClientHome() {
     }
 
     let orderData = null;
-    let keyId = import.meta.env.VITE_RAZORPAY_KEY_ID || 'rzp_test_Tb5vtcaDHRVpEc';
+    let keyId = import.meta.env.VITE_RAZORPAY_KEY_ID || 'rzp_live_Tb62UMbnjoUyts';
 
     try {
       // Step 1: Create Order on Backend

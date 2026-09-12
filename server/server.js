@@ -904,8 +904,8 @@ app.post('/api/admin/leads', adminAuth, async (req, res) => {
 // RAZORPAY PAYMENT GATEWAY ENDPOINTS
 // ----------------------------------------------------
 const getRazorpayInstance = () => {
-  const keyId = process.env.RAZORPAY_KEY_ID || 'rzp_test_Tb5vtcaDHRVpEc';
-  const keySecret = process.env.RAZORPAY_KEY_SECRET || 'vaFCjOjpwDI4keLsGhpN4HAz';
+  const keyId = process.env.RAZORPAY_KEY_ID || 'rzp_live_Tb62UMbnjoUyts';
+  const keySecret = process.env.RAZORPAY_KEY_SECRET || 'A4ibn6ZKKUP8HebprUoAvCPQ';
   return new Razorpay({ key_id: keyId, key_secret: keySecret });
 };
 
@@ -928,7 +928,7 @@ const handleCreateOrder = async (req, res) => {
       return res.status(400).json({ error: 'Minimum amount must be at least 100 paise' });
     }
 
-    const keyId = process.env.RAZORPAY_KEY_ID || 'rzp_test_Tb5vtcaDHRVpEc';
+    const keyId = process.env.RAZORPAY_KEY_ID || 'rzp_live_Tb62UMbnjoUyts';
     const instance = getRazorpayInstance();
     const options = {
       amount: amountInPaise,
@@ -966,7 +966,7 @@ const handleVerifyPayment = async (req, res) => {
       return res.status(400).json({ success: false, error: 'Missing required fields: razorpay_order_id, razorpay_payment_id, and razorpay_signature are required' });
     }
 
-    const secret = process.env.RAZORPAY_KEY_SECRET || 'vaFCjOjpwDI4keLsGhpN4HAz';
+    const secret = process.env.RAZORPAY_KEY_SECRET || 'A4ibn6ZKKUP8HebprUoAvCPQ';
     const hmac = crypto.createHmac('sha256', secret);
     hmac.update(`${razorpay_order_id}|${razorpay_payment_id}`);
     const generated_signature = hmac.digest('hex');
