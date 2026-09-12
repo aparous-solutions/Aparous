@@ -748,42 +748,7 @@ export default function ClientHome() {
           gap: '40px'
         }}
       >
-        {/* Full Screen Width Video Banner */}
-        <div className="cinematic-reveal" style={{
-          width: '100%',
-          maxWidth: '1200px',
-          aspectRatio: '21/9',
-          borderRadius: '16px',
-          overflow: 'hidden',
-          border: '1px solid #e2e8f0',
-          boxShadow: '0 12px 35px rgba(0, 0, 0, 0.06)',
-          position: 'relative',
-          animationDelay: '0.15s',
-          zIndex: 10
-        }}>
-          <video 
-            autoPlay 
-            loop 
-            muted 
-            playsInline 
-            style={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover'
-            }}
-          >
-            <source src="/intro.mp4?v=2" type="video/mp4" />
-          </video>
-          <div style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            background: 'linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.2) 100%)',
-            pointerEvents: 'none'
-          }} />
-        </div>
+
 
         <div className="hero-grid">
           {/* Left Column: Headline Copy */}

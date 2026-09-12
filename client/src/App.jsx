@@ -59,7 +59,6 @@ function App() {
           path="/" 
           element={
             <>
-              <IntroPreloader />
               <CanvasBackground />
               <ClientHome />
               <Chatbot />
