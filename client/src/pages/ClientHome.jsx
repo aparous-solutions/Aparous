@@ -220,6 +220,15 @@ export default function ClientHome() {
   const [newsletterStatus, setNewsletterStatus] = useState(false);
 
 
+  // Custom Editable Payment State
+  const [customPayAmount, setCustomPayAmount] = useState('10000');
+  const [customPayNote, setCustomPayNote] = useState('');
+  const [packagePrices, setPackagePrices] = useState({
+    'pkg-1': 15000,
+    'pkg-2': 35000,
+    'pkg-3': 75000
+  });
+
   // FAQ Accordion State
   const [activeFaq, setActiveFaq] = useState(null);
 
@@ -282,12 +291,20 @@ export default function ClientHome() {
     }
   ];
 
-  const handleRazorpayPayment = async (pkg) => {
+  const handleRazorpayPayment = async (pkgOrCustom, overridePrice = null) => {
+    let title = typeof pkgOrCustom === 'object' ? pkgOrCustom.title : 'Custom Payment / Deposit';
+    let priceINR = overridePrice !== null ? Number(overridePrice) : (typeof pkgOrCustom === 'object' ? (packagePrices[pkgOrCustom.id] || pkgOrCustom.priceINR) : Number(pkgOrCustom));
+
+    if (isNaN(priceINR) || priceINR < 1) {
+      alert('Please enter a valid payment amount of at least ₹1.00');
+      return;
+    }
+
     // 1. Ensure checkout.js script is loaded
     if (!window.Razorpay) {
       const script = document.createElement('script');
       script.src = 'https://checkout.razorpay.com/v1/checkout.js';
-      script.onload = () => handleRazorpayPayment(pkg);
+      script.onload = () => handleRazorpayPayment(pkgOrCustom, overridePrice);
       document.body.appendChild(script);
       return;
     }
@@ -301,9 +318,9 @@ export default function ClientHome() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          amount: pkg.priceINR * 100, // amount in paise
+          amount: Math.round(priceINR * 100), // amount in paise
           currency: 'INR',
-          packageName: pkg.title,
+          packageName: title,
           isPaise: true
         })
       });
@@ -332,10 +349,10 @@ export default function ClientHome() {
     // Step 2: Configure Front-end Checkout Modal Options
     const options = {
       key: keyId,
-      amount: orderData?.amount || (pkg.priceINR * 100),
+      amount: orderData?.amount || Math.round(priceINR * 100),
       currency: orderData?.currency || 'INR',
       name: 'Aparous Solutions',
-      description: `Order Package: ${pkg.title}`,
+      description: `Payment: ${title} (₹${priceINR.toLocaleString('en-IN')})`,
       order_id: orderData?.order_id,
       image: '/logo.jpeg',
       prefill: {
@@ -344,8 +361,9 @@ export default function ClientHome() {
         contact: '9849836092'
       },
       notes: {
-        package_name: pkg.title,
-        merchant_name: 'Aparous Solutions'
+        package_name: title,
+        merchant_name: 'Aparous Solutions',
+        custom_note: customPayNote || 'Custom Client Amount'
       },
       theme: {
         color: '#7c3aed'
@@ -364,7 +382,7 @@ export default function ClientHome() {
           });
           const verifyData = await verifyRes.json();
           if (verifyRes.ok && verifyData.success) {
-            alert(`Payment Verified Successfully!\nPayment ID: ${response.razorpay_payment_id}\nOrder ID: ${response.razorpay_order_id}\n\nOur team will contact you within 24 hours.`);
+            alert(`Payment Verified Successfully!\nAmount Paid: ₹${priceINR.toLocaleString('en-IN')}\nPayment ID: ${response.razorpay_payment_id}\nOrder ID: ${response.razorpay_order_id}\n\nOur team will contact you within 24 hours.`);
           } else {
             alert(`Payment verification failed: ${verifyData.error || 'Signature mismatch'}`);
           }
@@ -1688,100 +1706,244 @@ export default function ClientHome() {
         </div>
       </section>
 
-      {/* Service Pricing Packages Section (Razorpay Merchant Compliant) */}
+      {/* Service Pricing Packages & Custom Editable Amount Section */}
       <section id="pricing" className="scroll-reveal" style={{ padding: '100px 8%', background: '#f8fafc', borderTop: '1px solid #e2e8f0', borderBottom: '1px solid #e2e8f0' }}>
         <div style={{ textAlign: 'center', marginBottom: '60px' }}>
           <span style={{ fontSize: '0.8rem', color: 'var(--accent-purple)', textTransform: 'uppercase', letterSpacing: '2px', fontWeight: '700', display: 'block', marginBottom: '10px' }}>
-            Transparent Pricing
+            Transparent & Flexible Pricing
           </span>
-          <h2 style={{ fontSize: '2.5rem', marginBottom: '15px', color: '#0f172a', fontFamily: 'var(--font-head)', fontWeight: '800' }}>Service Packages</h2>
+          <h2 style={{ fontSize: '2.5rem', marginBottom: '15px', color: '#0f172a', fontFamily: 'var(--font-head)', fontWeight: '800' }}>Service Tiers & Custom Amounts</h2>
           <p style={{ color: 'var(--text-muted)', maxWidth: '600px', margin: '0 auto', fontSize: '0.95rem' }}>
-            Clear, fixed investment tiers for high-speed web development and AI automation workflows. Digital payment enabled via Razorpay.
+            Select a service package or enter a custom amount/milestone deposit. You can edit payment amounts manually prior to checkout.
           </p>
         </div>
 
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(310px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
           gap: '30px',
-          maxWidth: '1200px',
+          maxWidth: '1280px',
           margin: '0 auto'
         }}>
-          {pricingPackages.map((pkg) => (
-            <div 
-              key={pkg.id}
-              className="glass-panel"
-              style={{
-                padding: '35px 30px',
-                background: '#ffffff',
-                borderRadius: '16px',
-                border: pkg.recommended ? '2px solid var(--accent-purple)' : '1px solid #e2e8f0',
-                boxShadow: pkg.recommended ? '0 10px 30px rgba(124, 58, 237, 0.12)' : '0 4px 20px rgba(0,0,0,0.02)',
-                position: 'relative',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between'
-              }}
-            >
-              {pkg.badge && (
-                <span style={{
-                  position: 'absolute',
-                  top: '-13px',
-                  right: '25px',
-                  background: pkg.recommended ? 'var(--accent-purple)' : '#0f172a',
-                  color: '#ffffff',
-                  fontSize: '0.72rem',
-                  fontWeight: '700',
-                  padding: '4px 12px',
-                  borderRadius: '12px',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.5px'
-                }}>
-                  {pkg.badge}
-                </span>
-              )}
+          {pricingPackages.map((pkg) => {
+            const currentPrice = packagePrices[pkg.id] !== undefined ? packagePrices[pkg.id] : pkg.priceINR;
+            return (
+              <div 
+                key={pkg.id}
+                className="glass-panel"
+                style={{
+                  padding: '35px 25px',
+                  background: '#ffffff',
+                  borderRadius: '16px',
+                  border: pkg.recommended ? '2px solid var(--accent-purple)' : '1px solid #e2e8f0',
+                  boxShadow: pkg.recommended ? '0 10px 30px rgba(124, 58, 237, 0.12)' : '0 4px 20px rgba(0,0,0,0.02)',
+                  position: 'relative',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between'
+                }}
+              >
+                {pkg.badge && (
+                  <span style={{
+                    position: 'absolute',
+                    top: '-13px',
+                    right: '20px',
+                    background: pkg.recommended ? 'var(--accent-purple)' : '#0f172a',
+                    color: '#ffffff',
+                    fontSize: '0.72rem',
+                    fontWeight: '700',
+                    padding: '4px 12px',
+                    borderRadius: '12px',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.5px'
+                  }}>
+                    {pkg.badge}
+                  </span>
+                )}
 
-              <div>
-                <h3 style={{ fontSize: '1.35rem', fontFamily: 'var(--font-head)', fontWeight: '700', color: '#0f172a', marginBottom: '10px' }}>
-                  {pkg.title}
-                </h3>
-                <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', lineHeight: '1.5', minHeight: '40px', marginBottom: '20px' }}>
-                  {pkg.description}
-                </p>
+                <div>
+                  <h3 style={{ fontSize: '1.3rem', fontFamily: 'var(--font-head)', fontWeight: '700', color: '#0f172a', marginBottom: '10px' }}>
+                    {pkg.title}
+                  </h3>
+                  <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', lineHeight: '1.5', minHeight: '40px', marginBottom: '20px' }}>
+                    {pkg.description}
+                  </p>
 
-                <div style={{ marginBottom: '25px', paddingBottom: '20px', borderBottom: '1px solid #e2e8f0' }}>
-                  <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px' }}>
-                    <span style={{ fontSize: '2.2rem', fontWeight: '800', color: '#0f172a', fontFamily: 'var(--font-head)' }}>
-                      ₹{pkg.priceINR.toLocaleString('en-IN')}
-                    </span>
-                    <span style={{ fontSize: '0.9rem', color: 'var(--text-muted)', fontWeight: '500' }}>
-                      (${pkg.priceUSD} USD)
+                  <div style={{ marginBottom: '25px', paddingBottom: '20px', borderBottom: '1px solid #e2e8f0' }}>
+                    <label style={{ display: 'block', fontSize: '0.75rem', color: 'var(--text-muted)', fontWeight: '600', uppercase: 'uppercase', letterSpacing: '0.5px', marginBottom: '6px' }}>
+                      Editable Investment Amount (₹)
+                    </label>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', background: '#f8fafc', padding: '6px 12px', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
+                      <span style={{ fontSize: '1.4rem', fontWeight: '800', color: 'var(--accent-purple)' }}>₹</span>
+                      <input
+                        type="number"
+                        min="1"
+                        value={currentPrice}
+                        onChange={(e) => setPackagePrices(prev => ({ ...prev, [pkg.id]: Number(e.target.value) }))}
+                        style={{
+                          width: '100%',
+                          fontSize: '1.35rem',
+                          fontWeight: '800',
+                          fontFamily: 'var(--font-head)',
+                          color: '#0f172a',
+                          background: 'transparent',
+                          border: 'none',
+                          outline: 'none'
+                        }}
+                      />
+                    </div>
+                    <span style={{ fontSize: '0.75rem', color: 'var(--accent-purple)', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.5px', display: 'block', marginTop: '6px' }}>
+                      {pkg.period}
                     </span>
                   </div>
-                  <span style={{ fontSize: '0.78rem', color: 'var(--accent-purple)', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-                    {pkg.period}
-                  </span>
+
+                  <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '30px' }}>
+                    {pkg.features.map((feat, idx) => (
+                      <li key={idx} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', fontSize: '0.85rem', color: 'var(--text-normal)' }}>
+                        <Check size={16} color="var(--accent-purple)" style={{ flexShrink: 0, marginTop: '3px' }} />
+                        <span>{feat}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
 
-                <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '30px' }}>
-                  {pkg.features.map((feat, idx) => (
-                    <li key={idx} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', fontSize: '0.88rem', color: 'var(--text-normal)' }}>
-                      <Check size={16} color="var(--accent-purple)" style={{ flexShrink: 0, marginTop: '3px' }} />
-                      <span>{feat}</span>
-                    </li>
-                  ))}
-                </ul>
+                <button
+                  onClick={() => handleRazorpayPayment(pkg, currentPrice)}
+                  className={pkg.recommended ? 'btn-primary' : 'btn-secondary'}
+                  style={{ width: '100%', justifyContent: 'center', padding: '14px', fontSize: '0.88rem', fontWeight: '700' }}
+                >
+                  Pay ₹{Number(currentPrice || 0).toLocaleString('en-IN')} via Razorpay
+                </button>
+              </div>
+            );
+          })}
+
+          {/* 4th Card: Dedicated Custom Amount Payment */}
+          <div 
+            className="glass-panel"
+            style={{
+              padding: '35px 25px',
+              background: '#ffffff',
+              borderRadius: '16px',
+              border: '2px dashed var(--accent-purple)',
+              boxShadow: '0 4px 20px rgba(124, 58, 237, 0.08)',
+              position: 'relative',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between'
+            }}
+          >
+            <span style={{
+              position: 'absolute',
+              top: '-13px',
+              right: '20px',
+              background: 'linear-gradient(135deg, #7c3aed 0%, #06b6d4 100%)',
+              color: '#ffffff',
+              fontSize: '0.72rem',
+              fontWeight: '700',
+              padding: '4px 12px',
+              borderRadius: '12px',
+              textTransform: 'uppercase',
+              letterSpacing: '0.5px'
+            }}>
+              Custom Amount
+            </span>
+
+            <div>
+              <h3 style={{ fontSize: '1.3rem', fontFamily: 'var(--font-head)', fontWeight: '700', color: '#0f172a', marginBottom: '10px' }}>
+                Custom Amount Payment
+              </h3>
+              <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', lineHeight: '1.5', marginBottom: '20px' }}>
+                Enter any agreed custom deposit, milestone payment, or custom project retainer amount.
+              </p>
+
+              <div style={{ marginBottom: '20px' }}>
+                <label style={{ display: 'block', fontSize: '0.78rem', color: '#0f172a', fontWeight: '700', marginBottom: '6px' }}>
+                  Enter Amount in INR (₹) *
+                </label>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', background: '#f8fafc', padding: '10px 14px', borderRadius: '10px', border: '1px solid var(--accent-purple)' }}>
+                  <span style={{ fontSize: '1.5rem', fontWeight: '800', color: 'var(--accent-purple)' }}>₹</span>
+                  <input
+                    type="number"
+                    min="1"
+                    placeholder="Enter custom amount..."
+                    value={customPayAmount}
+                    onChange={(e) => setCustomPayAmount(e.target.value)}
+                    style={{
+                      width: '100%',
+                      fontSize: '1.4rem',
+                      fontWeight: '800',
+                      fontFamily: 'var(--font-head)',
+                      color: '#0f172a',
+                      background: 'transparent',
+                      border: 'none',
+                      outline: 'none'
+                    }}
+                  />
+                </div>
               </div>
 
-              <button
-                onClick={() => handleRazorpayPayment(pkg)}
-                className={pkg.recommended ? 'btn-primary' : 'btn-secondary'}
-                style={{ width: '100%', justifyContent: 'center', padding: '14px', fontSize: '0.9rem', fontWeight: '700' }}
-              >
-                Order Package via Razorpay
-              </button>
+              {/* Quick Select Preset Buttons */}
+              <div style={{ marginBottom: '20px' }}>
+                <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontWeight: '600', display: 'block', marginBottom: '8px' }}>
+                  Quick Preset Selection:
+                </span>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+                  {['2500', '5000', '10000', '25000', '50000'].map((preset) => (
+                    <button
+                      key={preset}
+                      type="button"
+                      onClick={() => setCustomPayAmount(preset)}
+                      style={{
+                        background: customPayAmount === preset ? 'rgba(124, 58, 237, 0.12)' : '#ffffff',
+                        border: customPayAmount === preset ? '1px solid var(--accent-purple)' : '1px solid #e2e8f0',
+                        color: customPayAmount === preset ? 'var(--accent-purple)' : '#0f172a',
+                        borderRadius: '6px',
+                        padding: '4px 10px',
+                        fontSize: '0.78rem',
+                        fontWeight: '600',
+                        cursor: 'pointer',
+                        transition: 'all 0.2s'
+                      }}
+                    >
+                      ₹{Number(preset).toLocaleString('en-IN')}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div style={{ marginBottom: '25px' }}>
+                <label style={{ display: 'block', fontSize: '0.78rem', color: '#0f172a', fontWeight: '700', marginBottom: '6px' }}>
+                  Payment Note / Purpose (Optional)
+                </label>
+                <input
+                  type="text"
+                  placeholder="e.g. Milestone 1 Deposit / Custom Web Retainer"
+                  value={customPayNote}
+                  onChange={(e) => setCustomPayNote(e.target.value)}
+                  style={{
+                    width: '100%',
+                    padding: '10px 12px',
+                    fontSize: '0.85rem',
+                    color: '#0f172a',
+                    background: '#f8fafc',
+                    border: '1px solid #e2e8f0',
+                    borderRadius: '8px',
+                    outline: 'none'
+                  }}
+                />
+              </div>
             </div>
-          ))}
+
+            <button
+              onClick={() => handleRazorpayPayment('Custom Amount Payment', Number(customPayAmount))}
+              className="btn-primary"
+              style={{ width: '100%', justifyContent: 'center', padding: '14px', fontSize: '0.88rem', fontWeight: '700' }}
+            >
+              Pay Custom ₹{Number(customPayAmount || 0).toLocaleString('en-IN')} via Razorpay
+            </button>
+          </div>
+
         </div>
       </section>
 
