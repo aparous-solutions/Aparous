@@ -7,6 +7,11 @@ import CanvasBackground from './components/CanvasBackground';
 import IntroPreloader from './components/IntroPreloader';
 import Chatbot from './components/Chatbot';
 import ClientHome from './pages/ClientHome';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsConditions from './pages/TermsConditions';
+import RefundPolicy from './pages/RefundPolicy';
+import ShippingPolicy from './pages/ShippingPolicy';
+import ContactUsPage from './pages/ContactUsPage';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 
@@ -65,6 +70,11 @@ function App() {
             </>
           } 
         />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/terms-and-conditions" element={<TermsConditions />} />
+        <Route path="/refund-policy" element={<RefundPolicy />} />
+        <Route path="/shipping-policy" element={<ShippingPolicy />} />
+        <Route path="/contact" element={<ContactUsPage />} />
         <Route 
           path="/admin" 
           element={

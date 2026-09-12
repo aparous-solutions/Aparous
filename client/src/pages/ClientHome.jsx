@@ -222,6 +222,139 @@ export default function ClientHome() {
 
   // FAQ Accordion State
   const [activeFaq, setActiveFaq] = useState(null);
+
+  // Transparent Pricing Packages for Merchant Compliance & Gateway
+  const pricingPackages = [
+    {
+      id: 'pkg-1',
+      title: 'Starter Web Launch',
+      priceINR: 15000,
+      priceUSD: 200,
+      period: 'One-time investment',
+      description: 'Ideal for startups & businesses seeking a high-speed, conversion-focused single page React website.',
+      features: [
+        'Custom Single Page React Build',
+        'Responsive Mobile-First UI/UX',
+        'SEO Metadata & OG Tag suite',
+        'Contact Scope Form Integration',
+        'Digital Delivery in 5 to 7 Days',
+        '30-Day Post-Launch Support'
+      ],
+      recommended: false,
+      badge: 'Starter'
+    },
+    {
+      id: 'pkg-2',
+      title: 'Professional Web & AI Tier',
+      priceINR: 35000,
+      priceUSD: 450,
+      period: 'One-time investment',
+      description: 'Complete full-stack React web application integrated with custom AI chatbot workflows and CRM.',
+      features: [
+        'Multi-Page Full-Stack React Architecture',
+        'AI Customer Lead Qualification Chatbot',
+        'Admin CRM Operations Desk Access',
+        'Custom UI/UX & Glassmorphic Elements',
+        'Express/Node Backend + MongoDB Atlas',
+        'Digital Delivery in 7 to 14 Days',
+        '60-Day Dedicated Support & Care'
+      ],
+      recommended: true,
+      badge: 'Most Popular'
+    },
+    {
+      id: 'pkg-3',
+      title: 'Enterprise Automation Suite',
+      priceINR: 75000,
+      priceUSD: 950,
+      period: 'Custom Scope',
+      description: 'Bespoke web platform, custom LLM integrations, multi-stage lead funnels, and high-scale backends.',
+      features: [
+        'Bespoke Web Application & SaaS Portal',
+        'Custom AI Workflow & Telegram Webhooks',
+        'High-Concurrence Database Optimization',
+        'Full Source Code Ownership & Licensing',
+        'Automated CI/CD Deployment Suite',
+        '1-on-1 Founder Technical Support'
+      ],
+      recommended: false,
+      badge: 'Enterprise'
+    }
+  ];
+
+  const handleRazorpayPayment = async (pkg) => {
+    try {
+      const res = await fetch(`${API_BASE_URL}/api/payment/create-order`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          amount: pkg.priceINR,
+          currency: 'INR',
+          packageName: pkg.title
+        })
+      });
+
+      const data = await res.json();
+
+      if (!res.ok || !data.order) {
+        alert(`Selected Package: ${pkg.title} (₹${pkg.priceINR.toLocaleString('en-IN')}). Redirecting to Scope Intake Form.`);
+        const contactSec = document.getElementById('contact');
+        if (contactSec) contactSec.scrollIntoView({ behavior: 'smooth' });
+        return;
+      }
+
+      const options = {
+        key: data.key_id || 'rzp_test_placeholder',
+        amount: data.order.amount,
+        currency: data.order.currency,
+        name: 'Aparous Solutions',
+        description: `Order Package: ${pkg.title}`,
+        order_id: data.order.id,
+        handler: async function (response) {
+          try {
+            const verifyRes = await fetch(`${API_BASE_URL}/api/payment/verify`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                razorpay_order_id: response.razorpay_order_id,
+                razorpay_payment_id: response.razorpay_payment_id,
+                razorpay_signature: response.razorpay_signature
+              })
+            });
+            const verifyData = await verifyRes.json();
+            if (verifyData.success) {
+              alert(`Payment Authorized Successfully! Payment ID: ${response.razorpay_payment_id}. Our team will contact you within 24 hours.`);
+            } else {
+              alert('Payment received. Payment ID: ' + response.razorpay_payment_id);
+            }
+          } catch (vErr) {
+            alert('Payment received. Payment ID: ' + response.razorpay_payment_id);
+          }
+        },
+        prefill: {
+          name: '',
+          email: '',
+          contact: ''
+        },
+        theme: {
+          color: '#7c3aed'
+        }
+      };
+
+      if (window.Razorpay) {
+        const rzp = new window.Razorpay(options);
+        rzp.open();
+      } else {
+        alert(`Razorpay checkout script loading... Redirecting to scope intake.`);
+        const contactSec = document.getElementById('contact');
+        if (contactSec) contactSec.scrollIntoView({ behavior: 'smooth' });
+      }
+    } catch (err) {
+      console.error('Razorpay payment error:', err);
+      const contactSec = document.getElementById('contact');
+      if (contactSec) contactSec.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
   const faqData = [
     {
       q: "How long does a premium web platform build take?",
@@ -1518,6 +1651,103 @@ export default function ClientHome() {
         </div>
       </section>
 
+      {/* Service Pricing Packages Section (Razorpay Merchant Compliant) */}
+      <section id="pricing" className="scroll-reveal" style={{ padding: '100px 8%', background: '#f8fafc', borderTop: '1px solid #e2e8f0', borderBottom: '1px solid #e2e8f0' }}>
+        <div style={{ textAlign: 'center', marginBottom: '60px' }}>
+          <span style={{ fontSize: '0.8rem', color: 'var(--accent-purple)', textTransform: 'uppercase', letterSpacing: '2px', fontWeight: '700', display: 'block', marginBottom: '10px' }}>
+            Transparent Pricing
+          </span>
+          <h2 style={{ fontSize: '2.5rem', marginBottom: '15px', color: '#0f172a', fontFamily: 'var(--font-head)', fontWeight: '800' }}>Service Packages</h2>
+          <p style={{ color: 'var(--text-muted)', maxWidth: '600px', margin: '0 auto', fontSize: '0.95rem' }}>
+            Clear, fixed investment tiers for high-speed web development and AI automation workflows. Digital payment enabled via Razorpay.
+          </p>
+        </div>
+
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(310px, 1fr))',
+          gap: '30px',
+          maxWidth: '1200px',
+          margin: '0 auto'
+        }}>
+          {pricingPackages.map((pkg) => (
+            <div 
+              key={pkg.id}
+              className="glass-panel"
+              style={{
+                padding: '35px 30px',
+                background: '#ffffff',
+                borderRadius: '16px',
+                border: pkg.recommended ? '2px solid var(--accent-purple)' : '1px solid #e2e8f0',
+                boxShadow: pkg.recommended ? '0 10px 30px rgba(124, 58, 237, 0.12)' : '0 4px 20px rgba(0,0,0,0.02)',
+                position: 'relative',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between'
+              }}
+            >
+              {pkg.badge && (
+                <span style={{
+                  position: 'absolute',
+                  top: '-13px',
+                  right: '25px',
+                  background: pkg.recommended ? 'var(--accent-purple)' : '#0f172a',
+                  color: '#ffffff',
+                  fontSize: '0.72rem',
+                  fontWeight: '700',
+                  padding: '4px 12px',
+                  borderRadius: '12px',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.5px'
+                }}>
+                  {pkg.badge}
+                </span>
+              )}
+
+              <div>
+                <h3 style={{ fontSize: '1.35rem', fontFamily: 'var(--font-head)', fontWeight: '700', color: '#0f172a', marginBottom: '10px' }}>
+                  {pkg.title}
+                </h3>
+                <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', lineHeight: '1.5', minHeight: '40px', marginBottom: '20px' }}>
+                  {pkg.description}
+                </p>
+
+                <div style={{ marginBottom: '25px', paddingBottom: '20px', borderBottom: '1px solid #e2e8f0' }}>
+                  <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px' }}>
+                    <span style={{ fontSize: '2.2rem', fontWeight: '800', color: '#0f172a', fontFamily: 'var(--font-head)' }}>
+                      ₹{pkg.priceINR.toLocaleString('en-IN')}
+                    </span>
+                    <span style={{ fontSize: '0.9rem', color: 'var(--text-muted)', fontWeight: '500' }}>
+                      (${pkg.priceUSD} USD)
+                    </span>
+                  </div>
+                  <span style={{ fontSize: '0.78rem', color: 'var(--accent-purple)', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                    {pkg.period}
+                  </span>
+                </div>
+
+                <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '30px' }}>
+                  {pkg.features.map((feat, idx) => (
+                    <li key={idx} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', fontSize: '0.88rem', color: 'var(--text-normal)' }}>
+                      <Check size={16} color="var(--accent-purple)" style={{ flexShrink: 0, marginTop: '3px' }} />
+                      <span>{feat}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <button
+                onClick={() => handleRazorpayPayment(pkg)}
+                className={pkg.recommended ? 'btn-primary' : 'btn-secondary'}
+                style={{ width: '100%', justifyContent: 'center', padding: '14px', fontSize: '0.9rem', fontWeight: '700' }}
+              >
+                Order Package via Razorpay
+              </button>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* FAQ Section */}
       <section id="faq" className="scroll-reveal" style={{ padding: '100px 8%', background: '#ffffff' }}>
         <div style={{ textAlign: 'center', marginBottom: '60px' }}>
@@ -1747,9 +1977,14 @@ export default function ClientHome() {
               <span className="text-gradient" style={{ fontFamily: 'var(--font-head)', fontSize: '1.4rem', fontWeight: '800' }}>APAROUS</span>
               <span style={{ fontSize: '0.55rem', background: 'var(--accent-purple)', color: '#fff', padding: '2px 6px', borderRadius: '3px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Solutions</span>
             </div>
-            <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem', lineHeight: '1.6', maxWidth: '280px' }}>
+            <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem', lineHeight: '1.6', maxWidth: '320px' }}>
               We build premium websites and intelligent AI automations for modern brands.
             </p>
+            <div style={{ marginTop: '15px', fontSize: '0.82rem', color: 'var(--text-normal)', lineHeight: '1.5' }}>
+              <strong>Registered Office:</strong> Hyderabad, Telangana, India - 500008<br />
+              <strong>Support Email:</strong> <a href="mailto:aparous.solutions@gmail.com" style={{ color: 'var(--accent-purple)', textDecoration: 'none' }}>aparous.solutions@gmail.com</a><br />
+              <strong>Direct Phone:</strong> +91 9849836092
+            </div>
           </div>
 
           {/* Col 2: Services */}
@@ -1760,7 +1995,7 @@ export default function ClientHome() {
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '0.85rem' }}>
               <li><a href="#services" style={{ color: 'var(--text-normal)', textDecoration: 'none', transition: 'color 0.2s' }} onMouseEnter={e => e.target.style.color = '#0f172a'} onMouseLeave={e => e.target.style.color = 'var(--text-normal)'}>Premium Websites</a></li>
               <li><a href="#services" style={{ color: 'var(--text-normal)', textDecoration: 'none', transition: 'color 0.2s' }} onMouseEnter={e => e.target.style.color = '#0f172a'} onMouseLeave={e => e.target.style.color = 'var(--text-normal)'}>AI Automations</a></li>
-              <li><a href="#services" style={{ color: 'var(--text-normal)', textDecoration: 'none', transition: 'color 0.2s' }} onMouseEnter={e => e.target.style.color = '#0f172a'} onMouseLeave={e => e.target.style.color = 'var(--text-normal)'}>UI/UX Design</a></li>
+              <li><a href="#pricing" style={{ color: 'var(--text-normal)', textDecoration: 'none', transition: 'color 0.2s' }} onMouseEnter={e => e.target.style.color = '#0f172a'} onMouseLeave={e => e.target.style.color = 'var(--text-normal)'}>Pricing Packages</a></li>
             </ul>
           </div>
 
@@ -1773,18 +2008,21 @@ export default function ClientHome() {
               <li><a href="#why-choose-us" style={{ color: 'var(--text-normal)', textDecoration: 'none', transition: 'color 0.2s' }} onMouseEnter={e => e.target.style.color = '#0f172a'} onMouseLeave={e => e.target.style.color = 'var(--text-normal)'}>Why Us</a></li>
               <li><a href="#our-process" style={{ color: 'var(--text-normal)', textDecoration: 'none', transition: 'color 0.2s' }} onMouseEnter={e => e.target.style.color = '#0f172a'} onMouseLeave={e => e.target.style.color = 'var(--text-normal)'}>Process</a></li>
               <li><a href="#portfolio" style={{ color: 'var(--text-normal)', textDecoration: 'none', transition: 'color 0.2s' }} onMouseEnter={e => e.target.style.color = '#0f172a'} onMouseLeave={e => e.target.style.color = 'var(--text-normal)'}>Portfolio</a></li>
-              <li><a href="#faq" style={{ color: 'var(--text-normal)', textDecoration: 'none', transition: 'color 0.2s' }} onMouseEnter={e => e.target.style.color = '#0f172a'} onMouseLeave={e => e.target.style.color = 'var(--text-normal)'}>FAQ</a></li>
+              <li><Link to="/contact" style={{ color: 'var(--text-normal)', textDecoration: 'none', transition: 'color 0.2s' }}>Contact Desk</Link></li>
             </ul>
           </div>
 
-          {/* Col 4: Legal */}
+          {/* Col 4: Legal & Compliance */}
           <div>
             <h4 style={{ fontSize: '0.85rem', marginBottom: '16px', color: '#0f172a', textTransform: 'uppercase', letterSpacing: '1px', fontFamily: 'var(--font-head)', fontWeight: '700' }}>
-              Legal
+              Legal & Policy
             </h4>
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '0.85rem' }}>
-              <li><button onClick={() => alert('Privacy Policy: Aparous does not share client contact information or data scope details.')} style={{ background: 'transparent', border: 'none', padding: 0, color: 'var(--text-normal)', cursor: 'pointer', fontSize: '0.85rem', textAlign: 'left', transition: 'color 0.2s' }} onMouseEnter={e => e.target.style.color = '#0f172a'} onMouseLeave={e => e.target.style.color = 'var(--text-normal)'}>Privacy Policy</button></li>
-              <li><button onClick={() => alert('Terms of Service: Project scopes are delivered within agreed milestones.')} style={{ background: 'transparent', border: 'none', padding: 0, color: 'var(--text-normal)', cursor: 'pointer', fontSize: '0.85rem', textAlign: 'left', transition: 'color 0.2s' }} onMouseEnter={e => e.target.style.color = '#0f172a'} onMouseLeave={e => e.target.style.color = 'var(--text-normal)'}>Terms & Conditions</button></li>
+              <li><Link to="/privacy-policy" style={{ color: 'var(--text-normal)', textDecoration: 'none' }}>Privacy Policy</Link></li>
+              <li><Link to="/terms-and-conditions" style={{ color: 'var(--text-normal)', textDecoration: 'none' }}>Terms & Conditions</Link></li>
+              <li><Link to="/refund-policy" style={{ color: 'var(--text-normal)', textDecoration: 'none' }}>Cancellation & Refund Policy</Link></li>
+              <li><Link to="/shipping-policy" style={{ color: 'var(--text-normal)', textDecoration: 'none' }}>Shipping & Digital Delivery</Link></li>
+              <li><Link to="/contact" style={{ color: 'var(--text-normal)', textDecoration: 'none' }}>Contact Us</Link></li>
             </ul>
           </div>
         </div>
@@ -1800,7 +2038,7 @@ export default function ClientHome() {
           fontSize: '0.8rem',
           color: 'var(--text-muted)'
         }}>
-          <span>© {new Date().getFullYear()} Aparous Solutions. All rights reserved.</span>
+          <span>© {new Date().getFullYear()} Aparous Solutions. All rights reserved. Registered Office: Hyderabad, Telangana, India - 500008.</span>
         </div>
       </footer>
 

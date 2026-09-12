@@ -60,6 +60,8 @@ import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import compression from 'compression';
 import { generateProposalWithAI, generateEmailWithAI } from './ai.js';
+import Razorpay from 'razorpay';
+import crypto from 'crypto';
 
 dotenv.config();
 
@@ -895,6 +897,66 @@ app.post('/api/admin/leads', adminAuth, async (req, res) => {
     res.status(201).json(newLead);
   } catch (err) {
     res.status(500).json({ error: 'Failed to create lead manually' });
+  }
+});
+
+// ----------------------------------------------------
+// RAZORPAY PAYMENT GATEWAY ENDPOINTS
+// ----------------------------------------------------
+const getRazorpayInstance = () => {
+  return new Razorpay({
+    key_id: process.env.RAZORPAY_KEY_ID || 'rzp_test_placeholder',
+    key_secret: process.env.RAZORPAY_KEY_SECRET || 'placeholder_secret'
+  });
+};
+
+app.post('/api/payment/create-order', async (req, res) => {
+  try {
+    const { amount, currency = 'INR', packageName = 'Digital Service Package' } = req.body;
+    if (!amount) {
+      return res.status(400).json({ error: 'Package amount is required' });
+    }
+
+    const instance = getRazorpayInstance();
+    const options = {
+      amount: Math.round(Number(amount) * 100), // amount in paise
+      currency,
+      receipt: `rcpt_${Date.now()}_${Math.floor(Math.random() * 1000)}`,
+      notes: {
+        packageName,
+        merchant: 'Aparous Solutions'
+      }
+    };
+
+    const order = await instance.orders.create(options);
+    res.status(201).json({
+      success: true,
+      order,
+      key_id: process.env.RAZORPAY_KEY_ID || 'rzp_test_placeholder'
+    });
+  } catch (err) {
+    console.error('Razorpay Create Order Error:', err);
+    res.status(500).json({ error: err.message || 'Failed to create payment order' });
+  }
+});
+
+app.post('/api/payment/verify', async (req, res) => {
+  try {
+    const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body;
+    const secret = process.env.RAZORPAY_KEY_SECRET || 'placeholder_secret';
+
+    const hmac = crypto.createHmac('sha256', secret);
+    hmac.update(`${razorpay_order_id}|${razorpay_payment_id}`);
+    const generated_signature = hmac.digest('hex');
+
+    if (generated_signature === razorpay_signature) {
+      res.json({ success: true, message: 'Payment verified successfully', payment_id: razorpay_payment_id });
+    } else {
+      res.status(400).json({ success: false, error: 'Invalid payment signature verification' });
+    }
+  } catch (err) {
+    console.error('Razorpay Verify Signature Error:', err);
+    res.status(500).json({ error: 'Payment verification failed' });
   }
 });
 
