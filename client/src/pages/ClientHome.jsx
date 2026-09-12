@@ -293,38 +293,51 @@ export default function ClientHome() {
     }
 
     let orderData = null;
-    let keyId = 'rzp_test_1DP5mmOlF5G5ag';
+    let keyId = import.meta.env.VITE_RAZORPAY_KEY_ID || 'rzp_test_Tb5vtcaDHRVpEc';
 
     try {
-      const res = await fetch(`${API_BASE_URL}/api/payment/create-order`, {
+      // Step 1: Create Order on Backend
+      const res = await fetch(`${API_BASE_URL}/api/create-order`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          amount: pkg.priceINR,
+          amount: pkg.priceINR * 100, // amount in paise
           currency: 'INR',
-          packageName: pkg.title
+          packageName: pkg.title,
+          isPaise: true
         })
       });
 
       if (res.ok) {
         const data = await res.json();
-        if (data && data.order) {
-          orderData = data.order;
+        if (data && data.order_id) {
+          orderData = data;
+        } else if (data && data.order) {
+          orderData = { order_id: data.order.id, amount: data.order.amount, currency: data.order.currency };
         }
-        if (data && data.key_id && data.key_id !== 'rzp_test_placeholder') {
+        if (data && data.key_id) {
           keyId = data.key_id;
         }
+      } else {
+        const errData = await res.json().catch(() => ({}));
+        alert(`Order creation error: ${errData.error || 'Server error creating order'}`);
+        return;
       }
     } catch (err) {
-      console.log('Order API fallback active:', err);
+      console.error('Order creation error:', err);
+      alert('Unable to reach server to create payment order. Please check network connection.');
+      return;
     }
 
+    // Step 2: Configure Front-end Checkout Modal Options
     const options = {
       key: keyId,
       amount: orderData?.amount || (pkg.priceINR * 100),
       currency: orderData?.currency || 'INR',
       name: 'Aparous Solutions',
       description: `Order Package: ${pkg.title}`,
+      order_id: orderData?.order_id,
+      image: '/logo.jpeg',
       prefill: {
         name: 'Client Name',
         email: 'support@aparous.com',
@@ -337,40 +350,45 @@ export default function ClientHome() {
       theme: {
         color: '#7c3aed'
       },
+      // Step 3: Handle Payment Verification on Success
       handler: async function (response) {
         try {
-          const verifyRes = await fetch(`${API_BASE_URL}/api/payment/verify`, {
+          const verifyRes = await fetch(`${API_BASE_URL}/api/verify-payment`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-              razorpay_order_id: response.razorpay_order_id || orderData?.id || 'demo_order',
+              razorpay_order_id: response.razorpay_order_id,
               razorpay_payment_id: response.razorpay_payment_id,
-              razorpay_signature: response.razorpay_signature || 'demo_sig'
+              razorpay_signature: response.razorpay_signature
             })
           });
           const verifyData = await verifyRes.json();
-          alert(`Payment Authorized Successfully! Payment ID: ${response.razorpay_payment_id}. Our team will contact you within 24 hours.`);
+          if (verifyRes.ok && verifyData.success) {
+            alert(`Payment Verified Successfully!\nPayment ID: ${response.razorpay_payment_id}\nOrder ID: ${response.razorpay_order_id}\n\nOur team will contact you within 24 hours.`);
+          } else {
+            alert(`Payment verification failed: ${verifyData.error || 'Signature mismatch'}`);
+          }
         } catch (vErr) {
-          alert(`Payment Successful! Payment ID: ${response.razorpay_payment_id}`);
+          console.error('Payment verification error:', vErr);
+          alert(`Payment received (ID: ${response.razorpay_payment_id}), but verification check encountered a network error.`);
+        }
+      },
+      modal: {
+        ondismiss: function () {
+          console.log('Payment checkout modal dismissed by user');
         }
       }
     };
 
-    if (orderData && orderData.id && !orderData.id.startsWith('order_demo_')) {
-      options.order_id = orderData.id;
-    }
-
     try {
       const rzp = new window.Razorpay(options);
       rzp.on('payment.failed', function (response) {
-        alert('Payment Status: ' + (response.error?.description || 'Transaction cancelled or test mode simulation completed.'));
+        alert('Payment Failed: ' + (response.error?.description || response.error?.reason || 'Transaction declined'));
       });
       rzp.open();
     } catch (modalErr) {
       console.error('Failed to open Razorpay modal:', modalErr);
-      alert('Opening Scope Form for custom package checkout.');
-      const contactSec = document.getElementById('contact');
-      if (contactSec) contactSec.scrollIntoView({ behavior: 'smooth' });
+      alert('Unable to launch Razorpay checkout modal: ' + modalErr.message);
     }
   };
   const faqData = [

@@ -904,41 +904,36 @@ app.post('/api/admin/leads', adminAuth, async (req, res) => {
 // RAZORPAY PAYMENT GATEWAY ENDPOINTS
 // ----------------------------------------------------
 const getRazorpayInstance = () => {
-  return new Razorpay({
-    key_id: process.env.RAZORPAY_KEY_ID || 'rzp_test_placeholder',
-    key_secret: process.env.RAZORPAY_KEY_SECRET || 'placeholder_secret'
-  });
+  const keyId = process.env.RAZORPAY_KEY_ID || 'rzp_test_Tb5vtcaDHRVpEc';
+  const keySecret = process.env.RAZORPAY_KEY_SECRET || 'vaFCjOjpwDI4keLsGhpN4HAz';
+  return new Razorpay({ key_id: keyId, key_secret: keySecret });
 };
 
-app.post('/api/payment/create-order', async (req, res) => {
+const handleCreateOrder = async (req, res) => {
   try {
-    const { amount, currency = 'INR', packageName = 'Digital Service Package' } = req.body;
+    let { amount, currency = 'INR', packageName = 'Digital Service Package', receipt } = req.body;
+    
     if (!amount) {
-      return res.status(400).json({ error: 'Package amount is required' });
+      return res.status(400).json({ error: 'Amount is required' });
     }
 
-    const keyId = process.env.RAZORPAY_KEY_ID;
-    const keySecret = process.env.RAZORPAY_KEY_SECRET;
-
-    // If live/test keys are not configured yet, return a valid test response so Razorpay modal launches for verification
-    if (!keyId || keyId === 'rzp_test_placeholder' || !keySecret) {
-      return res.status(200).json({
-        success: true,
-        isPlaceholder: true,
-        order: {
-          id: `order_demo_${Date.now()}`,
-          amount: Math.round(Number(amount) * 100),
-          currency
-        },
-        key_id: 'rzp_test_1DP5mmOlF5G5ag'
-      });
+    let amountInPaise = Number(amount);
+    // If amount passed in rupees (e.g. 15000), convert to paise (1500000) unless already in paise (>=100)
+    if (!req.body.isPaise && amountInPaise < 10000) {
+      amountInPaise = Math.round(amountInPaise * 100);
     }
 
+    // Minimum amount validation: 100 paise
+    if (amountInPaise < 100) {
+      return res.status(400).json({ error: 'Minimum amount must be at least 100 paise' });
+    }
+
+    const keyId = process.env.RAZORPAY_KEY_ID || 'rzp_test_Tb5vtcaDHRVpEc';
     const instance = getRazorpayInstance();
     const options = {
-      amount: Math.round(Number(amount) * 100), // amount in paise
+      amount: amountInPaise,
       currency,
-      receipt: `rcpt_${Date.now()}_${Math.floor(Math.random() * 1000)}`,
+      receipt: receipt || `rcpt_${Date.now()}_${Math.floor(Math.random() * 1000)}`,
       notes: {
         packageName,
         merchant: 'Aparous Solutions'
@@ -946,46 +941,59 @@ app.post('/api/payment/create-order', async (req, res) => {
     };
 
     const order = await instance.orders.create(options);
-    res.status(201).json({
+    return res.status(200).json({
       success: true,
+      order_id: order.id,
+      amount: order.amount,
+      currency: order.currency,
       order,
       key_id: keyId
     });
   } catch (err) {
     console.error('Razorpay Create Order Error:', err);
-    // Return graceful test order on error so popup modal still opens
-    res.status(200).json({
-      success: true,
-      isPlaceholder: true,
-      order: {
-        id: `order_fallback_${Date.now()}`,
-        amount: Math.round(Number(amount) * 100),
-        currency
-      },
-      key_id: 'rzp_test_1DP5mmOlF5G5ag'
-    });
+    if (err.statusCode === 401 || err.code === 'BAD_REQUEST_ERROR') {
+      return res.status(401).json({ error: err.message || 'Razorpay authentication failed' });
+    }
+    return res.status(500).json({ error: err.message || 'Failed to create Razorpay order' });
   }
-});
+};
 
-app.post('/api/payment/verify', async (req, res) => {
+const handleVerifyPayment = async (req, res) => {
   try {
     const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body;
-    const secret = process.env.RAZORPAY_KEY_SECRET || 'placeholder_secret';
 
+    if (!razorpay_order_id || !razorpay_payment_id || !razorpay_signature) {
+      return res.status(400).json({ success: false, error: 'Missing required fields: razorpay_order_id, razorpay_payment_id, and razorpay_signature are required' });
+    }
+
+    const secret = process.env.RAZORPAY_KEY_SECRET || 'vaFCjOjpwDI4keLsGhpN4HAz';
     const hmac = crypto.createHmac('sha256', secret);
     hmac.update(`${razorpay_order_id}|${razorpay_payment_id}`);
     const generated_signature = hmac.digest('hex');
 
     if (generated_signature === razorpay_signature) {
-      res.json({ success: true, message: 'Payment verified successfully', payment_id: razorpay_payment_id });
+      return res.status(200).json({
+        success: true,
+        message: 'Payment signature verified successfully',
+        payment_id: razorpay_payment_id,
+        order_id: razorpay_order_id
+      });
     } else {
-      res.status(400).json({ success: false, error: 'Invalid payment signature verification' });
+      return res.status(400).json({
+        success: false,
+        error: 'Invalid payment signature. Verification failed.'
+      });
     }
   } catch (err) {
     console.error('Razorpay Verify Signature Error:', err);
-    res.status(500).json({ error: 'Payment verification failed' });
+    return res.status(500).json({ success: false, error: 'Payment verification failed' });
   }
-});
+};
+
+app.post('/api/create-order', handleCreateOrder);
+app.post('/api/payment/create-order', handleCreateOrder);
+app.post('/api/verify-payment', handleVerifyPayment);
+app.post('/api/payment/verify', handleVerifyPayment);
 
 // ----------------------------------------------------
 // SERVER STARTUP
