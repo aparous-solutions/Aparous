@@ -87,14 +87,14 @@ export default function TermsConditions() {
           <section className="glass-panel" style={{ padding: '30px', background: '#ffffff', borderRadius: '14px' }}>
             <h2 style={{ fontSize: '1.25rem', marginBottom: '15px', color: '#0f172a', fontFamily: 'var(--font-head)' }}>5. Governing Law & Contact Details</h2>
             <p style={{ marginBottom: '15px' }}>
-              These terms shall be governed by and construed in accordance with the laws of India. Legal disputes are subject to the exclusive jurisdiction of the courts in Hyderabad, Telangana, India.
+              These terms shall be governed by and construed in accordance with the laws of India. Legal disputes are subject to the exclusive jurisdiction of the courts in Anantapur, Andhra Pradesh, India.
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', background: 'rgba(124, 58, 237, 0.04)', padding: '20px', borderRadius: '10px', border: '1px solid rgba(124, 58, 237, 0.12)' }}>
               <div><strong>Business Name:</strong> Aparous Solutions</div>
-              <div><strong>Owner / Founder:</strong> Mohammed Aadil</div>
+              <div><strong>Owner / Founder:</strong> Mohammad Sabeel</div>
               <div><strong>Support Email:</strong> <a href="mailto:aparous.solutions@gmail.com" style={{ color: 'var(--accent-purple)' }}>aparous.solutions@gmail.com</a></div>
               <div><strong>Phone Number:</strong> +91 9849836092</div>
-              <div><strong>Physical Address:</strong> Hyderabad, Telangana, India - 500008</div>
+              <div><strong>Physical Address:</strong> Anantapur, Andhra Pradesh, India - 515004</div>
             </div>
           </section>
         </div>

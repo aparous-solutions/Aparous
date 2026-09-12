@@ -1982,7 +1982,7 @@ export default function ClientHome() {
               We build premium websites and intelligent AI automations for modern brands.
             </p>
             <div style={{ marginTop: '15px', fontSize: '0.82rem', color: 'var(--text-normal)', lineHeight: '1.5' }}>
-              <strong>Registered Office:</strong> Hyderabad, Telangana, India - 500008<br />
+              <strong>Registered Office:</strong> Anantapur, Andhra Pradesh, India - 515004<br />
               <strong>Support Email:</strong> <a href="mailto:aparous.solutions@gmail.com" style={{ color: 'var(--accent-purple)', textDecoration: 'none' }}>aparous.solutions@gmail.com</a><br />
               <strong>Direct Phone:</strong> +91 9849836092
             </div>
@@ -2039,7 +2039,7 @@ export default function ClientHome() {
           fontSize: '0.8rem',
           color: 'var(--text-muted)'
         }}>
-          <span>© {new Date().getFullYear()} Aparous Solutions. All rights reserved. Registered Office: Hyderabad, Telangana, India - 500008.</span>
+          <span>© {new Date().getFullYear()} Aparous Solutions. All rights reserved. Registered Office: Anantapur, Andhra Pradesh, India - 515004.</span>
         </div>
       </footer>
 

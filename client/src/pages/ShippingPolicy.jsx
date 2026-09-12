@@ -93,10 +93,10 @@ export default function ShippingPolicy() {
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', background: 'rgba(124, 58, 237, 0.04)', padding: '20px', borderRadius: '10px', border: '1px solid rgba(124, 58, 237, 0.12)' }}>
               <div><strong>Business Name:</strong> Aparous Solutions</div>
-              <div><strong>Owner / Founder:</strong> Mohammed Aadil</div>
+              <div><strong>Owner / Founder:</strong> Mohammad Sabeel</div>
               <div><strong>Support Email:</strong> <a href="mailto:aparous.solutions@gmail.com" style={{ color: 'var(--accent-purple)' }}>aparous.solutions@gmail.com</a> / <a href="mailto:support@aparous.com" style={{ color: 'var(--accent-purple)' }}>support@aparous.com</a></div>
               <div><strong>Direct Phone:</strong> +91 9849836092</div>
-              <div><strong>Registered Office:</strong> Hyderabad, Telangana, India - 500008</div>
+              <div><strong>Registered Office:</strong> Anantapur, Andhra Pradesh, India - 515004</div>
             </div>
           </section>
         </div>

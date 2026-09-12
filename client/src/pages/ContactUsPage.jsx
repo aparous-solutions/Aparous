@@ -93,7 +93,7 @@ export default function ContactUsPage() {
                   <div>
                     <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.5px', fontWeight: '600' }}>Physical Office Address</span>
                     <p style={{ fontSize: '0.95rem', color: '#0f172a', fontWeight: '600', margin: '4px 0 0 0', lineHeight: '1.5' }}>
-                      Hyderabad, Telangana, India - 500008
+                      Anantapur, Andhra Pradesh, India - 515004
                     </p>
                   </div>
                 </div>
@@ -141,8 +141,8 @@ export default function ContactUsPage() {
 
             <div style={{ background: 'rgba(124, 58, 237, 0.04)', padding: '20px', borderRadius: '12px', border: '1px solid rgba(124, 58, 237, 0.12)', fontSize: '0.85rem', color: 'var(--text-normal)', lineHeight: '1.6' }}>
               <strong>Business Legal Name:</strong> Aparous Solutions<br />
-              <strong>Founder / Owner:</strong> Mohammed Aadil<br />
-              <strong>Merchant Country:</strong> India (Telangana)
+              <strong>Founder / Owner:</strong> Mohammad Sabeel<br />
+              <strong>Merchant Country:</strong> India (Andhra Pradesh)
             </div>
           </div>
 
@@ -210,7 +210,7 @@ export default function ContactUsPage() {
 
       {/* Footer */}
       <footer style={{ borderTop: '1px solid var(--glass-border)', padding: '30px 8%', textAlign: 'center', fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-        © {new Date().getFullYear()} Aparous Solutions. All rights reserved. Registered Office: Hyderabad, Telangana, India - 500008.
+        © {new Date().getFullYear()} Aparous Solutions. All rights reserved. Registered Office: Anantapur, Andhra Pradesh, India - 515004.
       </footer>
     </div>
   );

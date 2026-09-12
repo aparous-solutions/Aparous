@@ -88,7 +88,7 @@ export default function RefundPolicy() {
               <div><strong>Business Name:</strong> Aparous Solutions</div>
               <div><strong>Support Email:</strong> <a href="mailto:aparous.solutions@gmail.com" style={{ color: 'var(--accent-purple)' }}>aparous.solutions@gmail.com</a> / <a href="mailto:support@aparous.com" style={{ color: 'var(--accent-purple)' }}>support@aparous.com</a></div>
               <div><strong>Direct Phone:</strong> +91 9849836092</div>
-              <div><strong>Physical Address:</strong> Hyderabad, Telangana, India - 500008</div>
+              <div><strong>Physical Address:</strong> Anantapur, Andhra Pradesh, India - 515004</div>
             </div>
           </section>
         </div>

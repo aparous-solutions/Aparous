@@ -100,7 +100,7 @@ export default function PrivacyPolicy() {
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                 <MapPin size={16} color="var(--accent-magenta)" />
-                <span><strong>Registered Office:</strong> Hyderabad, Telangana, India - 500008</span>
+                <span><strong>Registered Office:</strong> Anantapur, Andhra Pradesh, India - 515004</span>
               </div>
             </div>
           </section>
